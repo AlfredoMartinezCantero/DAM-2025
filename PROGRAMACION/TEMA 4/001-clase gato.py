@@ -1,0 +1,6 @@
+class Gato:
+    pass
+
+
+
+

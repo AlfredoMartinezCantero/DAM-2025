@@ -1,0 +1,11 @@
+Los elementos principales de una clase son:
+
+- Las pripiedades: piezas de información estáticas (no se "mueven")
+
+Son como variables
+
+- Los métodos: piezas de información (se "mueven")
+
+
+
+

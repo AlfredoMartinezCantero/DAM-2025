@@ -1,0 +1,3 @@
+Ctrl+shift+S = renombrar archivo
+
+Ctrl+T = nuevo archivo dentro de los mismos

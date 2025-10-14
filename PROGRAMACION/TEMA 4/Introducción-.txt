@@ -1,0 +1,10 @@
+Anteriormente hemos visto como las funcionesw permiten encapsular código
+Cuando encaptsulamos podemos:
+
+- Reutilizar
+- Externalizar
+
+Las clases llevan esta metodología mucho más alla
+
+base_imponible = float(input("Base imponible de tu factura: ")) numero_canciones = int(input("¿Cuántas canciones tiene el álbum?: "))
+

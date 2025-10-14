@@ -1,0 +1,3 @@
+Alfredo,alfredo@gmail.com
+Ana,ana@gmail.com
+Ruth,ruth@gmail.com

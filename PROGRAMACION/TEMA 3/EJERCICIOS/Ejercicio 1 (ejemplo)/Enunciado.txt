@@ -1,0 +1,97 @@
+# Enunciado:
+Clasificación de jugadores de baloncesto por edad
+
+Escribe un programa en Python que pida al usuario la edad de un jugador de baloncesto y muestre por pantalla la categiría en la que debe jugar.
+
+Las categorías son las siguientes (
+
+
+Menores de 8 años : Pre-mini
+
+De 8 a 11 años : Mini
+
+De 12 a 15 años : Infantil
+
+De 16 a 17 años : Cadete
+
+De 18 a 20 años : Junior
+
+De 21 o más : Senior
+
+Además, si el jugador tiene más de 40 años, el programa debe mostrar un mensaje adicional indicando que es "Veterano con experiencia en la cancha"
+
+# Escribir pseudocódigo
+
+- Pide al usuario la edad
+- Si la edad es menor de 8, pre-mini
+- Si la edad va de 8 a 11, mini
+- Si la edad va de  a , 
+- Si la edad va de  a , 
+- Si la edad va de  a , 
+- Si la edad va de  a , 
+- Si la edad va de  a , 
+- Muestra la categoría
+
+# Empezamos a meter "palabritas"
+
+
+
+
+
+
+---------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+# Rúbrica de evaluación
+
+##1.- Introducción breve y contextualización
+
+Las estructuras de control de selección nos permiten ejecutar diferentes bloques de código de forma condicional, es decir, la ejecuación de esos bloques está supeditada a la validación de una expresión
+
+Nos sirve para elegir qué partes de un programa se activan y cuales permanecen sin ejecutarse.
+
+##2.- Desarrollo detallado y preciso
+
+Cuando introducimos una condición, utilizamos, en primer lugarm la cláusula if (si condicional)
+
+Escribiremos de la siguiente forma:
+
+```
+if condicion:
+    codigo a ejecutar
+```
+El código solo se ejecutará si la calidación de la condicion resulta ser cierta
+
+Además tenemos la posibilidad de ejecutar código en el caso falso, mediante la cáusula else
+
+Ejemplo:
+```
+in condicion:
+    codigo que se ejecuta en el caso veraddero
+    else:
+        codigo quese ejecuta en el caso falso
+```
+edad = input("Introduce tu edad")
+edad = int(edad) # Convierto la edad en un entero
+if edad < 8:
+    categoria = "pre-mini"
+elif edad >= 8 and edad <= 11:
+    categoria = "mini"
+elif edad >= 12 and edad <= 15:
+    categoria = "cadete"
+elif edad >= 16 and edad <= 17:
+    categoria = "cadete"
+elif edad >= 18 and edad <=20:
+    categoria = "junior"
+else:
+    categoria = "senior"
+
+print("Tu edad es de",edad,"años y tu categoría es: ", categoria)
+
+if edad > 40:
+    print("Veterano con experiencia en la cancha")
+```
+
+##4.-Conclusión breve
+
+Como hemos podido ver, las intrucciones condicionales ponen en manos del programador el poder de no ejecutar todo el codigo de forma
