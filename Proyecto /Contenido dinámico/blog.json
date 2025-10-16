@@ -1,0 +1,26 @@
+[
+	{
+		"título": "Primer artículo",
+		"fecha": "2025-10-16",
+		"autor": "Alfredo Martínez Cantero",
+		"contenido": "Este es el contenido del primer artículo"
+	},
+	{
+		"título": "Segundo artículo",
+		"fecha": "2025-10-17",
+		"autor": "Alfredo Martínez Cantero",
+		"contenido": "Este es el contenido del primer artículo"
+	},
+	{
+		"título": "Tercer artículo",
+		"fecha": "2025-10-18",
+		"autor": "Alfredo Martínez Cantero",
+		"contenido": "Este es el contenido del primer artículo"
+	},
+	{
+		"título": "Cuarto artículo",
+		"fecha": "2025-10-19",
+		"autor": "Alfredo Martínez Cantero",
+		"contenido": "Este es el contenido del primer artículo"
+	}
+]
