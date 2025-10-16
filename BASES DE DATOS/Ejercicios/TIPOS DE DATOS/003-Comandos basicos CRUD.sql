@@ -35,3 +35,8 @@ WHERE nombre = 'Alfredo';
 
 DELETE FROM clientes
 WHERE dni = '11111111A';
+
+
+
+
+
