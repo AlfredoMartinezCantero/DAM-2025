@@ -1,0 +1,26 @@
+/home/alfredo/Escritorio/Ejercicios IA/Ej5 (operadores y expresiones)/005-Calculadora.py
+/home/alfredo/Escritorio/Ejercicios IA/Ej5 (operadores y expresiones)/005.txt
+/home/alfredo/Escritorio/Ejercicios IA/Ej4 (constantes)/004-.py
+/home/alfredo/Escritorio/Ejercicios IA/Ej4 (constantes)/004.txt
+/home/alfredo/Escritorio/Ejercicios IA/1-Simulacro/001- .py
+/home/alfredo/Escritorio/Ejercicios IA/Ej2 (tipos de datos)/002.txt
+/home/alfredo/Escritorio/Ejercicios IA/Ej2 (tipos de datos)/002-.py
+/home/alfredo/Escritorio/Ejercicios IA/Ej7 (Estructuras de repetición)/007.txt
+/home/alfredo/Escritorio/Ejercicios IA/Ej7 (Estructuras de repetición)/008-impares con while.py
+/home/alfredo/Escritorio/Ejercicios IA/Ej7 (Estructuras de repetición)/007-pares.py
+/home/alfredo/Escritorio/Ejercicios IA/Ej7 (Estructuras de repetición)/009-añosmesesdias.py
+/home/alfredo/Escritorio/Ejercicios IA/Ej 9 (Instanciación de objetos)/009.txt
+/home/alfredo/Escritorio/Ejercicios IA/Ej 9 (Instanciación de objetos)/009-.py
+/home/alfredo/Escritorio/Ejercicios IA/Ej 8 (Estructuras de salto)/archivo2.py
+/home/alfredo/Escritorio/Ejercicios IA/Ej 8 (Estructuras de salto)/008.txt
+/home/alfredo/Escritorio/Ejercicios IA/Ej 8 (Estructuras de salto)/archivo1.py
+/home/alfredo/Escritorio/Ejercicios IA/Ej 8 (Estructuras de salto)/__pycache__/archivo1.cpython-312.pyc
+/home/alfredo/Escritorio/Ejercicios IA/Ej3 (literales)/003.txt
+/home/alfredo/Escritorio/Ejercicios IA/Ej3 (literales)/003-.py
+/home/alfredo/Escritorio/Ejercicios IA/Ej 10 (Utilización de métodos.)/010-.py
+/home/alfredo/Escritorio/Ejercicios IA/Ej6 (Estructuras de selección)/006-.py
+/home/alfredo/Escritorio/Ejercicios IA/Ej6 (Estructuras de selección)/006.txt
+/home/alfredo/Escritorio/Ejercicios IA/TEST U1/001-Actividad Práctica-Factura con IVA y Descuento.py
+/home/alfredo/Escritorio/Ejercicios IA/Ej1(variables)/001.txt
+/home/alfredo/Escritorio/Ejercicios IA/Ej1(variables)/001-Canción favorita.py
+/home/alfredo/Escritorio/Ejercicios IA/Ej 11 Utilización de propiedades/011-.py
