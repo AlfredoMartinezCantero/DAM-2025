@@ -1,10 +1,12 @@
 from flask import Flask
+import json
 
 aplicacion = Flask(__name__)
 
 @aplicacion.route("/")
 def raiz():
-    return '''
+################################ ESTO ES UN BLOQUE
+    cadena = '''
     <!doctype html>
 <html lang="es">
   <head>
@@ -20,17 +22,28 @@ def raiz():
   <body>
     <header><h1>ALFREDO's blog</h1></header>
     <main>
-      <article>
-        <h3>Titulo del articulo</h3>
-        <time>2025-10-16</time>
-        <p>Alfredo Martínez Cantero</p>
-        <p>Este es el contenido de un artículo ficticio</p>
-      </article>
-    </main>
-    <footer>(c) 2025 Alfredo Martínez Cantero</footer>
-  </body>
-</html>
-'''
+    '''
+########################## ESTO ES OTRO BLOQUE
+    archivo = open("blog.json",'r')
+    contenido = json.load(archivo)
+    for linea in contenido:
+        cadena += '''
+          <article>
+            <h3>'''+linea['título']+'''</h3>
+            <time>'''+linea['fecha']+'''</time>
+            <p>'''+linea['autor']+'''</p>
+            <p>'''+linea['contenido']+'''</p>
+          </article>
+          '''
+################################### ESTO ES OTRO BLOQUE
+    cadena += '''
+        </main>
+        <footer>(c) 2025 Alfredo Martínez Cantero</footer>
+      </body>
+    </html>
+    '''
+############################# No os olvidéis de RETURN
+    return cadena
 
 if __name__ == "__main__":
     aplicacion.run(debug=True) 
