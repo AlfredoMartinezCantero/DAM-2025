@@ -21,7 +21,27 @@
         margin:auto; /* Lo centra en pantalla */
         padding:20px; /* Pon un poco de margen interior */
       }
-      
+      nav ul{
+        list-style-type:none; /* Anula estilos de lista*/
+        margin:0px; /* Anula el margen exterior por defecto */
+        padding:0px; /* Anula el margen interior por defecto */
+        display:flex; /* Activa flex de izquierda a derecha */
+        gap:10px; /* Distancia entre los elementos flexbox o grid */
+        justify-content:center; /* Esto sirve para centrar los elementos */
+        /*https://flexbox.jocarsa.com/*/
+      }
+      nav ul li a{
+        text-decoration:none; /* Anula los estilos de subrayado*/
+        color:inherit; /* Le pone el color que debería tener */
+        color:white; /* Fuerzo el color a blanco */
+        background:indigo; /* El fondo es de un color sólido */
+        padding:6px; /* Le pongo margen interior */
+        font-size:11px; /* Le pongo tamaño de letra */
+        text-transform:uppercase; /* Texto va en mayúsculas */
+        display:block;  /* Permito a los elementos que sean bloques */
+        width:70px;  /* Su anchura es de 60 píxeles */
+        text-align:center;  /* Alineo el texto al centro */
+      }
     </style>
   </head> 
   <body>

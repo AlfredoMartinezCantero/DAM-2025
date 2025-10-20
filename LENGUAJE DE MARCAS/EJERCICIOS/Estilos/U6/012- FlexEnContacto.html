@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <title>Alfredo Martinez Cantero</title>
+    <meta charset="utf-8">
+    <style>
+      @font-face{
+        font-family: "ubuntu";
+        src:url(Minecrafter.Reg.ttf);
+        }
+        h1,h2,h3{
+          color:BlueViolet;
+        }
+        body{
+          background:Azure;
+          font-family:ubuntu;
+        }
+        header,main,footer{
+          width:600px; /* Establece la anchura de los elementos */
+          background:white; /* Establece el fondo de los elementos */
+          margin:auto; /* Centralo en pantalla */
+          padding:20px; /* Pon un poco de margen interior */
+        }
+        nav ul{
+          list-style-type:none; /* Anula estilos de lista */
+          margin:0px; /* anula el margen exterior por defecto */
+          padding:0px; /* anula el margen interior por defecto */
+          display:flex; /* Activa flex de izquierda a derecha */
+          gap:1px; /* Distancia entre los elementos flexbox o grid */
+          justify-content: center; /* Centrar los elementos de menu */
+        }
+        nav ul li a{
+          text-decoration:none; /* Anula los estilos de subrayado */
+          color:inherit;        /* Le pone el color que deberia tener */
+          color:white;          /* Fuerzo el color a blanco */
+          background:indigo;    /* El fondo es de un color solido */
+          padding:5px;          /* Le pongo margen interior */
+          font-size:10px;       /* Le pongo tamaño de letra */
+          text-transform:uppercase;   /* Texto va en mayusculas */
+          display:block;        /* Permito a los elementos que sean bloques */
+          width:60px;           /* Su anchura es de 60 pixeles */
+          text-align:center;    /* Alineo el texto al centro */
+        }
+      #inicio img{
+        width:100%; /* No quiero que la imagen se salga de los márgenes */
+      }
+      .bloque{
+        display:flex;
+        gap:20px;
+      }
+      .bloque img{
+        flex:1; /* Ocupa una unidad flex */
+        width:50%; /* Ocupa el 50% de la anchura */
+        height:50%; /* Ocupa el 50% de la altura */
+      }
+      .bloque p{
+        flex:1; /* Ocupa una unidad flex */
+        font-size:10px; /* Edito el tamaño del texto */
+        text-align:justify; /* Edito la alineación del texto */
+      }
+      #desarrollo .bloque{
+        flex-direction:row-reverse; /* Invertimos el orden para el elem. */
+      }
+      #contenedorportafolio{
+        display:grid; /* Este elemento es una rejilla */
+        grid-template-columns:auto auto auto; /* Y tiene tres columnas */
+        gap:20px; /* Separación entre los elementos */
+      }
+      #contenedorportafolio img{
+        width:100; /* Quiero que la imagen no desborde */
+      }
+      form{
+        display:flex; /* Quiero que el formulario no desborde */
+        flex-direction:column; /* Y quiero que sea columna */
+        flex:1; /* Tiene una unidad flex*/
+        gap:10px;
+     </style>
+  </head>
+  <body>
+    <header>
+      <!-- Esto es la cabecera de la página -->
+      <h1 style="color:violet;">Alfredo Martínez Cantero</h1>
+      <h2>Estudiante de Desarrollo de Aplicaciones Multiplataforma</h2>
+      <nav>
+        <ul>
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#sobremi">Sobre mi</a></li>
+          <li><a href="#experiencialabroal">Experiencia laboral</a></li>
+          <li><a href="#desarrollo">Desarrollo</a></li>
+          <li><a href="#diseño">Diseño</a></li>
+          <li><a href="#portafolio">Portafolio</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+    </header>
+    
+    <main>
+      <!-- Esto es el contenido principal -->
+    <section id="inicio">
+      <h3>Inicio</h3>
+      <img src="https://avatars.githubusercontent.com/u/231197078?s=400&u=0dcb8df01b8541361379940e096c7d6035aac675&v=4" alt="Alfredo Martínez Cantero">
+      </section>
+       <section id="sobremi">
+        <h3>Sobre mi</h3>
+        <p>Soy Alfredo Martínez Cantero, un educador infantil estudiando Desarrollo de Aplicaciones Multiplataforma.</p>
+      </section>
+       <section id="experiencialaboral">
+        <h3>Experiencia laboral</h3>
+        <div class="bloque">
+          <img src="https://avatars.githubusercontent.com/u/231197078?s=400&u=0dcb8df01b8541361379940e096c7d6035aac675&v=4">
+          <p>Soy Alfredo Martínez Cantero, un educador infantil estudiando Desarrollo de Aplicaciones Multiplataforma.</p>
+        </div>
+      </section>
+       <section id="desarrollo">
+        <h3>Desarrollo</h3>
+        <div class="bloque">
+          <img src="https://avatars.githubusercontent.com/u/231197078?s=400&u=0dcb8df01b8541361379940e096c7d6035aac675&v=4">
+          <p>Soy Alfredo Martínez Cantero, un educador infantil estudiando Desarrollo de Aplicaciones Multiplataforma.</p>
+        </div>
+      </section>
+       <section id="diseño">
+        <h3>Diseño</h3>
+        <div class="bloque">
+          <img src="https://avatars.githubusercontent.com/u/231197078?s=400&u=0dcb8df01b8541361379940e096c7d6035aac675&v=4">
+          <p>Soy Alfredo Martínez Cantero, un educador infantil estudiando Desarrollo de Aplicaciones Multiplataforma.</p>
+        </div>
+      </section>
+       <section id="portafolio">
+        <h3>Portafolio</h3>
+        <div id="portafolio">
+          <article>
+             <h4>Elemento de portafolio</h4>
+             <p>Descripción del elemento</p>
+             <img src="https://avatars.githubusercontent.com/u/231197078?s=400&u=0dcb8df01b8541361379940e096c7d6035aac675&v=4">
+          </article>
+          <article>
+             <h4>Elemento de portafolio</h4>
+             <p>Descripción del elemento</p>
+             <img src="https://avatars.githubusercontent.com/u/231197078?s=400&u=0dcb8df01b8541361379940e096c7d6035aac675&v=4">
+          </article>
+          <article>
+             <h4>Elemento de portafolio</h4>
+             <p>Descripción del elemento</p>
+             <img src="https://avatars.githubusercontent.com/u/231197078?s=400&u=0dcb8df01b8541361379940e096c7d6035aac675&v=4">
+          </article>
+        </div>
+      </section>
+       <section id="contacto">
+        <h3>Contacto</h3>
+        <div class="bloque">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d714.5272612248036!2d-0.4100381017306038!3d39.501390916941126!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd60456dc889478f%3A0x34e1876207a3d64!2sCEAC%20FP%20Valencia%20%F0%9F%8E%93%20Centro%20de%20Formaci%C3%B3n%20Profesional%20Oficial!5e1!3m2!1ses!2ses!4v1759912141059!5m2!1ses!2ses" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <form>
+          <label for="nombre">Introduce tu nombre</label>
+          <input type="text" id="nombre">
+          <label for="email">Introduce tu email</label>
+          <input type="email" id="email">
+          <label for="mensaje">Introduce tu mensaje</label>
+          <textarea id="mensaje"></textarea>
+          <input type="submit">
+        </form>
+      </div>
+      </section>
+    </main>
+    
+    <footer>
+      <!-- Esto es el pié de página -->
+      <a href="https://github.com/AlfredoMartinezCantero?tab=projects">Github</a>
+      <a href="https://instagram.com/itsalfreedo">Instagram</a>
+    </footer>
+  </body>
+</html>
