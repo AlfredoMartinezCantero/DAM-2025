@@ -1,0 +1,29 @@
+# Definimos la clase #
+class TiendaMusica:
+
+# Convierte el método a estático #
+    @staticmethod 
+
+   # Definimos el método estático #
+    def calcularCostoTotal(canciones):
+
+        # Definimos una variable con un precio fijo #
+        precio_por_cancion = 1.50
+
+        # Usamos la función len() para obtener la cantidad de elementos (canciones) de la lista #
+        cantidad_canciones = len(canciones)
+
+        # Calculamos el costo total multiplicando la cantidad por el precio unitario #
+        costo_total = cantidad_canciones * precio_por_cancion
+
+        # Devuelve el valor del costo total calculado #
+        return costo_total
+
+# Creamos una lista con los nombres de las canciones #
+lista_canciones = ["Canción 1", "Canción 2", "Canción 3"]
+
+# Llamamos al método estático directamente desde la clase (TiendaMusica) y pasa la lista #
+total = TiendaMusica.calcularCostoTotal(lista_canciones)
+
+# Imprimimos el resultado final del costo total #
+print("Costo total: ", total, "€")
