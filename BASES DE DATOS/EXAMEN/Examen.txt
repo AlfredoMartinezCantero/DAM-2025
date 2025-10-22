@@ -1,0 +1,12 @@
+Examen de bases de datos:
+
+A cada uno se os presentarán una serie de entidades(entre 3-5):
+cliente, producto, pedido, empleado, servicio, stock...
+Deberéis:
+1.-Usar SQLs
+2.-Crear tablas y columnas
+3.-Insertar datos
+4.-Habrá algún cruce de datos (claves foráneas)
+5.-Deberéis implementar CRUD (leer, instertar, actualizar, eliminar)
+
+
