@@ -1,0 +1,12 @@
+{
+	"datos personales":{
+		"nombre":"Alfredo",
+		"apellidos":"Martínez Cantero",
+		"email":"alfredomartinezcantero@gmail.com",
+		"telefono":"653358447",
+		"direccion":"Mi calle",
+		"codigopostal":"46000 Valencia"
+	},
+	"experiencia":"",
+	"formación":""
+}
