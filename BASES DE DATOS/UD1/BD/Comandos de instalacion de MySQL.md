@@ -2,7 +2,7 @@ En la máquina virtual:
 
 Ctrl + alt + T: Abrir un terminal
 
-suudo apt install mysql-server
+sudo apt install mysql-server
 
 sudo = super user do = el superusuario va a hacer algo
 apt = gestor de paquetes de Debian Linux
