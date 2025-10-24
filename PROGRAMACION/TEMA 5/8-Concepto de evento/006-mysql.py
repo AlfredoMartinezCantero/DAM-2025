@@ -6,7 +6,7 @@ import mysql.connector
 conexion = mysql.connector.connect(
     host="localhost",
     user="empresadam",
-    password="Accesoadatos2526$",
+    password="Empresadam123$",
     database="empresadam"
 )
 cursor = conexion.cursor()
@@ -20,8 +20,6 @@ cursor.execute('''
     "alfredomartinezcantero@gmail.com"
   );
 ''')
-
 conexion.commit()
-
 cursor.close()
 conexion.close()
