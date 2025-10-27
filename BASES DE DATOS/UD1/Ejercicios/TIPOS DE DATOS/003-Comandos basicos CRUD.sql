@@ -1,3 +1,6 @@
+-- Acceder
+sudo mysql -u root -p
+
 -- Create
 
 INSERT INTO clientes VALUES(

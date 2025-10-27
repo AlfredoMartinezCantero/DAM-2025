@@ -6,3 +6,6 @@ CREATE TABLE clientes(
 	apellidos VARCHAR(255),
 	email VARCHAR(100)
 );
+
+
+
