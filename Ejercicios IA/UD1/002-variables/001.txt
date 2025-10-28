@@ -1,0 +1,32 @@
+Voy a realizar una demostración del uso de las variables y salidas en Python para crear un programa que muestre mi nombre y una canción que me gusta del grupo "Extremoduro".
+
+` print ` sirve para mostrar por pantalla lo que nosotros queramos. 
+Para que esto funcione 'print' debe estar acompañado de ` () `  y el contenido que quieras que se muestre por pantalla dentro de los paréntesis ha de empezar y acabar con ` "" ` .
+
+Las variables sirven para definir una palabra y que el sistema lo reconozca como variable, es decir; yo le digo al programa que ` nombre = "Alfredo" `  y así cuándo vaya a mostrarlo por pantalla con ` print `  pondré: ` print("Mi nombre es",nombre) `. Esto lo que hace es que al definir la palabra nombre con lo que nosotros queramos el sistema proyectará ese dato.
+
+El comienzo de la declaración de variables se ejecuta de la siguiente manera; declaramos la variable *nombre* ` = ` y elegimos el nombre que queramos entre ` "" `.
+
+Ahora, para enseñar prácticamente lo que he estado explicando adjunto como sería un ejercicio práctico:
+
+Declaramos las variables del nombre y la canción que queramos.
+```
+nombre = "Alfredo"
+cancion_favorita = "Tango Suicida"
+```
+
+Utilizamos la función ` Print` para mostrar el nombre y la canción.
+```
+print("Mi nombre es",nombre)
+print("Mi canción favorita de Extremoduro es" ,cancion_favorita)
+```
+
+Por último cambiamos el valor de la variable ` nombre `  a otro nombre y mostramos el mensaje.
+```
+nombre = "Robe"
+print("Mi nombre es",nombre)  
+```
+
+Un error común sería no poner las `""` cuando declaramos la variable.
+
+Con este ejercicio seremos capaces de definir variables y usar ` print ` con eficiencia para mostrar los datos que queramos por pantalla.

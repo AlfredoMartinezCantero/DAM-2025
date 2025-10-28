@@ -1,0 +1,13 @@
+Este ejercicio presenta el uso de la declaración y uso de constantes en Python.
+En pocas palabras, declarar una constante significa asignar un valor a un identificador, en este caso: `PI = 3.1415`, para que se utilice en diferentes partes del programa sin necesidad de volver a escribirlo.
+
+```
+PI = 3.1415
+print("El valor de PI es", PI)
+
+PI = 4
+print("El nuevo valor de PI es", PI)
+``` 
+
+Un error común pudiera ser que las constantes deben formularse con mayúsculas (PI).
+

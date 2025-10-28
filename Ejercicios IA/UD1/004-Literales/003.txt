@@ -1,0 +1,22 @@
+Voy a realizar una demostración del uso de las `variables`, el uso del `input` para pedir datos al usuario, la conversión de tipos con `int`, la realización de operaciones matemáticas sencillas y la impresión de resultados en pantalla con `print`; en este caso, el ejemplo será realizado con la banda de rock Español "Extremoduro"
+
+Una `variable` sirve para definir en la memoria del ordenador donde guardamos información que luego podemos usar o modificar.
+
+La función `input` se utiliza para pedir información al usuario.
+
+Como `input` devuelve siempre texto, si queremos trabajar con números debemos convertir ese texto en un número entero usando `int`.
+
+Y por último, la función `print` se utiliza para mostrar información en pantalla. 
+
+```
+nombre_album = input("¿Cuál es el último álbum de Extremoduro que has escuchado?: ")
+
+numero_canciones = int(input("¿Cuántas canciones tiene el álbum?: "))
+
+doble_canciones = numero_canciones*2
+
+print("El último álbum de Extremoduro que escuchaste es: ",nombre_album)
+print("El doble del número de canciones es: ",doble_canciones)
+```
+
+Con este ejercicio podemos aprender a poner en práctica conceptos básicos y fundamentales de la programación; como el uso de variables, la interacción mediante la función `input`, la conversión de datos con `int`, y la visualización de resultados con `print`.

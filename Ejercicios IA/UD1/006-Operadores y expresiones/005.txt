@@ -1,0 +1,22 @@
+Este ejercicio nos ayuda a comprender el uso de operadores y expresiones en Python aplicados a un caso real (el cálculo de una factura con IVA).
+Con `input` pedimos al usuario la base imponible y la convertimos a número con `float`.
+Usamos el`*`para calcular el 21% de IVA, es decir:`(base_imponible * 0.21)`.
+A continuación sumamos la base imponible y el IVA con el`+`para obtener el total de la factura.
+Finalmente, mostramos los resultados con `print`.
+
+```
+base_imponible = 0
+total_iva = 0
+total_factura = 0
+
+base_imponible = float(input("Base imponible de tu factura: "))
+total_iva = base_imponible*0.21
+
+total_factura = base_imponible + total_iva
+
+print("base imponible:",base_imponible)
+print("iva (21%):",total_iva)
+print("total factura",total_factura)
+``` 
+
+Un error común pudiera ser el hecho de no añadir el `float`, esto resultaría en que el programa no podría hacer la operación matemática.

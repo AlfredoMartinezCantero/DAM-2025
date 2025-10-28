@@ -1,0 +1,28 @@
+En estos ejercicios vamos a ver el uso de `for`, `in range`y `while`.
+El `for` se usa para repetir unas instrucciones varias veces, en este caso lo usamos para que, con el uso de `print`, que sirve para mostrar por pantalla los resultados, cuente los números pares que se encuentren en el rango del 0 al 100. Esto lo conseguimos con la función `in range`, que sirve para generar una secuencia de números enteros.
+
+Por último, `while`, que significa literalmente "mientras", sirve para repetir unas instrucciones *mientras* se cumpla una condición booleana, es decir, `True/False`
+
+1.- Contando los días del mes con for:
+```
+for numero_par in range(0,100,2):
+    print(numero_par)
+``` 
+
+2.- Contando los días del mes con while:
+```
+numero_impar = 1
+while numero_impar <= 99:
+    print(numero_impar)
+    numero_impar += 2
+```
+
+3.- Contando años, meses y días con anidación:
+```
+for anio in range(1978,2026):
+    for mes in range(1,13):
+        for dia in range(1,32):
+            print("Hoy es el dia",dia,"del mes",mes,"del año",anio)
+```
+
+
