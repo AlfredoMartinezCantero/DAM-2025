@@ -1,5 +1,0 @@
-# Tengo que poner el nombre de mi videojuego favorito.
-# Poner la puntuación en una escala del 1-10 como número entero que le daría.
-
-# A continuación convierte la puntuación a número entero y calcula el doble de esa puntuación.
-# Mostrar en pantalla un mensaje que incluya el nombre del videojuego y el doble de la puntuación.
