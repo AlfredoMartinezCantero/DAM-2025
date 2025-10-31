@@ -1,0 +1,2 @@
+En la máquina virtual:
+gcc 004-Hola mundo.c

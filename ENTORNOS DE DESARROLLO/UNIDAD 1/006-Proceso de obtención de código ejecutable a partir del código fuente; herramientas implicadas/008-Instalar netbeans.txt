@@ -1,0 +1,5 @@
+En la máquina virtual:
+Acceder a la tienda de app (Centro de aplicaciones)
+
+Apache NetBeans
+openJDK
