@@ -28,3 +28,17 @@ NO tiene programacón orientada a objetos
 -----------------------------------------------------------------------------------------------------------------
 C++ (incremento de C) - 1984-1986
 Igual que C, pero con más cosas, entre ellas, programación orientada a objetos
+cpp = Archivo de codigo para ejecutar
+hpp = Archivo de librerias para importar
+-----------------------------------------------------------------------------------------------------------------
+Java - Lenguaje creado en Sun Microsystems (hoy Oracle) en 1995
+Lenguaje estrictamente orientado a objetos
+Pensado para:
+1.-Poder construir software grande de forma cómoda
+2.-Dar al usuario un ecosistema completo de herramientas
+3.-Y un IDE cómodo de usar
+Todas esas promesas se cumplieron, pero Oracle se está cargando Java
+
+Sun Microsystems hacía estaciones de trabajo de pago, y el sofware era gratuito 
+Segunda mitad de los años 90, Windows se populariza, las estaciones de trabajo Intel lo acaparan todo
+Ante la bancarrota de Sun Microsystems, Oracle compró Sun y todos sus productos
