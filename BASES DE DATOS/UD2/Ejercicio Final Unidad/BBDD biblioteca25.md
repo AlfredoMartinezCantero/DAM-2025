@@ -1,7 +1,8 @@
 ---
 # Introducción:
 Este ejercicio de BBDD tiene como objetivo la creación y gestión de una base de datos para una biblioteca, denominada **biblioteca25**. A través de este ejercicio se busca practicar la creación de tablas relacionales, la definición de claves primarias y foráneas, así como la implementación de restricciones de integridad y índices para optimizar consultas.
-Se diseñan cuatro tablas principales: autores, libros, socios y prestamos, que permiten almacenar información sobre autores de libros, títulos disponibles, socios de la biblioteca y los préstamos realizados. Además, se incluyen validaciones de datos mediante restricciones como NOT NULL, UNIQUE y CHECK, así como la creación de índices para mejorar el rendimiento de las consultas.
+
+Se diseñan cuatro tablas principales; autores, libros, socios y prestamos, que permiten almacenar información sobre autores de libros, títulos disponibles, socios de la biblioteca y los préstamos realizados. Además, se incluyen validaciones de datos mediante restricciones como NOT NULL, UNIQUE y CHECK, así como la creación de índices para mejorar el rendimiento de las consultas.
 Finalmente, se realizan inserciones de datos de ejemplo y se verifican las estructuras y contenidos de las tablas mediante las sentencias DESCRIBE y SELECT, asegurando así que la base de datos se encuentra correctamente estructurada y funcional.
 
 ---
