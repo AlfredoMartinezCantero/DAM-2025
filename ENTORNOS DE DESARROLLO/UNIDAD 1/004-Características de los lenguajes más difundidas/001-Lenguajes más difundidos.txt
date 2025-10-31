@@ -38,7 +38,37 @@ Pensado para:
 2.-Dar al usuario un ecosistema completo de herramientas
 3.-Y un IDE cómodo de usar
 Todas esas promesas se cumplieron, pero Oracle se está cargando Java
+Java no se interpreta como Python
+Java no se compila como Centro
+Sino que se genera un archivo intermedio con extension .jar
+
+Contiene el programa, pero no ves el código
+Se ejecuta contra una maquina virtual
 
 Sun Microsystems hacía estaciones de trabajo de pago, y el sofware era gratuito 
 Segunda mitad de los años 90, Windows se populariza, las estaciones de trabajo Intel lo acaparan todo
 Ante la bancarrota de Sun Microsystems, Oracle compró Sun y todos sus productos
+
+En ecosistema Android, antes se usaba Java, ahora se usa Kotlin
+Una de las muchas malas  ideas de Oracle, fué demandar a Google por el uso de Java en Android
+- Java era gratuito
+- Google construye Android
+- Como Java es gratuíto, Google elige Java como lenguaje de programación
+- Android genera mucho volumen de negocio haciendo moviles
+- Oracle siente que podría rentabilizar Java
+- Oracle demanda a Google
+- Google gana el juicio
+- Y a continuación abandona java 
+
+Ecosistema Windows-Microsoft .NET 
+
+En el momento en el que Java se empieza a comer el mercado
+1966-1967
+Microsoft tiene envidia y saca la plataforma .net, que es una copia de Java pero de Microsoft
+1998 - Microsoft lanza C# (do sostenido) (C++++)
+Precio de producto en el rango de 1000-2000€
+Lenguajes:
+Visual C#
+Visual Basic .NET
+ASP.NET (web)
+F# para interfaces de usuario
