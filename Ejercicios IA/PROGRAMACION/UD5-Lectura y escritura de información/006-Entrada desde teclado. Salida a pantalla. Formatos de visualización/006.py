@@ -1,18 +1,3 @@
-'''
-Pantalla de bienvenida: El programa debe comenzar con un mensaje de bienvenida que incluya el nombre del creador del programa.
-
-Menú principal: Ofrecerá al usuario 4 opciones: Insertar cliente, Listar clientes, Actualizar cliente y Eliminar cliente.
-
-Insertar cliente: Pedirá los datos del cliente (nombre, apellidos y email) y lo añadirá a la lista de clientes.
-
-Listar clientes: Mostrará todos los clientes con su ID correspondiente.
-
-Actualizar cliente: Pedirá el ID del cliente a modificar y los nuevos datos para actualizar.
-
-Eliminar cliente: Pedirá el ID del cliente a eliminar y confirmará la acción.
-
-'''
-
 class Cliente():
     def __init__(self,nombre,apellidos,email):
         self.nombre = nombre
