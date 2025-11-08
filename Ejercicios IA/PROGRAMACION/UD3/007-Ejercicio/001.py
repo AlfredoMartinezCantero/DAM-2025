@@ -1,0 +1,83 @@
+nombre_dragon_A = input("¿Cuál es el nombre del dragon A? -> ")
+edad_dragon_A = input("¿Que edad tiene el dragón A? -> ")
+print("")
+print("El nombre del Dragón A es", nombre_dragon_A, "y tiene", edad_dragon_A, "años.")
+
+print("")
+nombre_dragon_B = input("¿Cuál es el nombre del dragon B? -> ")
+edad_dragon_B = input("¿Que edad tiene el dragón B? -> ")
+print("El nombre del Dragón B es", nombre_dragon_B, "y tiene", edad_dragon_B, "años.")
+print("")
+
+fuerza_dragon_A = 0
+fuerza_dragon_B = 0
+
+# Vamos a asegurarnos que las edades sean números enteros
+try:
+    edad_dragon_A = int(edad_dragon_A)
+    print("La edad del dragón A se ha convertido correctamente")
+except:
+    edad_dragon_A = 100 
+    print("No se ha podido convertir la edad del dragón A correctamente, se le asignará una edad de 100 años")
+
+try:
+    edad_dragon_B = int(edad_dragon_B)
+    print("La edad del dragón B se ha convertido correctamente")
+
+except:
+    edad_dragon_B = 100 
+    print("No se ha podido convertir la edad del dragón B correctamente, se le asignará una edad de 100 años")
+
+# Ahora vamos a clasificar por edades a los dragones según la edad
+
+if edad_dragon_A < 50:
+    clasificacion_dragon_A = "Dragón Joven"
+elif edad_dragon_A >= 50 and edad_dragon_A <= 199: 
+    clasificacion_dragon_A = "Dragón Adulto"
+elif edad_dragon_A >= 200:
+    clasificacion_dragon_A = "Dragón Anciano"
+print("El Dragón A es un:", clasificacion_dragon_A)
+
+
+if edad_dragon_B < 50:
+    clasificacion_dragon_B = "Dragón Joven"
+elif edad_dragon_B >= 50 and edad_dragon_B <= 199: 
+    clasificacion_dragon_B = "Dragón Adulto"
+elif edad_dragon_B >= 200:
+    clasificacion_dragon_B = "Dragón Anciano"
+print("El Dragón B es un:", clasificacion_dragon_B)
+
+
+# Días de entrenamiento
+for dia in range (1,4):
+
+    # Entrenamos al dragón A
+    if clasificacion_dragon_A == "Dragón Joven":
+        fuerza_dragon_A +=2
+    elif clasificacion_dragon_A == "Dragón Adulto":
+        fuerza_dragon_A +=1
+    elif clasificacion_dragon_A == "Dragón Anciano":
+        fuerza_dragon_A +=1
+    print("")
+    print("Está anocheciendo, es hora de ir a descansar... Fin del día", dia)
+    print("")
+    print("El dragón A ahora tiene", fuerza_dragon_A, "de fuerza.")
+    print("")
+
+    # Entrenamos al dragón B
+    if clasificacion_dragon_B == "Dragón Joven":
+        fuerza_dragon_B +=2
+    elif clasificacion_dragon_B == "Dragón Adulto":
+        fuerza_dragon_B +=1
+    elif clasificacion_dragon_B == "Dragón Anciano":
+        fuerza_dragon_B +=1
+    print("")
+    print("Está anocheciendo, es hora de ir a descansar... Fin del día", dia)
+    print("")
+    print("El dragón B ahora tiene", fuerza_dragon_B, "de fuerza.")
+    print("")
+
+
+print("Al final del entrenamiento el Dragón A,", nombre_dragon_A, ",ha conseguido acumular un total de", fuerza_dragon_A, "de fuerza!")
+print("---------------------------------------------------------------------------------------------------------------------------------")
+print("Al final del entrenamiento el Dragón B,", nombre_dragon_B, ",ha conseguido acumular un total de", fuerza_dragon_B, "de fuerza!")
