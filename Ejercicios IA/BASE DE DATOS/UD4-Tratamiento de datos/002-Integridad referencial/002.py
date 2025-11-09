@@ -1,21 +1,3 @@
-# Introducción:
-Este ejercicio desarrolla un programa que permite gestionar una base de datos llamada "empresarial" con una tabla "clientes". El programa ofrece un menú interactivo para insertar, listar, actualizar y borrar clientes en la base de datos utilizando Python y MySQL.
-
-Dispone de un menú interactivo donde el usuario puede insertar, listar, actualizar y borrar clientes en la base de datos.
-El objetivo es practicar las operaciones de manipulación de datos (CRUD) y la gestión de conexiones a bases de datos en Python.
-
-`while True:` se utiliza para crear un bucle infinito que mantiene el programa en ejecución hasta que el usuario decida salir.
-
-El bloque `try-except` se emplea para manejar errores de entrada, asegurando que el usuario introduzca un número válido para la opción del menú.
-
-`INSERT INTO clientes values (%s, %s, %s, %s, %s)` es una sentencia SQL parametrizada que previene inyecciones SQL al insertar un nuevo cliente en la tabla.
-
-`UPDATE clientes SET Telefono = %s WHERE Identificador = %s` es una sentencia SQL que actualiza el teléfono de un cliente específico identificado por su ID.
-
-`cursor.close()` y `conexion.close()` se utilizan para cerrar el cursor y la conexión a la base de datos, liberando recursos una vez que el programa termina.
-
----
-```
 import mysql.connector
 
 conexion = mysql.connector.connect(
@@ -125,9 +107,4 @@ while True:
 
 cursor.close()
 conexion.close()
-```
----
 
-# Conclusión:
-Gracias al ejercicio se logra establecer una conexión estable, ejecutar sentencias SQL seguras y manipular registros de manera dinámica desde un programa de consola.
-Un error común a la hora de escribir el código es olvidar el `conexion.commit()` después de las operaciones de inserción, actualización o eliminación, lo que impide que los cambios se guarden en la base de datos.
