@@ -1,4 +1,4 @@
-CREATE TABLE "clientes" (
+CREATE TABLE clientes (
 	"Identificador"	INTEGER,
 	"nombre"	TEXT,
 	"apellidos"	TEXT,
