@@ -1,0 +1,217 @@
+
+<!doctype html>                               /* indica al navegador que el documento está escrito en html */
+<html lang="es">                             /* especifica el idioma principal del contenido */
+		<head>                                           
+    <meta charset="utf-8">               /* define la codificación de caracteres del documento */
+    <title>Currículum</title>
+
+    <!-- Definimos la apariencia de la página -->
+    <style>
+      html {
+        background: ghostwhite;         /* color de fondo de la ventana */
+        font-family: sans-serif;        /* familia de fuentes por defecto */
+        font-size: 13px;               /* tamaño base de letra */
+      }
+
+
+
+      /* Estilos para el body */
+      body {
+        width: 700px;                  /* ancho fijo del CV */
+        background: white;             /* fondo de la hoja */
+        margin: 20px auto;             /* margen superior, inferior y centrado horizontal */
+        padding: 20px;                 /* espacio interior */
+      }
+
+
+
+      /* Contenedor principal que agrupa la columna izquierda y derecha */
+      #contenedor {
+        display: flex;                 /* usar flexbox para columnas */
+        gap: 20px;                     /* separación entre columnas */
+      }
+
+
+
+      /* Columna izquierda */
+      #izquierda {
+        flex: 1;                       /* proporción de espacio en el contenedor flex */
+        background: rgb(75, 100, 125); /* color de fondo de la columna izquierda */
+        padding: 15px;                 /* espacio interior */
+        color: floralwhite;            /* color de texto en la columna izquierda */
+      }
+
+
+
+      /* Imagen dentro de la columna izquierda */
+      #izquierda img {
+        width: 100%;            /* la imagen ocupa todo el ancho del contenedor */
+        margin-bottom: 15px;    /* espacio inferior */
+      }
+
+
+
+      /* Encabezados de nivel 3 en la columna izquierda */
+      #izquierda h3 {
+        border-bottom: 1px solid white;                         
+        padding-bottom: 3px;              /* espacio inferior al texto */
+        margin-bottom: 6px;               /* espacio inferior al borde */
+      }
+
+
+
+      /* Listas en la columna izquierda */
+      #izquierda ul {
+        list-style: none;            /* sin viñetas */
+        padding: 0;                  /* sin padding */
+        margin: 0 0 15px 0;        /* margen inferior de 15px */
+      }
+
+
+
+      /* Elementos de la lista */
+      #izquierda li {
+        margin: 4px 0;             /* margen vertical entre elementos */
+      }
+
+
+
+      /* Columna derecha */
+      #derecha {
+        flex: 3;                       /* más ancho que la columna izquierda */
+        padding: 15px;                 /* espacio interior */
+      }
+
+
+
+      /* Estilo del nombre principal (h1) */
+      h1 {
+        font-size: 20px;            /* tamaño de fuente */
+        color: rgb(50, 70, 90);   /* color del texto */
+        margin-bottom: 4px;         /* espacio inferior */
+      }
+
+
+
+      /* Subtítulo (puesto/estudios) */
+      h2 {
+        font-size: 14px;          /* tamaño de fuente */
+        color: gray;            /* color gris */
+        font-weight: normal;      /* peso de fuente normal */
+        margin-top: 0;            /* sin margen superior */
+        margin-bottom: 15px;      /* margen inferior */
+      }
+
+
+
+      /* h3 general: se usa para secciones dentro de la columna derecha */
+      h3 {
+        color: black;                               /* color del texto */  
+        border-bottom: 1px solid lightgray;         /* borde inferior */   
+        padding-bottom: 4px;                          /* espacio inferior al texto */     
+        margin-top: 20px;                             /* espacio superior */     
+        margin-bottom: 10px;                          /* espacio inferior */
+      }
+
+
+
+    </style>
+  </head>
+
+  <body>
+    <div id="contenedor">
+      <!-- COLUMNA IZQUIERDA -->
+      <section id="izquierda">
+        <!-- IMAGEN-->
+        <img src="1760996654051-removebg-preview.png" alt="Foto de perfil">
+        
+        <!-- CONTACTO -->
+        <article>
+          <h3>Contacto</h3>
+          <ul>
+            <li>alfredomartinezcantero@gmail.com</li>
+            <li>653358447</li>
+            <li>Valencia, 46022</li>
+            <li>www.linkedin.com/in/AlfredoMartínez</li>
+          </ul>
+        </article>
+
+        <!-- HABILIDADES -->
+        <article>
+          <h3>Habilidades</h3>
+          <ul>
+            <li>Profesional versátil</li>
+            <li>Capacidad de adaptación</li>
+            <li>Comunicativo</li>
+            <li>Competente en equipos de trabajo</li>
+          </ul>
+        </article>
+
+        <!-- DATOS EXTRA -->
+        <article>
+          <h3>Datos de interés</h3>
+          <ul>
+            <li>Nivel de Inglés B2 (Cambridge English)</li>
+            <li>Valenciano nativo</li>
+            <li>Disponibilidad total</li>
+            <li>Vehículo propio</li>
+          </ul>
+        </article>
+      </section>
+
+      <!-- COLUMNA DERECHA -->
+      <section id="derecha">
+        <!-- NOMBRE Y SUBTÍTULO -->
+        <h1>Alfredo Martínez Cantero</h1>
+        <h2>Estudiante de Desarrollo de Aplicaciones Multiplataforma</h2>
+
+        <!-- BREVE INTRODUCCIÓN -->
+        <p>
+          Soy un profesional dinámico con trayectoria en los ámbitos educativo y logístico.
+          Destaco por mi capacidad de adaptación a diversos entornos laborales, así como por mis habilidades en comunicación, organización y resolución de problemas.
+          Tengo una actitud proactiva y estoy acostumbrado al trabajo colaborativo.
+        </p>
+
+        <!-- EXPERIENCIA PROFESIONAL -->
+        <div id="experiencia">
+          <h3>Experiencia profesional</h3>
+
+          <article>
+            <h4>Puesto</h4>
+            <h5>Inicio 2025 - Final 2025</h5>
+            <!-- strong alrededor de un p poner en negrita "descripción del puesto" -->
+            <strong><p>Descripción del puesto</p></strong>
+            <p>
+              Logístico en una empresa a nivel nacional.
+              Mi papel consistía en la preparación de pedidos en plataformas logísticas de gran volumen,
+              la verificación y control de mercancías destinadas a distintos puntos de venta,
+              el manejo de transpaletas y herramientas de gestión logística,
+              además del cumplimiento de los protocolos de seguridad y calidad durante los procesos de envío.
+            </p>
+          </article>
+
+          <article>
+            <h4>Puesto</h4>
+            <h5>Inicio 2025 - Final 2025</h5>
+            <strong><p>Descripción del puesto</p></strong>
+            <p>
+              Auxiliar logístico en almacén.
+              Encargado de preparar pedidos para su envío conforme a los protocolos establecidos,
+              realizando tareas de carga y descarga de mercancías,
+              organización y reposición de productos en el almacén,
+              gestión de inventario y apoyo general en operaciones logísticas.
+            </p>
+          </article>
+        </div>
+
+        <!-- FORMACIÓN ACADÉMICA -->
+        <div id="formacion">
+          <h3>Formación</h3>
+          <p><strong>Desarrollo de Aplicaciones Multiplataforma</strong> - CEACFP (Cursando actualmente)</p>
+          <p><strong>Educación Infantil</strong> - IES Misericordia</p>
+          <p><strong>Atención a Personas en Situación de Dependencia</strong> - IES Misericordia</p>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
