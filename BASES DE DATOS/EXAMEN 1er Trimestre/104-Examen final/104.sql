@@ -5,91 +5,107 @@
 -- y una vista de esa misma peticion Crea un usuario con permisos para acceder a esa base de datos
 
 
+-- Crear base de datos
 CREATE DATABASE portafolioexamen;
+USE portafolioexamen;
 
+-- Crear tabla categorías
 CREATE TABLE categoriasportafolio (
     Identificador INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(255)
+    nombre VARCHAR(255) NOT NULL
 );
 
+-- Crear tabla piezas
 CREATE TABLE piezasportafolio (
     Identificador INT AUTO_INCREMENT PRIMARY KEY,
-    titulo VARCHAR(255),
-    descripcion VARCHAR(255),
-    fecha VARCHAR(50),
+    titulo VARCHAR(255) NOT NULL,
+    descripcion TEXT,
+    fecha DATE,
     id_categoria INT,
     FOREIGN KEY (id_categoria) REFERENCES categoriasportafolio(Identificador)
+    ON DELETE SET NULL
+    ON UPDATE CASCADE
 );
 
-+---------------+--------------+------+-----+---------+----------------+
-| Field         | Type         | Null | Key | Default | Extra          |
-+---------------+--------------+------+-----+---------+----------------+
-| Identificador | int          | NO   | PRI | NULL    | auto_increment |
-| titulo        | varchar(255) | YES  |     | NULL    |                |
-| descripcion   | varchar(255) | YES  |     | NULL    |                |
-| fecha         | varchar(50)  | YES  |     | NULL    |                |
-| id_categoria  | int          | YES  | MUL | NULL    |                |
-+---------------+--------------+------+-----+---------+----------------+
-5 rows in set (0.00 sec)
+-- Mostrar estructura de las tablas
+DESCRIBE categoriasportafolio;
+DESCRIBE piezasportafolio;
 
-CREATE TABLE categoriasportafolio (
-    Identificador INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(255)
-);
+-----------------------
 
-+---------------+--------------+------+-----+---------+----------------+
-| Field         | Type         | Null | Key | Default | Extra          |
-+---------------+--------------+------+-----+---------+----------------+
-| Identificador | int          | NO   | PRI | NULL    | auto_increment |
-| nombre        | varchar(255) | YES  |     | NULL    |                |
-+---------------+--------------+------+-----+---------+----------------+
-2 rows in set (0.00 sec)
+-- Insertar registros en categorías PRIMERO
+INSERT INTO categoriasportafolio (nombre) VALUES 
+('Postimpresionismo'),
+('Impresionismo'),
+('Arte Moderno'),
+('Arte Abstracto');
 
--- Insertamos registros en piezasportafolio
-INSERT INTO piezasportafolio VALUES (
-    NULL,
-    'La noche estellada',
-    'famosa pintura de Vincent van Gogh de 1889, 
-     un óleo sobre lienzo postimpresionista que representa
-     un paisaje nocturno con un cielo turbulento y un pueblo idílico.',
-    '1889',
-    NULL
-);
+-- Insertar registros en piezas con referencias válidas
+INSERT INTO piezasportafolio (titulo, descripcion, fecha, id_categoria) VALUES 
+('La noche estrellada', 'Famosa pintura de Vincent van Gogh de 1889, un óleo sobre lienzo postimpresionista', '1889-06-01', 1),
+('Nenúfares', 'Serie de pinturas de Claude Monet representando su jardín en Giverny', '1915-01-01', 2),
+('El grito', 'Obra emblemática de Edvard Munch representando la angustia existencial', '1893-01-01', 3),
+('Composición VIII', 'Obra abstracta de Wassily Kandinsky', '1923-01-01', 4);
 
--- Insertamos registros en categoriasportafolio
-INSERT INTO categoriasportafolio VALUES (
-    NULL,
-    'Postimpresionismo'
-);
+-----------------------
 
--- Eliminamos columna
-ALTER TABLE piezasportafolio 
-DROP COLUMN apellidos;
-ADD COLUMN apellidos;
+-- CREATE (Insertar nuevo registro)
+INSERT INTO piezasportafolio (titulo, descripcion, fecha, id_categoria) 
+VALUES ('Los girasoles', 'Serie de pinturas de girasoles de Vincent van Gogh', '1888-08-01', 1);
 
--- Selección cruzada con LEFT JOIN
-SELECT Identificador, titulo, descripcion, fecha, nombre AS categoria
-FROM piezasportafolio
-LEFT JOIN categoriasportafolio ON id_categoria = Identificador;
+-- READ (Leer registros)
+SELECT * FROM piezasportafolio;
+SELECT * FROM categoriasportafolio;
+
+-- UPDATE (Actualizar registro)
+UPDATE piezasportafolio 
+SET descripcion = 'Obra maestra de Vincent van Gogh que representa un cielo nocturno turbulento' 
+WHERE Identificador = 1;
+
+-- DELETE (Eliminar registro)
+DELETE FROM piezasportafolio WHERE Identificador = 3;
+
+-----------------------
+
+-- Selección cruzada con LEFT JOIN (MEJORADA)
+SELECT 
+    p.Identificador,
+    p.titulo,
+    p.descripcion,
+    p.fecha,
+    c.nombre AS categoria,
+    c.Identificador AS id_categoria
+FROM piezasportafolio p
+LEFT JOIN categoriasportafolio c ON p.id_categoria = c.Identificador;
 
 -- Crear vista de la selección cruzada
 CREATE VIEW vista_piezas_categorias AS
-SELECT Identificador, titulo, descripcion, fecha, nombre AS categoria
-FROM piezasportafolio
-LEFT JOIN categoriasportafolio ON id_categoria = Identificador;
+SELECT 
+    p.Identificador,
+    p.titulo,
+    p.descripcion,
+    p.fecha,
+    c.nombre AS categoria,
+    c.Identificador AS id_categoria
+FROM piezasportafolio p
+LEFT JOIN categoriasportafolio c ON p.id_categoria = c.Identificador;
 
--- Eliminamos registros
-ALTER TABLE piezasportafolio 
-DROP CONSTRAINT apellidos;
+-- Consultar la vista
+SELECT * FROM vista_piezas_categorias;
 
--- Mostrar usuarios en el sistema.
+-----------------------
+
+-- Mostrar usuarios existentes
 SELECT USER, HOST FROM mysql.user;
 
--- Crear un nuevo usuario.
-CREATE USER 'nombredeusuario'@'servidor' IDENTIFIED BY 'contraseña';
+-- Crear nuevo usuario específico para la base de datos
+CREATE USER 'admin_portafolio'@'localhost' IDENTIFIED BY 'SecurePass123!';
 
-GRANT USAGE ON *.* TO 'nombredeusuario'@'servidor';
+-- Otorgar permisos específicos (no usar ALL PRIVILEGES en producción)
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE VIEW ON portafolioexamen.* TO 'admin_portafolio'@'localhost';
 
-GRANT ALL PRIVILEGES ON portafolioexamen.* TO 'nombredeusuario'@'servidor';
-
+-- Actualizar privilegios
 FLUSH PRIVILEGES;
+
+-- Verificar permisos del usuario
+SHOW GRANTS FOR 'admin_portafolio'@'localhost';

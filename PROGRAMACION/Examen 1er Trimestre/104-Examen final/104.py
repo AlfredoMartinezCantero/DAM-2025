@@ -12,9 +12,9 @@
 import mysql.connector
 
 conexion = mysql.connector.connect(
-    host="servidor",
-    user="nombredeusuario",
-    password="contraseña",
+    host="localhost",
+    user="admin_portafolio",
+    password="SecurePass123!",
     database="portafolioexamen"
 )
 
@@ -38,31 +38,35 @@ while True:
 
     if opcion == 1:
         print("--- Insertamos una pieza ---")
-        Nombre = input("Introduce el Nombre de la pieza: ")
-        Autor = input("Introduce el autor de la pieza: ")
-        Fecha = input("Introduce la Fecha de la pieza: ")
+        titulo = input("Introduce el título de la pieza: ")
+        descripcion = input("Introduce la descripción de la pieza: ")
+        fecha = input("Introduce la fecha de la pieza: ")
 
         cursor.execute('''
-            INSERT INTO piezas (Nombre, Autor, Fecha)
+            INSERT INTO piezasportafolio (titulo, descripcion, fecha)
             VALUES (%s, %s, %s)
-        ''', (Nombre, Autor, Fecha))
+        ''', (titulo, descripcion, fecha))
         conexion.commit()
         print("Pieza insertada correctamente.")
 
     elif opcion == 2:
         print("--- Listamos las piezas ---")
-        cursor.execute("SELECT * FROM piezas")
+        cursor.execute("SELECT * FROM piezasportafolio")
         resultados = cursor.fetchall()
         for fila in resultados:
-            print("ID:", fila[0], " Nombre:", fila[1], " Autor:", fila[2], " Fecha:", fila[3])
+            print("ID:", fila[0], " Título:", fila[1], " Descripción:", fila[2], " Fecha:", fila[3])
 
     elif opcion == 3:
         print("--- Actualizamos una pieza ---")
-        id = input("Introduce el ID de la pieza que quieres actualizar: ")
+        try:
+            id = int(input("Introduce el ID de la pieza que quieres actualizar: "))
+        except ValueError:
+            print("El ID debe ser un número.")
+            continue
 
         print("¿Qué dato quieres modificar?")
-        print("1.- Nombre")
-        print("2.- Autor")
+        print("1.- Título")
+        print("2.- Descripción")
         print("3.- Fecha")
 
         try:
@@ -72,19 +76,19 @@ while True:
             continue
 
         if campo == 1:
-            nuevo_valor = input("Introduce el nuevo nombre: ")
+            nuevo_valor = input("Introduce el nuevo título: ")
             cursor.execute('''
-                UPDATE piezas SET Nombre = %s WHERE ID = %s
+                UPDATE piezasportafolio SET titulo = %s WHERE Identificador = %s
             ''', (nuevo_valor, id))
         elif campo == 2:
-            nuevo_valor = input("Introduce el nuevo Autor: ")
+            nuevo_valor = input("Introduce la nueva descripción: ")
             cursor.execute('''
-                UPDATE piezas SET Autor = %s WHERE ID = %s
+                UPDATE piezasportafolio SET descripcion = %s WHERE Identificador = %s
             ''', (nuevo_valor, id))
         elif campo == 3:
             nuevo_valor = input("Introduce la nueva fecha: ")
             cursor.execute('''
-                UPDATE piezas SET Fecha = %s WHERE ID = %s
+                UPDATE piezasportafolio SET fecha = %s WHERE Identificador = %s
             ''', (nuevo_valor, id))
         else:
             print("Opción no válida.")
@@ -95,12 +99,16 @@ while True:
 
     elif opcion == 4:
         print("--- Eliminamos una pieza ---")
-        id = input("Introduce el ID de la pieza que quieres eliminar: ")
+        try:
+            id = int(input("Introduce el ID de la pieza que quieres eliminar: "))
+        except ValueError:
+            print("El ID debe ser un número.")
+            continue
 
         confirmar = input("¿Seguro que deseas eliminar esta pieza? (s/n): ")
         if confirmar.lower() == 's':
             cursor.execute('''
-                DELETE FROM piezas WHERE ID = %s
+                DELETE FROM piezasportafolio WHERE Identificador = %s
             ''', (id,))
             conexion.commit()
             print("Pieza eliminada correctamente.")
