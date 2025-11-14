@@ -1,0 +1,14 @@
+SELECT
+
+nombre AS 'Nombre del cliente',
+apellidos AS 'Apellidos del cliente',
+edad AS 'Edad del cliente'
+
+FROM 
+
+clientes
+
+ORDER BY
+edad DESC,apellidos ASC;
+
+-- En este caso ocurriría un cambio si tuvieramos 2 personas con la misma edad
