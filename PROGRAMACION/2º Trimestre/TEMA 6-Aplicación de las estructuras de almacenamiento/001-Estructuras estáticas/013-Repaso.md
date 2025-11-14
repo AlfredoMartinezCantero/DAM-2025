@@ -11,4 +11,4 @@ Son **dinámicas**, pueden crecer y decrecer.
 # Diccionarios {}
 
 Son **dinámicas**, pueden crecer y decrecer.
-Índices alfanuméricos (letras, palabras)
+Índices alfanuméricos (letras, palabras, números)
