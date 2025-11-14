@@ -13,3 +13,4 @@ while True:
         cantidad = input("Indica la cantidad del producto: ")
 
     elif opcion == 2:
+        print

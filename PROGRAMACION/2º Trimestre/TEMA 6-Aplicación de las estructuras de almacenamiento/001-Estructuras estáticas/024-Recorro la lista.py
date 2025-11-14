@@ -16,4 +16,9 @@ while True:
         lista_de_la_compra.append({"nombre":nombre,"cantidad":cantidad})
         print("")
     elif opcion == 2:
-        print
+        print("Listamos los elementos de la lista: ")
+        print(lista_de_la_compra)
+        for producto in lista_de_la_compra:
+            print("Producto:",producto["nombre"])
+            print("Cantidad:",producto["cantidad"])
+            print("##############################")     # Esto es estético, un separador
