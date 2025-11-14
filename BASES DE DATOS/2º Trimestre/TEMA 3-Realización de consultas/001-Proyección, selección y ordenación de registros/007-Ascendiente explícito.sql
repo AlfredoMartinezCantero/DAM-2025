@@ -11,7 +11,7 @@ clientes
 ORDER BY
 apellidos ASC;  
 
--- El resultado es el mismo pero le indicamos nosotros que es lo que queremos y no lo dejamos por defecto
+-- El resultado es el mismo que en el 006, pero le indicamos nosotros que es lo que queremos y no lo dejamos por defecto
 
 +--------------------+-----------------------+------------------+
 | Nombre del cliente | Apellidos del cliente | Edad del cliente |
