@@ -17,7 +17,7 @@ cursor.execute('''
     GROUP BY color
     ORDER BY numero ASC;    
 ''')         # Ordenamos por numero
-     
+
 filas = cursor.fetchall()   
 cantidades = []
 etiquetas = []
