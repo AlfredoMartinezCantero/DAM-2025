@@ -7,3 +7,4 @@ while True:
     telefono = input("Dime tu número de teléfono: ")
     # Añado a la agenda
     agenda.append([nombre,apellidos,email,telefono])
+    print(agenda)
