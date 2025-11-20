@@ -6,11 +6,13 @@
     </head>
     <body>
         <script>
-            fetch("curriculum.json")
-            .then(function(respuesta){
-                return respuesta.json();        // La info viene en json
-            }
-        )
+        fetch("curriculum.json")
+        .then(function(respuesta){
+            return respuesta.json();        // La info viene en json
+        })
+        .then(function(datos){
+            console.log(datos);
+        })
         </script>
     </body>
 </html>
