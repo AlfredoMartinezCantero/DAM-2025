@@ -3,5 +3,19 @@
     "nombre":"Alfredo",
     "apellidos":"Martínez Cantero",
     "correo":"alfredomartinezcantero@gmai.com"
+    },
+    "experiencias_laborales":[
+    {
+        "titulo":"Alumno",
+        "empresa":"CEAC",
+        "timespan":"2025-presente",
+        "descripcion":"Estudiante del ciclo formativo superior DAM"
+    },
+    {
+        "titulo":"Alumno",
+        "empresa":"CEAC",
+        "timespan":"2025-presente",
+        "descripcion":"Estudiante del ciclo formativo superior DAM"
     }
+    ]
 }
