@@ -1,0 +1,1 @@
+print("Pycharm funciona correctamente")

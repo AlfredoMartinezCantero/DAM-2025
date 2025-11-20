@@ -2,7 +2,7 @@ import mysql.connector
 import matplotlib.pyplot as pt
 
 conexion = mysql.connector.connect(
-    host="localhost",
+    host="172.27.59.229",
     user="clientes",  
     password="Clientes123$",
     database="clientes"
