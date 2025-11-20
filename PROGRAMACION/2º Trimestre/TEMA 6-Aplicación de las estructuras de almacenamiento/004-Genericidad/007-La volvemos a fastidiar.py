@@ -1,4 +1,4 @@
-numeros = [1,2,"3",4,"cinco"]
+numeros = [1,2,"3",4,"cinco","patata"]
 
 print(numeros)
 numeros_etiquetas = ["cero","uno","dos","tres","cuatro","cinco"]
