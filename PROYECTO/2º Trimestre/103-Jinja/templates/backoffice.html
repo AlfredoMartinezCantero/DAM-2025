@@ -37,9 +37,10 @@
             <header>Aplicación empresarial superchula de Alfredo</header>
             <main>
                 <nav>
-                    <a>Clienntes</a>
-                    <a>Productos</a>
-                    <a>Pedidos</a>
+                    {% for tabla in mis_tablas %}
+                    <a>{{tabla}}</a>
+                    {% endfor %}
+
                 </nav>
                 <section>Contenido
 
