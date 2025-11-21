@@ -50,13 +50,14 @@
                 <section>
                     <style>
                         table{
-                            width:100;
+                            width:100%;
                             border-collapse:collapse;
                             border:2px solid indigo;
                         }
 
                         table th,table td{
                             padding:10px;
+                            text-align:center;
                         }
 
                         table thead{
@@ -71,71 +72,16 @@
                                 {% endfor %}
                             </tr>
                             <tr>
-                                <th>Nombre</th><th>Apellidos</th><th>Email</th><th>Dirección</th>
                             </tr>
                         </thead>
                         <tbody>
+                            {% for fila in mi_contenido_tabla %}
                             <tr>
-                                <td>Alfredo</td><td>Martínez</td><td>alfredo@gmail.com</td><td>La calle de Alfredo</td>
+                                {% for dato in fila:%}
+                                    <td>{{dato}}</td>
+                            {% endfor %}
                             </tr>
-                            <tr>
-                                <td>Lucía</td><td>González</td><td>luciagonzalez@gmail.com</td><td>Calle del Río 12</td>
-                            </tr>
-                            <tr>
-                                <td>Carlos</td><td>López</td><td>carloslopez@gmail.com</td><td>Avenida Central 45</td>
-                            </tr>
-                            <tr>
-                                <td>María</td><td>Sánchez</td><td>mariasr@gmail.com</td><td>Paseo de las Flores 8</td>
-                            </tr>
-                            <tr>
-                                <td>Javier</td><td>Torres</td><td>j.torresd@gmail.com</td><td>Calle del Olivo 21</td>
-                            </tr>
-                            <tr>
-                                <td>Elena</td><td>Ramírez</td><td>elenars@gmail.com</td><td>Camino del Prado 3</td>
-                            </tr>
-                            <tr>
-                                <td>Pablo</td><td>Castro</td><td>pablocm@gmail.com</td><td>Calle Luna 19</td>
-                            </tr>
-                            <tr>
-                                <td>Sofía</td><td>Navarro</td><td>sofia.np@gmail.com</td><td>Av. del Sol 27</td>
-                            </tr>
-                            <tr>
-                                <td>Diego</td><td>Herrera</td><td>dherrera@gmail.com</td><td>Calle Roble 14</td>
-                            </tr>
-                            <tr>
-                                <td>Ana</td><td>Vargas</td><td>anavl@gmail.com</td><td>Camino del Sur 33</td>
-                            </tr>
-                            <tr>
-                                <td>Hugo</td><td>Morales</td><td>hugoma@gmail.com</td><td>Calle Romero 6</td>
-                            </tr>
-                            <tr>
-                                <td>Paula</td><td>Rojas</td><td>paularp@gmail.com</td><td>Av. Esperanza 52</td>
-                            </tr>
-                            <tr>
-                                <td>Marco</td><td>Calderón</td><td>marcocs@gmail.com</td><td>Calle Armonía 7</td>
-                            </tr>
-                            <tr>
-                                <td>Isabel</td><td>Díaz</td><td>isadiaz@gmail.com</td><td>Calle Norte 10</td>
-                            </tr>
-                            <tr>
-                                <td>Fernando</td><td>Méndez</td><td>fernandomp@gmail.com</td><td>Paseo del Parque 4</td>
-                            </tr>
-                            <tr>
-                                <td>Laura</td><td>Ortega</td><td>lauraor@gmail.com</td><td>Calle Jardinera 16</td>
-                            </tr>
-                            <tr>
-                                <td>Raúl</td><td>Crespo</td><td>raulcs@gmail.com</td><td>Av. Horizonte 23</td>
-                            </tr>
-                            <tr>
-                                <td>Clara</td><td>Benítez</td><td>clarabr@gmail.com</td><td>Calle Encina 11</td>
-                            </tr>
-                            <tr>
-                                <td>Mateo</td><td>Fuentes</td><td>mateofl@gmail.com</td><td>Avenida Libertad 85</td>
-                            </tr>
-                            <tr>
-                                <td>Valeria</td><td>Solano</td><td>valeriasn@gmail.com</td><td>Calle Primavera 5</td>
-                            </tr>
-                            </tr>
+                            {% endfor %}                        
                         </tbody>
                     </table>
                 </section>
