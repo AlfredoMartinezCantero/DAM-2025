@@ -46,7 +46,6 @@
                     {% for tabla in mis_tablas %}
                     <a>{{tabla}}</a>
                     {% endfor %}
-
                 </nav>
                 <section>
                     <style>
@@ -66,6 +65,11 @@
                     </style>
                     <table>
                         <thead>
+                            <tr>
+                                {% for columna in mis_columnas %}
+                                <th>{{columnas}}</th>
+                                {% endfor %}
+                            </tr>
                             <tr>
                                 <th>Nombre</th><th>Apellidos</th><th>Email</th><th>Dirección</th>
                             </tr>
