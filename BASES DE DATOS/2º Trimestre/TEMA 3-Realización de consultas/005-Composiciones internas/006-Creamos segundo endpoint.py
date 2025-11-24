@@ -9,7 +9,6 @@ conexion = mysql.connector.connect(
   database="tienda"
 )                                      
 app = Flask(__name__)
-
 # http://127.0.0.1:5000/clientes
 @app.route("/clientes")
 def clientes():
@@ -26,7 +25,10 @@ def tablas():
 	cursor.execute("SHOW TABLES;")
 
 	filas = cursor.fetchall()
-	return json.dumps(filas)
+	tablas = []
+	for fila in filas:
+		tablas.append(fila[0])
+	return json.dumps(tablas)
 
 if __name__ == "__main__":
 	app.run(debug=True)
