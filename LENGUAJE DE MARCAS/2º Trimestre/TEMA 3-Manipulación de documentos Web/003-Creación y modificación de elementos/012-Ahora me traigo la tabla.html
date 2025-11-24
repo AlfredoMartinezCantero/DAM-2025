@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+   <head>
+       <style>
+            html,body{
+                height:100%;
+                padding:0px;
+                margin:0px;
+                display:flex;
+                width:100%;
+            }
+
+            nav{
+                background:darkorchid;
+                flex:1;
+                color:white;
+                padding:20px;
+            }
+
+            main{
+                flex:4;
+                background:aliceblue;
+                padding:20px;
+            }
+
+       </style>
+   </head>
+   <body>
+       <nav>1</nav>
+       <style>
+            nav{
+                display:flex;
+                flex-direction:column
+                ;gap:20px;
+            }
+
+            nav button{
+                border:none;
+                background:white;
+                color:indigo;
+                padding:20px;
+                text-transform:uppercase;
+            }
+       </style>
+       <script>
+           // En primer lugar cargamos datos de un json
+           fetch("botones.json")
+           .then(function(respuesta){
+               return respuesta.json(); // La resp viene en JSON
+           })
+           .then(function(datos){
+               // Y luego creamos botones a partir de lo que hay en el json
+           		let contenedor = document.querySelector("nav")
+                datos.forEach(function(texto_boton){
+                	let boton = document.createElement("button")
+                    boton.textContent = texto_boton;
+                    contenedor.appendChild(boton);
+                })
+           })
+       </script>
+       <main>2</main>
+<style>
+            table{border:3px solid blue;border-collapse:collapse;background:white}
+                table tr:first-child{background:blue;color:white;}
+                table tr td{padding:10px;border-right:1px solid blue;}
+</style>
+        <script>
+                // En primer lugar cargamos datos de un json
+                fetch("tabla.json")
+                .then(function(respuesta){
+                    return respuesta.json();    // La respuesta viene en json
+                })
+                .then(function(datos){
+                    let contenedor = document.querySelector("main");
+                    let tabla = document.createElement("table");
+                    contenedor.appendChild(tabla);              // Al cuerpo le añado la tabla
+                    // Para cada una de las lineas del json:
+                    datos.forEach(function(linea){
+                        // Primero creo una fila - tr = table row
+                        let fila = document.createElement("tr");
+                        // Ahora creo tantas celdas como sea necesario
+                        linea.forEach(function(celda){
+                                // Creo una celda
+                                let data = document.createElement("td");
+                                // Le pongo el texto a la celda
+                                data.textContent = celda
+                                // A la fila le añado la celda
+                                fila.appendChild(data);
+                        })
+                        // A la tabla le añado esta fila
+                        tabla.appendChild(fila)
+                    })
+                })
+        </script>
+   </body>
+</html>
