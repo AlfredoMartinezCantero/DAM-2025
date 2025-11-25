@@ -6,3 +6,6 @@ print(datos)
 partido = datos.split(",")
 # Imprimo el partido (lista)
 print(partido)
+# Ahora quiero unirlo todo de nuevo
+nueva_cadena = "|".join(partido)
+print(nueva_cadena)
