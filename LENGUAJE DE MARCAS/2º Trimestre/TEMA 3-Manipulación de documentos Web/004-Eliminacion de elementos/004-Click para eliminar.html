@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <body>
+            <table></table>
+            <script>
+                let tabla = document.querySelector("table")
+                for(let i = 0;i<20;i++){
+                    let fila = document.createElement("tr")
+                    fila.innerHTML = "<td>Prueba</td><td>Prueba</td><td>Prueba</td>"
+                    tabla.appendChild(fila)
+                    fila.onclick = function(){  // Cuando hago click en la fila
+                        this.remove()           // La elimino
+                    }
+                }
+            </script>
+        </body>
+    </head>
+</html>
