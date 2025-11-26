@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>Backoffice</title>
+        <meta charset="utf-8">
+        <style>
+            header{width:100%;background:indigo;padding:20px;color:white;}
+            section{display:grid;gap:20px;}
+        </style>
+    </head>
+        <body>
+            <header><h1>Gestión de escuela</header></h1>
+            <main>
+                <section>
+                    {% for linea in datos:%}
+                    <article>
+                        <p>Asignatura: {{linea['Nombre de la asignatura']}}</p>
+                        <p>Asignatura: {{linea['Nombre del alumno']}}</p>
+                        <p>Asignatura: {{linea['Apellidos del alumno']}}</p>
+                    </article>
+                    <style>
+                        table{
+                            width:100%;
+                            border-collapse:collapse;
+                            border:2px solid indigo;
+                        }
+
+                        table th,table td{
+                            padding:10px;
+                            text-align:center;
+                        }
+
+                        table thead{
+                            background:indigo;color:white;
+                        }
+                    </style>
+                </section>
+            </main>
+        </body>
+</html>
