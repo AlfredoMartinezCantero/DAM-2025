@@ -4,8 +4,12 @@
         <title>Backoffice</title>
         <meta charset="utf-8">
         <style>
+            body{font-family:sans-serif;background:aliceblue;}
             header{width:100%;background:indigo;padding:20px;color:white;}
-            section{display:grid;gap:20px;}
+            section{margin:auto;display:grid;gap:20px;grid-template-columns:repeat(5,100fr);padding:20px;}
+            article{border:1px solid indigo;padding:20px;background:white;border-radius:20px;display:flex;gap:20px;align-items:center;}
+            .imagen{width:100px;height:100px;background:lightgrey;border-radius:5px;overflow:hidden;}
+            article img{width:100%;}
         </style>
     </head>
         <body>
@@ -14,27 +18,15 @@
                 <section>
                     {% for linea in datos:%}
                     <article>
+                        <div class="imagen"></div>
+                        <div class="texto">
                         <p>Asignatura: {{linea['Nombre de la asignatura']}}</p>
-                        <p>Asignatura: {{linea['Nombre del alumno']}}</p>
-                        <p>Asignatura: {{linea['Apellidos del alumno']}}</p>
+                        <p>Nombre: {{linea['Nombre del alumno']}}</p>
+                        <p>Apellidos: {{linea['Apellidos del alumno']}}</p>
+                        </div>
                     </article>
-                    <style>
-                        table{
-                            width:100%;
-                            border-collapse:collapse;
-                            border:2px solid indigo;
-                        }
-
-                        table th,table td{
-                            padding:10px;
-                            text-align:center;
-                        }
-
-                        table thead{
-                            background:indigo;color:white;
-                        }
-                    </style>
-                </section>
-            </main>
-        </body>
+                {% endfor %}
+            </section>
+        </main>
+    </body>
 </html>
