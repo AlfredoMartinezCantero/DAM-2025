@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <body>
+            <div id="contenedor"></div>
+            <script>
+                let elemento = document.createElement("p");
+                elemento.textContent = "Contenido desde JS";
+                let contenedor = document.querySelector("#contenedor");
+                contenedor.appendChild(elemento);
+            </script>
+        </body>
+    </head>
+</html>
