@@ -2,7 +2,7 @@
 <html>
     <head>
         <style>
-            .npc{width:50px;height:50px;background:red;border-radius:50px;position:absolute;}
+            .npc{background:red;border-radius:50px;position:absolute;}
         </style>
     </head>
     <body>
@@ -27,6 +27,10 @@
                     personaje.style.left = npc.posx+"px"
                     // La posición Y en HTML será la posición Y que viene de Python
                     personaje.style.top = npc.posy+"px"
+                    // Pongo la anchura sobre el dato que llega de Python
+                    personaje.style.width = npc.radio+"px"
+                    // Pongo la altura sobre el dato que llega de Python
+                    personaje.style.height = npc.radio+"px"
                     escenario.appendChild(personaje)
                 })
             })
