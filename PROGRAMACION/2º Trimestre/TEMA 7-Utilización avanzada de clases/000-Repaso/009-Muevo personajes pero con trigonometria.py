@@ -1,21 +1,28 @@
 import random
 import json
 from flask import Flask,render_template
+import math # Para poder hacer trigonometría
 
 class Npc():
-    def __init__(self, x, y, radio):
+    def __init__(self, x, y, radio, direccion):
         self.posx = x
         self.posy = y
         self.radio = radio
+        self.direccion = direccion
 
     # Método para convertir el objeto en diccionario
     def to_dict(self):
-        return {"posx": self.posx, "posy": self.posy,"radio":self.radio}
+        return {
+           "posx": self.posx,
+            "posy": self.posy,
+            "radio":self.radio,
+            "direccion":self.direccion
+            }
     def mover(self):
-       self.posx += random.randint(-5,5)    # Muévete un poco en X
-       self.posy += random.randint(-5,5)    # Muévete un poco en Y
+       self.posx += math.cos(self.direccion)    # Muévete un poco en X
+       self.posy += math.sin(self.direccion)    # Muévete un poco en Y
 # Preparo los personajes
-
+    
 personajes = []
 numero_personajes = 50
 
@@ -23,8 +30,8 @@ for i in range(0, numero_personajes):
     xaleatoria = random.randint(0, 500)
     yaleatoria = random.randint(0, 500)
     radioaleatorio = random.randint(10, 30)
-    personajes.append(Npc(xaleatoria, yaleatoria, radioaleatorio))
-
+    direccionaleatoria = random.random()*math.pi*2
+    personajes.append(Npc(xaleatoria, yaleatoria, radioaleatorio, direccionaleatoria))
 
 # Lanzo una web
 

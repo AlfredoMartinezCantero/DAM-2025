@@ -2,38 +2,63 @@
 <html>
     <head>
         <style>
-            .npc{background:red;border-radius:50px;position:absolute;}
+            .npc{
+                position:absolute;
+                border-radius:50%;
+                overflow:hidden; 
+            }
+            .npc img{
+                width:100%;
+                height:100%;
+                border-radius:50%;
+            }
         </style>
     </head>
     <body>
-        <main>
+        <main></main>
 
-        </main>
         <script>
             // Cojo el contenedor
             let escenario = document.querySelector("main")
-            // Me conecto a una api, pido datos, los convierto a json, y los lanzo
-            fetch("http://127.0.0.1:5000/api")
-            .then(function(respuesta){return respuesta.json();})
-            .then(function(datos){
-                console.log(datos)
-                // Para cada NPC:
-                datos.forEach(function(npc){
-                    // Creo un nuevo elemento en HTML
-                    let personaje = document.createElement("div")
-                    // Le añado una clase CSS
-                    personaje.classList.add("npc")
-                    // La posición X en HTML será la posición X que viene de Python
-                    personaje.style.left = npc.posx+"px"
-                    // La posición Y en HTML será la posición Y que viene de Python
-                    personaje.style.top = npc.posy+"px"
-                    // Pongo la anchura sobre el dato que llega de Python
-                    personaje.style.width = npc.radio+"px"
-                    // Pongo la altura sobre el dato que llega de Python
-                    personaje.style.height = npc.radio+"px"
-                    escenario.appendChild(personaje)
+            let temporizador = setTimeout("bucle()",1000)
+
+            function bucle(){
+                // Me conecto a una API, pido datos y los convierto a JSON
+                fetch("http://127.0.0.1:5000/api")
+                .then(function(respuesta){ return respuesta.json(); })
+                .then(function(datos){
+                    console.log(datos)
+
+                    // Vacio el escenario SOLO cuando recibo datos
+                    escenario.innerHTML = ""
+
+                    // Para cada NPC:
+                    datos.forEach(function(npc){
+
+                        // Creo un nuevo elemento HTML
+                        let personaje = document.createElement("div")
+                        personaje.classList.add("npc")
+
+                        // Inserto la imagen
+                        let imagen = document.createElement("img")
+                        imagen.src = "static/foto mii.png"   
+                        personaje.appendChild(imagen)
+
+                        // Posición y tamaño
+                        personaje.style.left = npc.posx + "px"
+                        personaje.style.top = npc.posy + "px"
+                        personaje.style.width = npc.radio + "px"
+                        personaje.style.height = npc.radio + "px"
+
+                        // Lo añado al escenario
+                        escenario.appendChild(personaje)
+                    })
                 })
-            })
+
+                // Reiniciar temporizador
+                clearTimeout(temporizador)
+                temporizador = setTimeout("bucle()", 100)
+            }
         </script>
     </body>
 </html>
