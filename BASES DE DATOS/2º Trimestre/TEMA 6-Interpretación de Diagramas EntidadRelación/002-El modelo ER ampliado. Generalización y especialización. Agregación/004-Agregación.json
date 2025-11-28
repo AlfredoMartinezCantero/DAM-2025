@@ -1,0 +1,207 @@
+{
+  "formas": [
+    {
+      "id": "forma-1",
+      "tipo": "entity",
+      "left": "517.75px",
+      "top": "163.2px",
+      "width": "",
+      "height": "",
+      "entityName": "Rueda",
+      "properties": [
+        {
+          "id": "prop-1",
+          "name": "id"
+        }
+      ]
+    },
+    {
+      "id": "forma-2",
+      "tipo": "entity",
+      "left": "248px",
+      "top": "82.2px",
+      "width": "",
+      "height": "",
+      "entityName": "Llanta",
+      "properties": [
+        {
+          "id": "prop-2",
+          "name": "id"
+        }
+      ]
+    },
+    {
+      "id": "forma-3",
+      "tipo": "entity",
+      "left": "247px",
+      "top": "198.2px",
+      "width": "",
+      "height": "",
+      "entityName": "Neumatico",
+      "properties": [
+        {
+          "id": "prop-3",
+          "name": "id"
+        }
+      ]
+    },
+    {
+      "id": "forma-4",
+      "tipo": "entity",
+      "left": "516px",
+      "top": "28.7px",
+      "width": "",
+      "height": "",
+      "entityName": "Chasis",
+      "properties": [
+        {
+          "id": "prop-4",
+          "name": "id"
+        },
+        {
+          "id": "prop-8",
+          "name": "grosor"
+        }
+      ]
+    },
+    {
+      "id": "forma-5",
+      "tipo": "entity",
+      "left": "517.25px",
+      "top": "263.7px",
+      "width": "",
+      "height": "",
+      "entityName": "Motor",
+      "properties": [
+        {
+          "id": "prop-5",
+          "name": "id"
+        },
+        {
+          "id": "prop-9",
+          "name": "cilindrada"
+        }
+      ]
+    },
+    {
+      "id": "forma-6",
+      "tipo": "entity",
+      "left": "516px",
+      "top": "406.2px",
+      "width": "",
+      "height": "",
+      "entityName": "Chapa",
+      "properties": [
+        {
+          "id": "prop-6",
+          "name": "id"
+        },
+        {
+          "id": "prop-10",
+          "name": "color"
+        }
+      ]
+    },
+    {
+      "id": "forma-7",
+      "tipo": "entity",
+      "left": "834.75px",
+      "top": "193.7px",
+      "width": "",
+      "height": "",
+      "entityName": "Coche",
+      "properties": [
+        {
+          "id": "prop-7",
+          "name": "id"
+        }
+      ]
+    }
+  ],
+  "flechas": [
+    {
+      "desde": {
+        "shapeId": "forma-2",
+        "propId": null,
+        "side": null
+      },
+      "hasta": {
+        "shapeId": "forma-1",
+        "propId": null,
+        "side": null
+      },
+      "tipo": "doble",
+      "estilo": "straight"
+    },
+    {
+      "desde": {
+        "shapeId": "forma-3",
+        "propId": null,
+        "side": null
+      },
+      "hasta": {
+        "shapeId": "forma-1",
+        "propId": null,
+        "side": null
+      },
+      "tipo": "doble",
+      "estilo": "straight"
+    },
+    {
+      "desde": {
+        "shapeId": "forma-4",
+        "propId": null,
+        "side": null
+      },
+      "hasta": {
+        "shapeId": "forma-7",
+        "propId": null,
+        "side": null
+      },
+      "tipo": "doble",
+      "estilo": "straight"
+    },
+    {
+      "desde": {
+        "shapeId": "forma-1",
+        "propId": null,
+        "side": null
+      },
+      "hasta": {
+        "shapeId": "forma-7",
+        "propId": null,
+        "side": null
+      },
+      "tipo": "doble",
+      "estilo": "straight"
+    },
+    {
+      "desde": {
+        "shapeId": "forma-5",
+        "propId": null,
+        "side": null
+      },
+      "hasta": {
+        "shapeId": "forma-7",
+        "propId": null,
+        "side": null
+      },
+      "tipo": "doble",
+      "estilo": "straight"
+    },
+    {
+      "desde": {
+        "shapeId": "forma-6",
+        "propId": null,
+        "side": null
+      },
+      "hasta": {
+        "shapeId": "forma-7",
+        "propId": null,
+        "side": null
+      },
+      "tipo": "doble",
+      "estilo": "straight"
+    }
+  ]
+}
