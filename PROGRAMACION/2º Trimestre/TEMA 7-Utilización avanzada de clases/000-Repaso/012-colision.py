@@ -23,7 +23,7 @@ class Npc():
     def mover(self):
         # Variar un poco la dirección cada frame
         self.direccion += (random.random() - 0.5) * 0.2
-        if self.posx > 1000 or self.posx < 0 or self.posy > 500 or self.posy < 0:
+        if self.posx > 2000 or self.posx < 0 or self.posy > 1000 or self.posy < 0:
             self.direccion += math.pi
         # Actualizar posición con trigonometría
         self.posx += math.cos(self.direccion) * self.velocidad
@@ -35,11 +35,11 @@ personajes = []
 numero_personajes = 500
 
 for i in range(numero_personajes):
-    xaleatoria = random.randint(0,1000)
-    yaleatoria = random.randint(0, 500)
+    xaleatoria = random.randint(0,2000)
+    yaleatoria = random.randint(0, 1000)
     radioaleatorio = random.randint(10, 30)
     direccionaleatoria = random.random() * math.pi * 2
-    velocidadaleatoria = random.random() * 5
+    velocidadaleatoria = random.random() * 4
 
     personajes.append(Npc(
         xaleatoria,
