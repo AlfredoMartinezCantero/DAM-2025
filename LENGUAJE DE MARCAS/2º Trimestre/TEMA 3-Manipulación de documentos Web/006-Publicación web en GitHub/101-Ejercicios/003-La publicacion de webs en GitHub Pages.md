@@ -37,3 +37,5 @@ https://[usuario].github.io/[nombre_del_repositorio]
 
 19.- Una vez publicada la página, se pueden hacer las modificaciones que quieras
 20.- Hacemos commit + push de las modificaciones 
+21.- Esperamos otros 5-10 minutos 
+22.- Esperamos los cambios
