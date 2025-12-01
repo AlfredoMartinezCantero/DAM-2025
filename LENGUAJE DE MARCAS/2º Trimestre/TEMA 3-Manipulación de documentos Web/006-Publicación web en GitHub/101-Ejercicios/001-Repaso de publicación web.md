@@ -40,3 +40,17 @@ Lista completa:
 https://es.wikipedia.org/wiki/Dominio_de_nivel_superior_geogr%C3%A1fico
 
 Nuevas extensiones de dominio:
+https://en.wikipedia.org/wiki/List_of_Internet_top-level_domains
+
+Cuanto cuesta un dominio?
+Depende del dominio:
+
+Dominios genéricos (.com, .net, .es) - coste aprox de 15 euros al año
+El dominio no se compra, se alquila
+
+Los dominios comerciales pueden tener un coste mayor
+30-100€ al año
+
+El dominio se tiene que renovar, si no se renueva se pierde
+
+
