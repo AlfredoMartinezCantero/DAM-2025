@@ -1,0 +1,107 @@
+{
+  "formas": [
+    {
+      "id": "forma-5",
+      "tipo": "entity",
+      "left": "230px",
+      "top": "100.2px",
+      "width": "",
+      "height": "",
+      "entityName": "Alumno",
+      "properties": [
+        {
+          "id": "prop-16",
+          "name": "id"
+        },
+        {
+          "id": "prop-17",
+          "name": "nombre"
+        },
+        {
+          "id": "prop-18",
+          "name": "apellidos"
+        },
+        {
+          "id": "prop-19",
+          "name": "email"
+        }
+      ]
+    },
+    {
+      "id": "forma-6",
+      "tipo": "entity",
+      "left": "232px",
+      "top": "299.2px",
+      "width": "",
+      "height": "",
+      "entityName": "Asignatura",
+      "properties": [
+        {
+          "id": "prop-20",
+          "name": "id"
+        },
+        {
+          "id": "prop-21",
+          "name": "Titulo"
+        },
+        {
+          "id": "prop-22",
+          "name": "Descripcion"
+        }
+      ]
+    },
+    {
+      "id": "forma-7",
+      "tipo": "entity",
+      "left": "557px",
+      "top": "246.2px",
+      "width": "",
+      "height": "",
+      "entityName": "Matriculas",
+      "properties": [
+        {
+          "id": "prop-23",
+          "name": "id"
+        },
+        {
+          "id": "prop-24",
+          "name": "id_alumno"
+        },
+        {
+          "id": "prop-25",
+          "name": "id_asignatura"
+        }
+      ]
+    }
+  ],
+  "flechas": [
+    {
+      "desde": {
+        "shapeId": "forma-5",
+        "propId": "prop-16",
+        "side": "right"
+      },
+      "hasta": {
+        "shapeId": "forma-7",
+        "propId": "prop-24",
+        "side": "left"
+      },
+      "tipo": "simple",
+      "estilo": "straight"
+    },
+    {
+      "desde": {
+        "shapeId": "forma-6",
+        "propId": "prop-20",
+        "side": "right"
+      },
+      "hasta": {
+        "shapeId": "forma-7",
+        "propId": "prop-25",
+        "side": "left"
+      },
+      "tipo": "simple",
+      "estilo": "straight"
+    }
+  ]
+}
