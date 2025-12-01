@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+	<head>
+        <meta charset="utf-8">
+        <style>
+            .rojo{
+                background:rgb(255,200,200);     /* Rojo claro */
+            }
+            .verde{                            /* Verde claro */
+                background:rgb(200,255,200);
+            }
+   	    </style>
+  </head>
+  <body>
+    <p>Esta entrada debe tener 9 caracteres exactamente</p>
+    <input class="rojo">
+    <script>
+        let entrada = document.querySelector("input")       // Selecciono la entrada
+        entrada.onkeyup = function(){                       // Cuando despulse la tecla
+            let valor = this.value;                         // Cojo el valor
+            let longitud = valor.length                     // Saco la longitud del valor
+            if (longitud == 9){                             // Si es igual a 9
+                this.classList.add("verde")                 // Añado la clase Verde
+                this.classList.add("rojo")                  // Te quito la clase rojo
+            }else{                                          // En caso contrario
+                this.classList.remove("verde")              // Te quito la clase verde
+                this.classList.add("rojo")                  // Te añado la clase rojo
+            }
+        }
+    </script>
+  </body>
+</html>
