@@ -1,4 +1,5 @@
 <?php
     echo $_GET['nombre'];
-    echo
+    echo "<br>";
+    echo $_GET['apellido'];
 ?>
