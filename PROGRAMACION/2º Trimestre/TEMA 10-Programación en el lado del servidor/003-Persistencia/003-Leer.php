@@ -7,6 +7,3 @@
     echo $contenido;
     fclose($archivo);
 ?>
-
-
-
