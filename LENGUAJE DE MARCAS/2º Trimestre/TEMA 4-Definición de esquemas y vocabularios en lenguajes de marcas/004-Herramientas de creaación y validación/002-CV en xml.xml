@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<curriculum xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:noNamespaceSchemaLocation="curriculum.xsd">
+  <header>
+    <subtitle>Estudiante de Desarrollo de Aplicaciones Multiplataforma</subtitle>
+    <name>
+      <given>Alfredo</given>
+      <family>Martínez Cantero</family>
+    </name>
+    <profilePhoto>Sin nombre.jpg</profilePhoto>
+  </header>
+
+  <perfil>
+    <titulo>Perfil Profesional</titulo>
+    <texto>Profesional polivalente en proceso de formación como Técnico Superior en Desarrollo de Aplicaciones Multiplataforma (DAM), con experiencia previa en los ámbitos logístico y educativo. Capacidad de adaptación a distintos entornos, con habilidades en resolución de problemas, organización y trabajo en equipo. Actitud proactiva, motivación por la tecnología y orientación hacia el desarrollo de software.</texto>
+  </perfil>
+
+  <experiencia>
+    <exp>
+      <role>Preparador logístico</role>
+      <company>Almacenes Silla</company>
+      <location>Valencia</location>
+      <period>2025</period>
+      <responsabilidades>
+        <item>Preparador de pedidos en plataformas logísticas de gran volumen.</item>
+        <item>Verificación y control de mercancías.</item>
+        <item>Manejo de transpaletas y herramientas de gestión logística.</item>
+        <item>Cumplimiento de procedimientos de seguridad.</item>
+      </responsabilidades>
+    </exp>
+
+    <exp>
+      <role>Logístico</role>
+      <company>Empresa Multinacional</company>
+      <location>Valencia</location>
+      <period>2025</period>
+      <responsabilidades>
+        <item>Preparación de pedidos para expedición.</item>
+        <item>Carga y descarga de mercancías.</item>
+        <item>Organización y reposición de productos en el almacen.</item>
+        <item>Control de stock y apoyo en las tareas logísticas.</item>
+      </responsabilidades>
+    </exp>
+  </experiencia>
+
+  <educacion>
+    <edu>
+      <degree>Técnico Superior en Desarrollo de Aplicaciones Multiplataforma (DAM) en formación</degree>
+      <institution>CEAC</institution>
+      <location>Valencia</location>
+      <period>Sept. 2025 — </period>
+      <description>Estudiando fundamentos de programación, bases de datos, desarrollo de interfaces y aplicaciones web y móviles.</description>
+    </edu>
+
+    <edu>
+      <degree>Técnico Superior en Educación Infantil</degree>
+      <institution>IES Misericordia</institution>
+      <location>Valencia</location>
+      <period>Sept. 2020 — Julio 2022</period>
+    </edu>
+
+    <edu>
+      <degree>Atención a Personas en Situación de Dependencia</degree>
+      <institution>IES Misericordia</institution>
+      <location>Valencia</location>
+      <period>Sept. 2018 — Julio 2020</period>
+    </edu>
+  </educacion>
+
+  <contacto>
+    <contact type="email">alfredomartinezcantero@gmail.com</contact>
+    <contact type="address">C/Fusta, 46022 Valencia, España</contact>
+    <contact type="phone">+34 653 358 447</contact>
+    <contact type="birthdate">26/10/2001</contact>
+    <contact type="nationalityLanguage">Español</contact>
+    <contact type="github">https://github.com/AlfredoMartinezCantero</contact>
+  </contacto>
+
+  <habilidades>
+    <skill>
+      <name>Programación</name>
+      <details>Python, SQL, HTML, CSS, JavaScript</details>
+    </skill>
+    <skill>
+      <name>Control de versiones</name>
+      <details>Git, GitHub</details>
+    </skill>
+    <skill>
+      <name>Trabajo en equipo</name>
+    </skill>
+    <skill>
+      <name>Desarrollo de aplicaciones</name>
+    </skill>
+    <skill>
+      <name>Investigación y análisis</name>
+    </skill>
+  </habilidades>
+
+  <idiomas>
+    <idioma>
+      <nombre>Español</nombre>
+      <nivel>Nativo</nivel>
+    </idioma>
+    <idioma>
+      <nombre>Inglés</nombre>
+      <nivel>B2</nivel>
+    </idioma>
+  </idiomas>
+
+  <resumen>
+    <texto>Desarrollador en formación. Me encanta la tecnología y el diseño de soluciones eficientes. Estoy determinado en aprender continuamente, trabajar con buenas prácticas y crear proyectos con impacto.</texto>
+  </resumen>
+</curriculum>

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified">
+
+  <!-- raíz -->
+  <xs:element name="curriculum">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="header" type="HeaderType"/>
+        <xs:element name="perfil" type="PerfilType"/>
+        <xs:element name="experiencia" type="ExperienciaType"/>
+        <xs:element name="educacion" type="EducacionType"/>
+        <xs:element name="contacto" type="ContactoType"/>
+        <xs:element name="habilidades" type="HabilidadesType"/>
+        <xs:element name="idiomas" type="IdiomasType"/>
+        <xs:element name="resumen" type="ResumenType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- header -->
+  <xs:complexType name="HeaderType">
+    <xs:sequence>
+      <xs:element name="subtitle" type="xs:string"/>
+      <xs:element name="name" type="NameType"/>
+      <xs:element name="profilePhoto" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="NameType">
+    <xs:sequence>
+      <xs:element name="given" type="xs:string"/>
+      <xs:element name="family" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- perfil -->
+  <xs:complexType name="PerfilType">
+    <xs:sequence>
+      <xs:element name="titulo" type="xs:string"/>
+      <xs:element name="texto" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- experiencia -->
+  <xs:complexType name="ExperienciaType">
+    <xs:sequence>
+      <xs:element name="exp" type="ExpItemType" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ExpItemType">
+    <xs:sequence>
+      <xs:element name="role" type="xs:string"/>
+      <xs:element name="company" type="xs:string"/>
+      <xs:element name="location" type="xs:string" minOccurs="0"/>
+      <xs:element name="period" type="xs:string" minOccurs="0"/>
+      <xs:element name="responsabilidades" type="ResponsabilidadesType" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ResponsabilidadesType">
+    <xs:sequence>
+      <xs:element name="item" type="xs:string" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- educacion -->
+  <xs:complexType name="EducacionType">
+    <xs:sequence>
+      <xs:element name="edu" type="EduItemType" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="EduItemType">
+    <xs:sequence>
+      <xs:element name="degree" type="xs:string"/>
+      <xs:element name="institution" type="xs:string"/>
+      <xs:element name="location" type="xs:string" minOccurs="0"/>
+      <xs:element name="period" type="xs:string" minOccurs="0"/>
+      <xs:element name="description" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- contacto -->
+  <xs:complexType name="ContactoType">
+    <xs:sequence>
+      <xs:element name="contact" type="ContactEntryType" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ContactEntryType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="type" type="ContactTypeEnum" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:simpleType name="ContactTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="email"/>
+      <xs:enumeration value="address"/>
+      <xs:enumeration value="phone"/>
+      <xs:enumeration value="birthdate"/>
+      <xs:enumeration value="nationalityLanguage"/>
+      <xs:enumeration value="github"/>
+      <xs:enumeration value="other"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- habilidades -->
+  <xs:complexType name="HabilidadesType">
+    <xs:sequence>
+      <xs:element name="skill" type="SkillType" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="SkillType">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string"/>
+      <xs:element name="details" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- idiomas -->
+  <xs:complexType name="IdiomasType">
+    <xs:sequence>
+      <xs:element name="idioma" type="IdiomaType" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="IdiomaType">
+    <xs:sequence>
+      <xs:element name="nombre" type="xs:string"/>
+      <xs:element name="nivel" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- resumen -->
+  <xs:complexType name="ResumenType">
+    <xs:sequence>
+      <xs:element name="texto" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="DDMMYYYY">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="\d{2}/\d{2}/\d{4}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+</xs:schema>
+
