@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persona>
+    <nombre>Alfredo</nombre>
+    <apellidos>Martínez Cantero</apellidos>
+    <telefonos>
+        <telefono>12345678</telefono>
+        <telefono>87654321</telefono>
+    </telefonos>
+</persona>
