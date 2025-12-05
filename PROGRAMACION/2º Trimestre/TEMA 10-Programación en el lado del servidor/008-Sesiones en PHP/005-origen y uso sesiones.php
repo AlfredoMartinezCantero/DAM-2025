@@ -2,4 +2,4 @@
 	session_start();
 	$_SESSION['nombre'] = "Alfredo";
 ?>
-<a href="004-destino.php">Vamos a otra página</a>
+<a href="006-destino con sesiones.php">Vamos a otra página</a>
