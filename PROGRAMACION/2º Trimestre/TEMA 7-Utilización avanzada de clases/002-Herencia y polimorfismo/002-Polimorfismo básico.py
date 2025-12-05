@@ -7,7 +7,7 @@ class Persona():
 
 class Profesor(Persona):
     def __init__(self,nombre,apellidos):
-  	    super().__init__(nombre, apellidos)
+        super().__init__(nombre, apellidos)
     def dameDatos(self):
         return "Profesor: "+self.nombre+" "+self.apellidos
   
