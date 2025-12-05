@@ -16,6 +16,13 @@ class Alumno(Persona):
     def __init__(self,nombre,apellidos,email,direccion):
         super().__init__(nombre,apellidos,email,direccion)
 
+class AlumnoOnline(Alumno):
+    def __init__(self,nombre,apellidos,email,direccion):
+        super().__init__(nombre,apellidos,email,direccion)
+
+class AlumnoPresencial(Alumno):
+    def __init__(self,nombre,apellidos,email,direccion):
+        super().__init__(nombre,apellidos,email,direccion)
 
 alumno1 = Alumno("Alfredo"," Martinez Cantero","alfredomartinezcantero@gmail.com","Direccion")
 print(alumno1.dameDatos())
