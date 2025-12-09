@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            #nave{
+                position:absolute;
+                width:50px;
+            }
+        </style>
+    </head>
+    <body>
+        <img src="naveespacial.png" id="nave">
+    </body>
+    <script>
+        let nave = documnet.querySelector("#nave");
+        let posx = 40;
+        let posy = 40;
+
+        document.onkeydown = function(tecla){    // Cuándo sobre el documento pulse una tecla
+            console.log(tecla)
+            // W = 87, S = 83, A = 65, D = 68
+            switch(tecla.keyCode){
+                case 87:        // Si pulso W
+                    posy -= 5;  // Sumo 5 unidades en Y
+                    break;
+                case 83:        // Si pulso S
+                    posy += 5;  // Quito 5 unidades en Y
+                    break;
+                case 65:        // Si pulso A
+                    posx -= 5;  // Quito 5 unidades en X
+                    break;
+                case 68:        // Si pulso D
+                    posx += 5;  // Sumo cinco unidades en X
+                    break;
+            }
+            nave.style.left = posx+"px";
+            nave.style.top = posy+"px";
+        }
+    </script>
+</html>
