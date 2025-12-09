@@ -1,17 +1,4 @@
-<!doctype html>
-<html lang="es">
-	<head>
-  	<title>El AAMC - Noticias tecnológicas</title>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="css/estilo.css">
-  </head>
-  <body>
-  	<header>
-    	<h1>El AAMC</h1>
-      <h2>Noticias tecnológicas</h2>
-    </header>
-    <main>
-    	<?php
+<?php
         $host = "localhost";
         $user = "periodico";
         $pass = "Periodico123$";
@@ -31,8 +18,3 @@
         }
         $conexion->close();
       ?>
-    </main>
-    <footer>
-    </footer>
-  </body>
-</html>
