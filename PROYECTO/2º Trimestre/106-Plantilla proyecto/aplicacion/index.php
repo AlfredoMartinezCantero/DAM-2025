@@ -1,5 +1,17 @@
-Hola yo soy el front<br>
-Y mi objetivo es mostrarte cosas<br>
-<br>
-Por ejemplo si soy una tienda online<br>
-Te voy a mostrar un listado de productos
+<!doctype html>
+<html lang="es">
+	<head>
+        <title>El AMC - Noticias tecnológicas</title>
+        <meta charset="utf-8">
+  </head>
+  <body>
+  	<header>
+    	<h1>El AMC</h1>
+      <h2>Noticias tecnológicas</h2>
+    </header>
+    <main>
+    </main>
+    <footer>
+    </footer>
+  </body>
+</html>
