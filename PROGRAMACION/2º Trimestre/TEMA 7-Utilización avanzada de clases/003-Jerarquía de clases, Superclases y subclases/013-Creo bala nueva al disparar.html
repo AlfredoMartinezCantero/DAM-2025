@@ -2,17 +2,10 @@
 <html>
   <head>
     <style>
-      #nave{
-        position:absolute;
-        width:50px;
-    }
-
+      #nave{position:absolute;width:50px;}
       .roca{width:50px;}
-
-      body{
-        background:url("estrellas.jpeg");
-        background-size:cover;
-    }
+      .bala{width:50px;}
+      body{background:url("estrellas.jpeg");background-size:cover;}
     </style>
   </head>
   <body>
@@ -24,7 +17,7 @@
     let altopagina = window.innerHeight			
     
     // Primero declaramos una clase madre (abstracta)
-    class Entidad{											// Creamos una entidad como superclase
+    class Entidad{											    // Creamos una entidad como superclase
     	constructor(x,y,a,v){
       	this.posx = x;
         this.posy = y;
@@ -66,8 +59,8 @@
       ))	// Creo una nueva roca	/// INICIALIZO LA VELOCIDAD A CERO								
     }
     // Voy a crear balas
-    let numero_balas = 0;                       // Indico el numero de balas actual
-    let balas = [];                             // Creo un conjunto vacío
+    let numero_balas = 0;												// Indico el numero de balas actual
+    let balas = [];														// Creo un conjunto vacio
     
     // Ahora creo una instancia del jugador
     let nave = document.querySelector("#nave");
@@ -93,20 +86,34 @@
         case 68:			// Si pulso D
           InstanciaJugador.posx += 5;	// Sumo cinco unidades en X
           break;
-      }
-      nave.style.left = InstanciaJugador.posx+"px";
-      nave.style.top = InstanciaJugador.posy+"px";
+        case 32:			// Si pulso la barra espaciadora
+          balas.push(new Bala(
+            InstanciaJugador.posx,
+            InstanciaJugador.posy,
+            0,0
+          ));					                                                // Cada vez que puso la barra espaciadora, creo una bala nueva
+          let nueva_bala = document.createElement("img");                       // Creo una nueva imagen
+          nueva_bala.classList.add("bala")								        // Le añado la clase roca
+          nueva_bala.src = "bala.png"											// Cargo la imagen de la roca
+          nueva_bala.style.position = "absolute"					            // Le pongo absoluto para poder mover con libertad
+          nueva_bala.style.left = InstanciaJugador.posx+"px"					// Le pongo su posicion X
+          nueva_bala.style.top = InstanciaJugador.posy+"px"						// Le pongo su posicion Y
+          document.querySelector("body").appendChild(nueva_bala)	            // Añado la roca al body
+              break;
+          }
+          nave.style.left = InstanciaJugador.posx+"px";
+          nave.style.top = InstanciaJugador.posy+"px";
     }
     // Voy a dibujar rocas
     for(let i = 0;i<numero_rocas;i++){
-    	let nueva_roca = document.createElement("img");                                                 // Creo una nueva imagen
-      nueva_roca.classList.add("roca")								                                    // Le añado la clase roca
-      nueva_roca.src = "roca.png"											                            // Cargo la imagen de la roca
-      nueva_roca.style.position = "absolute"					                                        // Le pongo absoluto para poder mover con libertad
-      nueva_roca.style.left = rocas[i].posx+"px"					                                    // Le pongo su posicion X
-      nueva_roca.style.top = rocas[i].posy+"px"						                                    // Le pongo su posicion Y
+    	let nueva_roca = document.createElement("img");                                         // Creo una nueva imagen
+      nueva_roca.classList.add("roca")								                            // Le añado la clase roca
+      nueva_roca.src = "roca.png"											                    // Cargo la imagen de la roca
+      nueva_roca.style.position = "absolute"					                                // Le pongo absoluto para poder mover con libertad
+      nueva_roca.style.left = rocas[i].posx+"px"					                            // Le pongo su posicion X
+      nueva_roca.style.top = rocas[i].posy+"px"						                            // Le pongo su posicion Y
       nueva_roca.style.transform = "rotate("+rocas[i].angulo+"deg)  scale("+rocas[i].escala+")"	
-      document.querySelector("body").appendChild(nueva_roca)	                                        // Añado la roca al body
+      document.querySelector("body").appendChild(nueva_roca)	                                // Añado la roca al body
     }
   </script>
 </html>
