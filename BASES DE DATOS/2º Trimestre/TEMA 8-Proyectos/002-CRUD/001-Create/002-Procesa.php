@@ -25,7 +25,8 @@
         '".$departamento."'
         );
     ";
+    
+    $conexion->query($sql);
         
     $conexion->close();
-  
 ?>
