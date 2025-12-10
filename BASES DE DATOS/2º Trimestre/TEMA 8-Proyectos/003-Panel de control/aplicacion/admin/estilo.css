@@ -1,3 +1,4 @@
+/* ESTILOS GENERALES */
 html,body{
   width:100%;
   height:100%;
@@ -17,4 +18,18 @@ nav{
 main{
   flex:4;
   background:white;
+}
+
+/* ESTILOS DEL MENÚ */
+nav{
+	display:flex;
+  padding:20px;
+  flex-direction:column;
+  gap:20px;
+}
+nav button{
+	background:white;
+  border:none;
+  color:black;
+  padding:10px;
 }
