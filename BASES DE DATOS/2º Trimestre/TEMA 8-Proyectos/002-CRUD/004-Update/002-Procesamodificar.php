@@ -30,11 +30,12 @@
             <input type="submit">
         </form>
         ';
+        // 4.-Enviar la información modificada a un tercer archivo
     }
         
         
     $conexion->close();
   
   
-  // 4.-Enviar la información modificada a un tercer archivo
+  
 ?>
