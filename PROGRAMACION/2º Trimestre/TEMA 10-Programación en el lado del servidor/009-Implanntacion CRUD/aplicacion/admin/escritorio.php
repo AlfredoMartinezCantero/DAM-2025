@@ -12,6 +12,7 @@
     </nav>
     <main>
     	<?php include "inc/read/leer.php"; ?>
+      <a href="?accion=nuevo" id="nuevo">+</a>
     </main>
   </body>
 </html>
