@@ -19,7 +19,7 @@
             echo "<td>".$fila['autor_id']."</td>";
             echo "<td>".$fila['contenido']."</td>";
         echo "</tr>";
-        var_dump($fila);			
+        			
     }
         
         $conexion->close();
