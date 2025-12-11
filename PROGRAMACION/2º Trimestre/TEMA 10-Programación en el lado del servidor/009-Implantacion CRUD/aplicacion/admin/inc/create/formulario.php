@@ -1,4 +1,4 @@
-<form action="procesaformulario.php" method="POST">
+<form action="inc/create/procesaformulario.php" method="POST">
 
     <div class="controlformulario">
         <label for="titulo">Título de la nueva noticia</label>
