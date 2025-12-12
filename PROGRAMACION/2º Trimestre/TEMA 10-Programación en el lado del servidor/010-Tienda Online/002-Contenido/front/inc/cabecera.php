@@ -29,6 +29,8 @@
         width:100%;
         justify-content:center;
         list-style-type:none;
+        padding:0px;
+        margin:0px;
     }
     nav ul li{
         padding:0px;
