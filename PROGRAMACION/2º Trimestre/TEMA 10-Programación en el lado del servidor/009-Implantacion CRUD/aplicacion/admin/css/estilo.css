@@ -70,6 +70,18 @@ table td,table th{
 	padding:5px;
 }
 
+.eliminar{
+	width:20px;
+  height:20px;
+  background:red;
+  border-radius:30px;
+  color:white;
+  line-height:20px;
+  text-decoration:none;
+  display:block;
+  text-align:center;
+}
+
 /* ESTILO DEL FORMULARIO */
 
 form{
