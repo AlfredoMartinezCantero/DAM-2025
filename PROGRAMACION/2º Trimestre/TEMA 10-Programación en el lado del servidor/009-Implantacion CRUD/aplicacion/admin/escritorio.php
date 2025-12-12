@@ -12,12 +12,12 @@
     </nav>
     <main>
     	<?php
-      	// Esto se conoce como router /////////////
+      	// Esto se conoce como router //////////
       	if(isset($_GET['accion'])){
         	if($_GET['accion'] == "nuevo"){
           	include "inc/create/formulario.php";
-          }else if($_GET['accion'] == "eliminar"){ // Defino la acción eliminar
-          	include "inc/delete/eliminar.php";		// En ese caso incluyo eliminar.php
+          }else if($_GET['accion'] == "eliminar"){      // Defino la acción eliminar
+          	include "inc/delete/eliminar.php";		      // En ese caso incluyo eliminar.php
           }
         }else{
       		include "inc/read/leer.php"; 
