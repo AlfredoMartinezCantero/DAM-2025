@@ -73,7 +73,7 @@ table td,table th{
 .eliminar,.editar{
 	width:20px;
   height:20px;
-  background:red;
+  background:rgb(6, 163, 236);
   border-radius:30px;
   color:white;
   line-height:20px;
