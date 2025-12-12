@@ -16,11 +16,11 @@
       while ($fila = $resultado->fetch_assoc()) {
     ?>
       <article>
-        <div class="imagen"></div>
+        <div class="imagen" style="background:url(img/producto.png);background-size:cover;"></div>
         <h3><?= $fila['nombre_producto'] ?></h3>
         <p><?= $fila['precio'] ?></p>
         <p><?= $fila['descripcion'] ?></p>
-        <a href="producto.php?id=<?= $fila['id'] ?>">Comprar</a>
+        <a href="producto.php?id=<?= $fila['id'] ?>">Comprar</a> 
       </article>
     <?php
         }
@@ -54,4 +54,6 @@
 </style>
 
 <?php include "inc/piedepagina.php"; ?>
+
+
 

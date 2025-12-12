@@ -1,6 +1,6 @@
 <?php include "inc/cabecera.php"; ?>
 
-<section id="catalogo">
+<section id="paginaproducto">
 
     <?php
       $host = "localhost";
@@ -16,11 +16,17 @@
       while ($fila = $resultado->fetch_assoc()) {
     ?>
       <article>
-        <div class="imagen"></div>
-        <h3><?= $fila['nombre_producto'] ?></h3>
+        <div class="imagen" style="background:url(img/producto.png);background-size:cover;"></div>
         <p><?= $fila['precio'] ?></p>
+        <form action="carrito.php" method="POST">
+        	<input type="hidden" name="id" value="<?= $fila['id'] ?>">
+          <input type="number" min=1 max=10 value=1>
+          <input type="submit" value="Comprar">
+        </form>
+      </article>
+      <article>
+      	<h3><?= $fila['nombre_producto'] ?></h3>
         <p><?= $fila['descripcion'] ?></p>
-        <a href="producto.php?id=<?= $fila['id'] ?>">Comprar</a>
       </article>
     <?php
         }
@@ -31,20 +37,20 @@
 </section>
 
 <style>
-	#catalogo{
-  	display:grid;
-    grid-template-columns:repeat(3,1fr);
+	#paginaproducto{
+  	display:flex;
     gap:20px;
   }
-  #catalogo article{
+  #paginaproducto article{
   	text-align:center;
+    flex:1;
   }
-  #catalogo article .imagen{
+  #paginaproducto article .imagen{
   	background:darkorchid;
-    height:100px;
+    height:300px;
     border-radius:5px 5px 0px 0px;
   }
-  #catalogo article a{
+  #paginaproducto article a{
   	background:darkorchid;
     padding:10px;
     border-radius:5px;
