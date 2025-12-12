@@ -17,7 +17,7 @@
 ?>
 
     <form action="inc/update/procesaformulario.php" method="POST">
-        <input type="hidden" name="id" value="<?= $fila['titulo'] ?>"> <!-- OJO A ESTE CAMPO OCULTO -->
+        <input type="hidden" name="id" value="<?= $fila['id'] ?>"> <!-- OJO A ESTE CAMPO OCULTO -->
       <div class="controlformulario">
         <label for="titulo">Título de la nueva noticia</label>
         <input type="text" name="titulo" id="titulo" value="<?= $fila['titulo'] ?>">
