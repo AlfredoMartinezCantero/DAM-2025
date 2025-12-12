@@ -16,7 +16,8 @@
         echo "<td>".$fila['fecha_publicacion']."</td>";
         echo "<td>".$fila['autor_id']."</td>";
         echo "<td>".$fila['contenido']."</td>";
-        echo "<td><a href='?accion=eliminar&id=".$fila['id']."' class='eliminar'>X</a></td>";
+        echo "<td><a href='?accion=editar&id=".$fila['id']."' class='editar' title='Cuidado que vas a editar un dato'>🖋</a></td>";
+        echo "<td><a href='?accion=eliminar&id=".$fila['id']."' class='eliminar' title='MAS cuidado todavía porque vas a ELIMINAR un dato'>✖</a></td>";
       echo "</tr>";
     }
 

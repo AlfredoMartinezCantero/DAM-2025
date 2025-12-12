@@ -70,7 +70,7 @@ table td,table th{
 	padding:5px;
 }
 
-.eliminar{
+.eliminar,.editar{
 	width:20px;
   height:20px;
   background:red;
