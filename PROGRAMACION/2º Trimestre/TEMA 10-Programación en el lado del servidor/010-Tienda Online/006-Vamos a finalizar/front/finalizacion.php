@@ -55,9 +55,25 @@ La cantidad que ha pedido es:<br>
     ");
     $id_cliente_insertado = $conexion->insert_id;
 
-    // Segundo, guardaremos el pedido (necesita un id de cliente)
-
-    // Tercero, guardaremos lineas de pedido (neecesita un id de pedido)
+// Segundo, guardaremos el pedido (necesita un id de cliente)
+    $resultado = $conexion->query("
+        INSERT INTO pedido VALUES(
+        NULL,
+        '".date('Y-m-d H:i:s')."',
+        ".$id_cliente_insertado."
+        )
+    ");
+    $id_pedido_insertado = $conexion->insert_id;
+    
+// Tercero, guardaremos lineas de pedido (neecesita un id de pedido)
+    $resultado = $conexion->query("
+        INSERT INTO lineaspedido VALUES(
+        NULL,
+        ".$id_pedido_insertado.",
+        '".$_POST['unidades']."',
+        ".$_POST['idproducto']."
+        )
+    ");
 
 ?>
 
