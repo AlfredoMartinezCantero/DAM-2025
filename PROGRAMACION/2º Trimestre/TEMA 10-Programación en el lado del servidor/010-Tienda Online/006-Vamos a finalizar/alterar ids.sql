@@ -21,3 +21,4 @@ ALTER TABLE lineaspedido
 ALTER TABLE lineaspedido
   ADD CONSTRAINT fk_lineaspedido_2
   FOREIGN KEY (pedido_id) REFERENCES pedido(id);
+s
