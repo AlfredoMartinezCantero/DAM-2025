@@ -10,26 +10,52 @@
 <?= $_POST['telefono']?><br>
 <br>
 
-El producto que ha pedido es:<br>
-<?= $_POST['idproducto']?><br>
-<br>
-La cantidad que ha pedido es:<br>
-<?= $_POST['unidades']?><br>
-<br>
-
+<table>
+<tr>
+	<th>Nombre del producto</th>
+  <th>Precio del producto</th>
+  <th>Unidades</th>
+  <th>Total</th>
+</tr>
 <?php
+	// CONVIERTO EL ID DE PRODUCTO EN LOS DATOS DE PRODUCTO
 	$host = "localhost";
   $user = "tiendaonlinedamdaw";
   $pass = "Tiendaonlinedamdaw123$";
   $db   = "tiendaonlinedamdaw";
 
   $conexion = new mysqli($host, $user, $pass, $db);
+	$resultado = $conexion->query("
+  	SELECT * FROM producto WHERE id = ".$_POST['idproducto'].";
+  ");
+  while ($fila = $resultado->fetch_assoc()) {
+  	echo '<tr>
+    	<td>'.$fila['nombre_producto'].'</td>
+      <td>'.$fila['precio'].'</td>
+      <td>'.$_POST['unidades'].'</td>
+      <td>'.$_POST['unidades']*$fila['precio'].'</td>
+    </tr>';
+  }
+  
+?>
+</table>
 
+<?php
+    $host = "localhost";
+    $user = "tiendaonlinedamdaw";
+    $pass = "Tiendaonlinedamdaw123$";
+    $db   = "tiendaonlinedamdaw";
+
+    $conexion = new mysqli($host, $user, $pass, $db);
+
+        
+
+        
     // Y ahora es cuando toca guardar cosas en la base de datos
     // CUIDADO CON LAS FK
     // Aquellas tablas que no tengan dependencias, van primero
     // Las tablas que tengan dependencias van despues
-  
+    
     // Primero guardaremos el cliente
     // Guardo los datos que vienen por post (del formulario anterior)
     $resultado = $conexion->query("
@@ -44,7 +70,7 @@ La cantidad que ha pedido es:<br>
     ");
     // Y me quedo en memoria con el id del ultimo cliente insertado
     $id_cliente_insertado = $conexion->insert_id;
-  
+    
     // Segundo, guardaremos el pedido (necesita un id de cliente)
     // Ahora creo un pedido con la fecha actual y el id anterior
     $resultado = $conexion->query("
@@ -54,7 +80,7 @@ La cantidad que ha pedido es:<br>
         ".$id_cliente_insertado."
         )
     ");
-    $id_pedido_insertado = $conexion->insert_id; // MAGIA NEGRA !!!!!!!!!!!!!!!!!!
+    $id_pedido_insertado = $conexion->insert_id;
     
     // Tercero, guardaremos lineas de pedido (necesita un id de pedido)
     // Ahora creo una linea  de pedido con el id de pedido insertado y las lineas que venian de la pantalla anterior
@@ -66,8 +92,18 @@ La cantidad que ha pedido es:<br>
         ".$_POST['idproducto']."
         )
     ";
-    echo $sql;
     $resultado = $conexion->query($sql);
-    ?>
 
+?>
+<style>
+	table{width:100%;border:2px solid orchid;}
+  table th{background:orchid;color:white;}
+</style>
 <?php include "inc/piedepagina.php"; ?>
+
+
+
+
+
+
+
