@@ -97,7 +97,7 @@
 ?>
 <style>
 	table{width:100%;border:2px solid orchid;}
-  table th{background:orchid;color:white;}
+    table th{background:orchid;color:white;}
 </style>
 <?php include "inc/piedepagina.php"; ?>
 
