@@ -10,23 +10,24 @@
 
       $conexion = new mysqli($host, $user, $pass, $db);
 
-      $sql = "SELECT * FROM producto WHERE id = ".$_GET['id'].";";
+      $sql = "SELECT * FROM producto WHERE id = ".$_GET['id'].";"; // NUEVO ///////////
 
       $resultado = $conexion->query($sql);
       while ($fila = $resultado->fetch_assoc()) {
     ?>
       <article>
-        <div class="imagen" style="background:url(img/producto.png);background-size:cover;"></div>
+        <div class="imagen" style="background:url(img/producto.jpg);background-size:cover;"></div>
         <p><?= $fila['precio'] ?></p>
         <form action="carrito.php" method="POST">
         	<input type="hidden" name="id" value="<?= $fila['id'] ?>">
-          <input type="number" min=1 max=10 value=1>
+          <input type="number" name="unidades" min=1 max=10 value=1>
           <input type="submit" value="Comprar">
         </form>
       </article>
       <article>
       	<h3><?= $fila['nombre_producto'] ?></h3>
-        <p><?= $fila['descripcion'] ?></p>
+        <h4><?= $fila['descripcion'] ?></h4>
+        <p><?= $fila['descripcion_larga'] ?></p>
       </article>
     <?php
         }
@@ -42,7 +43,7 @@
     gap:20px;
   }
   #paginaproducto article{
-  	text-align:center;
+  	text-align:justify;
     flex:1;
   }
   #paginaproducto article .imagen{
