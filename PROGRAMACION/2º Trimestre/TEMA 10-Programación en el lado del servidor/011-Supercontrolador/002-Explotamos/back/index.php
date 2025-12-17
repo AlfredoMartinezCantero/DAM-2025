@@ -4,17 +4,7 @@
   	<link rel="stylesheet" href="css/estilo.css">
   </head>
   <body>
-    <?php
-      // Primero me conecto a la base de datos
-      // Esto es común para todo el archivo
-        $host = "localhost";
-        $user = "tiendaonlinedamdaw";
-        $pass = "Tiendaonlinedamdaw123$";
-        $db   = "tiendaonlinedamdaw";
-
-        $conexion = new mysqli($host, $user, $pass, $db);
-    ?>
-
+    <?php include "inc/conexion_bd.php"; ?>
     <nav>
     <?php
       // Ahora lo que quiero es un listado de las tablas en la base de datos
