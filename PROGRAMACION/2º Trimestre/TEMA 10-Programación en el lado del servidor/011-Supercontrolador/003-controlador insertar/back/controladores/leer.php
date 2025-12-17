@@ -1,5 +1,5 @@
 <table>
-      <?php
+    <?php
       // PRIMERO CREO LAS CABECERAS //////////////////
         $resultado = $conexion->query("
           SELECT * FROM ".$_GET['tabla']." LIMIT 1;
@@ -11,8 +11,8 @@
           }
           echo "</tr>";
          }
-      ?>
-      <?php
+    ?>
+    <?php
       // Y LUEGO EL RESTO DE DATOS //////////////
         $resultado = $conexion->query("
           SELECT * FROM ".$_GET['tabla'].";
@@ -24,7 +24,7 @@
           }
           echo "</tr>";
          }
-      ?>
+    ?>
 </table>
 <a href="?operacion=insertar&tabla=<?= $_GET['tabla'] ?>" class="boton_insertar">+</a>
 <style>
