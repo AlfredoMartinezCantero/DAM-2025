@@ -20,14 +20,16 @@
     	<img src="satorilogo.png">
       <h1>Satori</h1>
       <form method="POST" action="?">
-        <input type="text" name="criterio" placeholder="Introduce algo para buscar...">
+        <input 
+        	type="text" 
+          name="criterio" 
+          placeholder="Introduce algo para buscar..."
+          value="<?= $_POST['criterio'] ?>">
       </form>
     </header>
     <main>
     	<?php
-      	if(isset($_POST['criterio'])){
-        	echo "Lo que vas a buscar es: ".$_POST['criterio'];
-        }
+      	
         $host = "localhost";
         $user = "satori";
         $pass = "Satori123$";
