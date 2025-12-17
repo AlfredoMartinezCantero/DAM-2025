@@ -3,7 +3,7 @@
       // PRIMERO CREO LAS CABECERAS //////////////////
         $resultado = $conexion->query("
           SELECT * FROM ".$_GET['tabla']." LIMIT 1;
-        ");	// SOLO QUIERO UN ELEMENTO !!!!!!!!!!!!!!!!
+        ");	                        // SOLO QUIERO UN ELEMENTO ////
         while ($fila = $resultado->fetch_assoc()) {
           echo "<tr>";
           foreach($fila as $clave=>$valor){
