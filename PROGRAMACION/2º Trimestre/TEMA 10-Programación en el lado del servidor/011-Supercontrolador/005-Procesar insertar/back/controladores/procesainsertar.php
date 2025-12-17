@@ -1,24 +1,17 @@
-<!doctype html>
-<html>
-    <head>
-  	<link rel="stylesheet" href="css/estilo.css">
-  </head>
-  <body>
-		<?php include "inc/conexion_bd.php"; ?>
-    <nav>
-    	<?php include "controladores/poblar_menu.php" ?>
-    </nav>
-    <main>
-
 <?php
-    $sql = "INSERT INTO ".$_GET['tabla']." VALUES ";
-    foreach($_POST as $clave=>$valor){
-        if($clave == "id"){
-            $sql.= "NULL,";
-        }else{
-            $sql.="'".$valor."',";
-        }
+	$sql = "INSERT INTO ".$_GET['tabla']." VALUES (";	// Inicio el formateo del SQL
+  foreach($_POST as $clave=>$valor){					// Recorro los campos del form
+  	if($clave == "id"){									// Si eres un id
+    	$sql.= "NULL,";									// Inserta NULL
+    }else{												// Si no eres un id
+  		$sql.= "'".$valor."',";							// Inserta el valor
+    }
   }
-  $sql = substr($sql, 0, -1);       // Le quito la última coma al SQL
-  echo $sql;
+  
+  $sql = substr($sql, 0, -1);                           // Le quito la ultima coma al SQL
+  $sql .= ");";
+  echo $sql;											// Lo saco por pantalla
+  
+  $resultado = $conexion->query($sql);					// Proceso el SQL
+  header("Location: ?tabla=".$_GET['tabla']);
 ?>
