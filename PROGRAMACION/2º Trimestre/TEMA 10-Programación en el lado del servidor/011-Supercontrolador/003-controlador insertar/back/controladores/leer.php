@@ -26,8 +26,8 @@
          }
       ?>
 </table>
-<a href="?operacion=insertar" class="boton_insertar">+</a><style>
-
+<a href="?operacion=insertar&tabla=<?= $_GET['tabla'] ?>" class="boton_insertar">+</a>
+<style>
 	.boton_insertar{
   	position:absolute;
     bottom:20px;
@@ -42,6 +42,12 @@
     text-decoration:none;
   }
 </style>
+
+
+
+
+
+
 
 
 
