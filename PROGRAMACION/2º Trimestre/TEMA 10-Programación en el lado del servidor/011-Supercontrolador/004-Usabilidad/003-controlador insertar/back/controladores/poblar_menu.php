@@ -4,9 +4,11 @@
    SHOW TABLES;
   ");
   while ($fila = $resultado->fetch_assoc()) {
-  	$clase = "";							                        // De entrada no tienes clase	
-    if($fila['Tables_in_'.$db] == $_GET['tabla']){	  // Pero si el nombre de esta tabla coincide con la tabla cargada
-    	$clase  = "activo";			                        // En ese caso tu clase es "activo"
+  	$clase = "";							                            // De entrada no tienes clase	
+    if(isset($_GET['tabla'])){
+    	if($fila['Tables_in_'.$db] == $_GET['tabla']){	    // Pero si el nombre de esta tabla coincide con la tabla cargada
+    		$clase  = "activo";			                          // En ese caso tu clase es "activo"
+    	}
     }
      echo '
      	<a href="?tabla='.$fila['Tables_in_'.$db].'" class="'.$clase.'">
@@ -15,11 +17,8 @@
       ';
   }
 ?>
-
 <style>
-  .activo{
-    background:red;
+	.activo{
   	transform:translateX(20px);
   }
-
 </style>
