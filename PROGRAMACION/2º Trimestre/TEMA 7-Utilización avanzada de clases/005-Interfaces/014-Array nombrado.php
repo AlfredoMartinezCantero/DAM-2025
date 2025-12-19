@@ -8,5 +8,4 @@
   
     var_dump($cliente);
  
-
 ?>
