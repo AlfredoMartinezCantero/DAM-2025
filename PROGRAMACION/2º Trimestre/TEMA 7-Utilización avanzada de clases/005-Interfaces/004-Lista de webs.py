@@ -6,7 +6,6 @@ urls = [
   	"https://josevicentecarratala.com"
 ]
 
-
 for url in urls:
     print("###############")
     response = requests.get(url, timeout=10)
