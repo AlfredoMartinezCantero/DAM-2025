@@ -29,7 +29,6 @@ class Npc():
         self.posx += math.cos(self.direccion) * self.velocidad
         self.posy += math.sin(self.direccion) * self.velocidad
 
-
 # Preparo los personajes
 personajes = []
 numero_personajes = 500
