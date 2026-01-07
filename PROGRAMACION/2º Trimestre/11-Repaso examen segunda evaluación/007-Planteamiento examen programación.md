@@ -9,3 +9,7 @@ Son los scripts mediante los cuales:
 
 Vuestro examen de programación puede contener HTML,CSS mezclado
 con los controladores
+PERO debéis reforzar vuestras explicaciones en:
+-los controladores
+-la lógica
+-cómo fluye la información
