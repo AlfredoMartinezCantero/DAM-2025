@@ -3,7 +3,7 @@ Las "vistas" son "las pantallas" de vuestra aplicación
 
 En vuestras pantallas habrá mayormente HTML, CSS, y opcionalmente JS
 Si lo necesitáis, podéis usar PHP en el examen
-Teniendo claro que el examen debe centrarse sobre HTML, css y opcional, JS
+Teniendo claro que el examen debe centrarse sobre HTML, CSS y opcional, JS
 
 Importante:
 Empieza el examen con un diagrama de flujo
