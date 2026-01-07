@@ -1,7 +1,7 @@
 El objetivo del examen es mostrar las "VISTAS" de vuestro proyecto
 Las "vistas" son "las pantallas" de vuestra aplicación
 
-Vuestras pantallas habrá mayormente HTML, CSS, y opcionalmente JS
+En vuestras pantallas habrá mayormente HTML, CSS, y opcionalmente JS
 Si lo necesitáis, podéis usar PHP en el examen
 Teniendo claro que el examen debe centrarse sobre HTML, css y opcional, JS
 
