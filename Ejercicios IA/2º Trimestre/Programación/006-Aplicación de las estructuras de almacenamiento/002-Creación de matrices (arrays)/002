@@ -1,0 +1,94 @@
+'''
+Enunciado paso a paso
+Crear una lista de comidas:
+
+Crea una lista vacía llamada menu.
+Implementa un bucle infinito que permita al usuario introducir nuevas comidas en la lista.
+
+Añade las comidas a la lista utilizando el método append().
+
+
+Listar comidas:
+
+Dentro del mismo bucle, agrega una opción para listar todas las comidas que se han añadido hasta ahora.
+
+Utiliza un bucle for para imprimir cada comida en la lista.
+
+Guardar comidas en archivo:
+
+Agrega una opción al menú para guardar la lista de comidas en un archivo binario.
+
+Usa el módulo pickle para serializar la lista y guardarlo en un archivo llamado datos.bin.
+
+Cargar comidas desde archivo:
+
+Añade una nueva opción que permita cargar las comidas desde el archivo datos.bin.
+Utiliza pickle.load() para deserializar la lista y cargarla en tu programa.
+Restricciones
+Solo puedes usar los conceptos y funciones que se han visto hasta ahora.
+No puedes usar librerías externas ni estructuras de datos más complejas.
+Asegúrate de manejar correctamente el modo de apertura del archivo (wb para escritura binaria).
+'''
+import pickle
+
+# Creamos la lista vacía
+menu = []
+
+print("--- GESTOR DE COMIDAS ---")
+
+while True:
+    print("\nELIGE UNA OPCIÓN:")
+    print("1. Anadir comida")
+    print("2. Listar comidas")
+    print("3. Guardar lista en archivo")
+    print("4. Cargar lista desde archivo")
+    print("5. Salir")
+    
+    opcion = input("\nTu opcion: ")
+
+    if opcion == "1":
+        # Añadimos una nueva comida
+        nueva_comida = input("Introduce el nombre de la comida: ")
+        menu.append(nueva_comida)
+        print("OK: '" + nueva_comida + "' añadida al menú.")
+
+    elif opcion == "2":
+        # Listamos las comidas
+        print("\n--- LISTADO ACTUAL ---")
+        if len(menu) == 0:
+            print("(La lista esta vacia)")
+        else:
+            # Usamos enumerate para tener el indice (i) y el valor (comida)
+            for i, comida in enumerate(menu):
+                # Sumamos 1 al indice porque empieza en 0
+                numero = i + 1
+                # Convertimos 'numero' a string con str() para poder sumarlo al texto
+                print(str(numero) + ".- " + comida)
+        print("----------------------")
+
+    elif opcion == "3":
+        # Guardamos en binario
+        try:
+            archivo = open("datos.bin", "wb")
+            pickle.dump(menu, archivo)
+            archivo.close()
+            print("ÉXITO: Lista guardada correctamente en 'datos.bin'.")
+        except:
+            print("ERROR: No se pudo guardar el archivo.")
+
+    elif opcion == "4":
+        # Cargar desde binario
+        try:
+            archivo = open("datos.bin", "rb")
+            menu = pickle.load(archivo)
+            archivo.close()
+            print("EXITO: Datos cargados.")
+        except:
+            print("ERROR: No existe el archivo o hubo un error al leerlo.")
+
+    elif opcion == "5":
+        print("Saliendo del programa...")
+        break
+
+    else:
+        print("Opcion no valida.")
