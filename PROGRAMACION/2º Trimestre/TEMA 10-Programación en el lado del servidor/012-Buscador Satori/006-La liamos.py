@@ -4,7 +4,7 @@ import mysql.connector                             # Importamos MySQL
 import time                                        # Para dormir
 from urllib.parse import urljoin, urlparse
 
-URLS = ["https://www.just-eat.es/"]
+URLS = ["https://www.hellofresh.es/recipes/recetas-familiares?srsltid=AfmBOooBhpmrPtFp6qOIzQEjeZmi0advFKkpaIwmc8y9UfGLW9EHJ1Rt"]
 
 DB_HOST = "localhost"
 DB_USER = "satori"
