@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de NPCs con Python</title>
+    <style>
+        body {
+            background-color: #2c3e50;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: white;
+            font-family: sans-serif;
+        }
+        canvas {
+            background-color: #ecf0f1;
+            border: 5px solid #34495e;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="lienzo" width="800" height="600"></canvas>
+
+    <script>
+        const canvas = document.getElementById('lienzo');
+        const ctx = canvas.getContext('2d');
+
+        // Función principal del bucle de juego
+        async function actualizarJuego() {
+            try {
+                // Pedimos a Python la posición actualizada de los personajes
+                const respuesta = await fetch('/api');
+                const personajes = await respuesta.json();
+
+                // Limpiamos el lienzo (borramos el frame anterior)
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                // Dibujamos cada personaje recibido
+                personajes.forEach(npc => {
+                    ctx.beginPath();
+                    // arc(x, y, radio, anguloInicio, anguloFin)
+                    ctx.arc(npc.x, npc.y, npc.radio, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(231, 76, 60, 0.8)'; // Color rojo semi-transparente
+                    ctx.fill();
+                    ctx.strokeStyle = '#c0392b';
+                    ctx.stroke();
+                });
+
+            } catch (error) {
+                console.error("Error al conectar con la API de Python:", error);
+            }
+
+            requestAnimationFrame(actualizarJuego);
+        }
+
+        // Iniciamos el bucle
+        actualizarJuego();
+    </script>
+</body>
+</html>
