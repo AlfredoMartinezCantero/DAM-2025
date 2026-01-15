@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+  <head>	
+    
+  </head>
+  <body>
+    <canvas></canvas>
+    <script>
+      // Condiciones iniciales
+      let temporizador = setTimeout("bucle()",1000);	
+      let lienzo = document.querySelector("canvas");
+      lienzo.width = 512;					
+      lienzo.height = 512;				
+      let contexto = lienzo.getContext("2d"); 
+      contexto.lineCap = "round";
+      // Condicion de bucle
+      function bucle(){
+      	let fecha = new Date();						
+
+        let hora = fecha.getHours();			
+        let minuto = fecha.getMinutes();	
+        let segundo = fecha.getSeconds();	
+        
+        contexto.clearRect(0,0,512,512); 	
+        
+        // Ahora dibujo la manecilla de las horas
+        contexto.lineWidth = 20;
+        contexto.strokeStyle = "blue";
+        angulo_hora = hora*(Math.PI*2/12)-Math.PI/2		
+        contexto.beginPath(); 			
+        contexto.moveTo(256,256);		
+        contexto.lineTo(
+          256+Math.cos(angulo_hora)*100,
+          256+Math.sin(angulo_hora)*100
+        )
+        contexto.stroke();
+        
+        // Ahora dibujo la manecilla de los minutos
+        contexto.lineWidth = 15;
+        contexto.strokeStyle = "green";
+        angulo_minuto = minuto*(Math.PI*2/60)-Math.PI/2				
+        contexto.beginPath(); 			
+        contexto.moveTo(256,256);		
+        contexto.lineTo(
+          256+Math.cos(angulo_minuto)*150,
+          256+Math.sin(angulo_minuto)*150
+        )
+        contexto.stroke();
+        
+        // Ahora dibujo la manecilla de los segundos
+        contexto.lineWidth = 5;
+        contexto.strokeStyle = "red";
+        angulo_segundo = segundo*(Math.PI*2/60)-Math.PI/2				
+        contexto.beginPath(); 			
+        contexto.moveTo(256,256);		
+        contexto.lineTo(
+          256+Math.cos(angulo_segundo)*200,
+          256+Math.sin(angulo_segundo)*200
+        )
+        contexto.stroke();
+        
+        // Circulo central
+        contexto.beginPath();
+        contexto.arc(256,256,50,0,Math.PI*2)
+        contexto.fill();
+        
+        contexto.lineWidth = 25;
+        contexto.strokeStyle = "black";
+        contexto.beginPath();				
+        contexto.arc(256,256,200,0,Math.PI*2) 
+        contexto.stroke(); 					
+
+        clearTimeout(temporizador);			
+        temporizador = setTimeout("bucle()",1000); 
+      }
+    </script>
+  </body>
+</html>
