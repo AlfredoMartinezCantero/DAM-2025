@@ -47,7 +47,7 @@
     echo "<h3>3. Manipulación ASCII (ord y chr)</h3>";
     
     // Obtengo el primer carácter de la contraseña
-    $primerCaracter = $contrasena[0]; // Es la 'B'
+    $primerCaracter = $contrasena[0];
     
     // Convierto el carácter a su valor numérico ASCII
     $valorAscii = ord($primerCaracter);
