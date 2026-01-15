@@ -1,6 +1,6 @@
 -- sudo mysql -u root -p
 
-CREATE DATABASe composiciones;
+CREATE DATABASE composiciones;
 
 USE composiciones;
 

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio Funciones y Fechas</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+
+    <div class="contenedor">
+        <h1>Ejercicio:</h1>
+        <p id="mensaje-salida">Esperando ejecución...</p>
+    </div>
+
+    <script>
+        const fechaActual = new Date();
+        console.log("La fecha actual es:", fechaActual);
+
+        function diHola(nombre, edad) {
+            return `Hola, ${nombre} tienes ${edad} años, ¿cómo estás?`;
+        }
+
+        const nombreUsuario = "Jose Vicente";
+        const edadUsuario = 47;
+
+        const mensajeGenerado = diHola(nombreUsuario, edadUsuario);
+
+        const elementoSalida = document.getElementById("mensaje-salida");
+        elementoSalida.textContent = mensajeGenerado;
+    </script>
+</body>
+</html>
