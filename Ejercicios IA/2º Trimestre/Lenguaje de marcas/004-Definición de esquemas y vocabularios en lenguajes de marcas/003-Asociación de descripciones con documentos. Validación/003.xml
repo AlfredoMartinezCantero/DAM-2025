@@ -1,4 +1,4 @@
-### ARCHIVO 1: 002-esquema.xsd (Las Reglas) ###
+### ARCHIVO 1: 002-esquema.xsd 
 # Definimos que esperamos una 'persona' con 'nombre' (texto) y 'edad' (entero)
 """
 <?xml version="1.0" encoding="UTF-8"?>
@@ -14,7 +14,7 @@
 </xs:schema>
 
 
-### ARCHIVO 2: 001-documento de referencia.xml (Los Datos) ###
+### ARCHIVO 2: 001-documento de referencia.xml (Los Datos)
 # Creamos un XML que cumple las reglas anteriores
 <?xml version="1.0" encoding="UTF-8"?>
 <persona>
