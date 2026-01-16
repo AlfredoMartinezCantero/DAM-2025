@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persona>
+  <nombre>Alfredoe</nombre>
+  <apellidos>Martínez Cantero</apellidos>
+  <email>alfredo@example.com</email>
+
+  <telefonos>
+    <telefono>12345567</telefono>
+    <telefono>6534646</telefono>
+    <telefono>98765432</telefono>
+    <telefono>666777888</telefono>
+  </telefonos>
+</persona>
