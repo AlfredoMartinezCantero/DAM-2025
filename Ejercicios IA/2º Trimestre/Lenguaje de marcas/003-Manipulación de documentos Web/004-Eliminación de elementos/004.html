@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Práctica: Crear y Eliminar</title>
+    <style>
+        body {
+            background-color: #222;
+            color: white;
+            font-family: sans-serif;
+            overflow: hidden; /* Evita barras de scroll cuando los elementos salen al borde */
+            margin: 0;
+            height: 100vh;
+            cursor: crosshair;
+        }
+
+        /* Estilo base para los objetivos */
+        .objetivo {
+            width: 50px;
+            height: 50px;
+            background-color: crimson;
+            border-radius: 50%; /* Lo hace redondo */
+            position: absolute; /* mover con top/left */
+            border: 2px solid white;
+            box-shadow: 0 0 10px red;
+            transition: transform 0.1s;
+        }
+
+        .objetivo:active {
+            transform: scale(0.9);
+        }
+
+        #marcador {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            font-size: 24px;
+            z-index: 1000;
+            pointer-events: none; /* El clic traspasa el texto */
+        }
+    </style>
+</head>
+<body>
+
+    <div id="marcador">Puntuación: <span id="puntos">0</span></div>
+
+    <script>
+        let puntuacion = 0;
+        const displayPuntos = document.getElementById('puntos');
+
+        // Función encargada de crear un nuevo elemento
+        function crearObjetivo() {
+            // Crear el nodo elemento
+            const nuevoElemento = document.createElement('div');
+            
+            // Asignar clase para estilos
+            nuevoElemento.className = 'objetivo';
+
+            // Posicionamiento Aleatorio
+            // Restamos 50px para que no aparezcan fuera de la pantalla
+            const x = Math.random() * (window.innerWidth - 60);
+            const y = Math.random() * (window.innerHeight - 60);
+
+            nuevoElemento.style.left = x + 'px';
+            nuevoElemento.style.top = y + 'px';
+
+            // Lógica de Eliminación
+            nuevoElemento.onclick = function() {
+                // Elemento que ha recibido el clic
+                this.remove(); 
+                
+                // Actualizamos lógica del juego
+                puntuacion++;
+                displayPuntos.textContent = puntuacion;
+            };
+
+            // Hacer visible el DOM
+            document.body.appendChild(nuevoElemento);
+        }
+
+        // Crear un objetivo cada segundo
+        setInterval(crearObjetivo, 1000);
+    </script>
+</body>
+</html>
