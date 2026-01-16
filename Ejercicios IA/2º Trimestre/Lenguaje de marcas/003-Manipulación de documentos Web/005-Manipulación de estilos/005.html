@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <title>Validación Visual Condicional</title>
+    <style>
+      /* Defino las clases visuales en CSS */
+      .rojo{
+          background:rgb(255,200,200); /* Rojo para el error */
+          border: 1px solid red;
+      } 
+      .verde{
+          background:rgb(200,255,200); /* Color para el exito */
+          border: 1px solid green;
+      } 
+      body{ font-family: sans-serif; padding: 20px; }
+    </style>
+  </head>
+  <body>
+    
+    <h3>Validación de DNI/Teléfono (Ejemplo)</h3>
+    <p>Esta entrada debe tener 9 caracteres exactamente para ser válida.</p>
+    
+    <input type="text" class="rojo" placeholder="Escribe aquí...">
+
+    <script>
+      // Selecciono la primera etiqueta input del documento
+      let entrada = document.querySelector("input"); 
+
+      // Asigno el evento
+      entrada.onkeyup = function() { 
+        
+        let valor = this.value;       // Obtengo el texto escrito
+        let longitud = valor.length;  // Calculo cuántos caracteres tiene
+
+        // Lógica de validación
+        if (longitud == 9) { 
+          // Si es correcto (9 caracteres)
+          this.classList.add("verde");    // Añado estilo de éxito
+          this.classList.remove("rojo");  // Quito estilo de error
+        } else { 
+          // Si es distinto de 9
+          this.classList.remove("verde"); // Quito estilo de éxito
+          this.classList.add("rojo");     // Añado estilo de error
+        }
+      };
+    </script>
+  </body>
+</html>
