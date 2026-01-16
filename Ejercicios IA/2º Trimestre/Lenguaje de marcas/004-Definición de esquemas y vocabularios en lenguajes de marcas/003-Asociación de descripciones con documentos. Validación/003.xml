@@ -1,0 +1,25 @@
+### ARCHIVO 1: 002-esquema.xsd (Las Reglas) ###
+# Definimos que esperamos una 'persona' con 'nombre' (texto) y 'edad' (entero)
+"""
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="persona">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="nombre" type="xs:string"/>
+                <xs:element name="edad" type="xs:integer"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
+
+
+### ARCHIVO 2: 001-documento de referencia.xml (Los Datos) ###
+# Creamos un XML que cumple las reglas anteriores
+<?xml version="1.0" encoding="UTF-8"?>
+<persona>
+    <nombre>Alfredo Martínez</nombre>
+    <edad>25</edad>
+</persona>
+
+
