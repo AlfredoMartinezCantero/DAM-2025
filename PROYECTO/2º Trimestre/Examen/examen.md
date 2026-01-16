@@ -5,6 +5,7 @@ Para este Proyecto Intermodular, mi compañera y yo elegimos desarrollar **Bar B
 
 Elegimos el sector de la hostelería porque identificamos una necesidad, la necesidad de la gente de ser atendida rápido y la capacidad del personal de responder así, Bar Bara no es una web como tal, es una herramienta que aporta una ayuda de trabajo, digitaliza la comanda y ofrece control total sobre la facturación.
 
+---
 **2. Detalles del Proyecto y Ejecución**
 Este proyecto ha sido desarrollado en colaboración con mi compañera, Ana. 
 Hemos operado como un equipo de desarrollo conjunto, no fue como un: Ana tu haces el back y yo el front, los dos íbamos haciendo poco a poco todo en general, igual en la parte del front mientras Ana hacia la parte del login yo estaba haciendo el carrito.
@@ -17,6 +18,7 @@ Usamos MySQL y PDO para la persistencia de datos, optamos por una base de datos 
 
 CSS3, en lugar de depender de librerías, diseñamos un sistema de estilos propio utilizando variables CSS, esto nos permitió establecer un sistema de diseño de colores, espaciados y altamente personalizable.
 
+---
 **3. Funcionalidad**
 La aplicación se divide en dos entornos: el Entorno Cliente (Front) y el Entorno Gestión (Back).
 
@@ -31,6 +33,7 @@ Historial y Pedir la Cuenta, en este apartado, el cliente puede ver en tiempo re
 
 Comandas a Cocina, aquí lo que hicimos fue hacer que los nuevos pedidos entren automáticamente en una lista de pendientes, y, con un solo clic, cocina marca el plato como "Entregado" y desaparece de la lista, limpiando el flujo de trabajo.
 
+---
 **4. Cierre y Conclusiones**
 Bar Bara demuestra que somos capaces de construir una solución Full-Stack completa, desde la base de datos hasta la interfaz de usuario.
 En resumen, creo que mi compañera y yo hemos conseguido crear una aplicación robusta, un backend seguro y bien estructurado, usabilidad, una interfaz pensada para móviles.
