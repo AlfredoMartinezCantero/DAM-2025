@@ -13,4 +13,5 @@ Y luego construir un software
 
 Vamos a simular que tenemos que establecer una lógica de negocio
 Cada uno de vosotros elige un tipo de negocio
+Recomendación: Coged una lógica de negocio de la cual conozcáis algo (o preguntad si no lo conocéis)
 
