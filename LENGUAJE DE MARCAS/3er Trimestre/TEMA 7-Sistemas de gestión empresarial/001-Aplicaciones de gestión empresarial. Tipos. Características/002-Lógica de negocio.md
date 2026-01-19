@@ -15,3 +15,15 @@ Vamos a simular que tenemos que establecer una lógica de negocio
 Cada uno de vosotros elige un tipo de negocio
 Recomendación: Coged una lógica de negocio de la cual conozcáis algo (o preguntad si no lo conocéis)
 
+Por ejemplo, Jose Vicente conoce centros de formación
+Lógica de negocio: 
+
+1.-Llega una persona interesada (formulario)
+2.-Realiza una inscripcion  (validación)
+3.-Secretaría valida la inscripción
+4.-Con la inscripción validada se convierte en matrícula
+5.-¿Qué es una matrícla?
+    FP - Ciclos, Modalidad, Cursos, Módulos profesionales
+    Master - Como mucho, tiene asignaturas
+    Cursos cortos
+    ...
