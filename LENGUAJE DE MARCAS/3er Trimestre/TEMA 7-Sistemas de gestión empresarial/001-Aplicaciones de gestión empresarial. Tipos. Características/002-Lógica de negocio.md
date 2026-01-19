@@ -19,7 +19,7 @@ Por ejemplo, Jose Vicente conoce centros de formación
 Lógica de negocio: 
 
 1.-Llega una persona interesada (formulario)
-2.-Realiza una inscripcion  (validación)
+2.-Realiza una inscripcion (validación)
 3.-Secretaría valida la inscripción
 4.-Con la inscripción validada se convierte en matrícula
 5.-¿Qué es una matrícla?
