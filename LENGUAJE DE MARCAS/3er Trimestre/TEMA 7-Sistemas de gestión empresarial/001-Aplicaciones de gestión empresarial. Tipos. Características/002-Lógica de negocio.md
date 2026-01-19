@@ -27,3 +27,7 @@ Lógica de negocio:
     Master - Como mucho, tiene asignaturas
     Cursos cortos
     ...
+
+6.-Generalmente un alumno necesita un acceso a una plataforma (LMS) - Crear usuario LMS
+7.-Se crea un registro en un SIS (notas, asistencias, etc)
+8.-Si el alumno realiza pagos, la información debe viajar hasta factura/conta
