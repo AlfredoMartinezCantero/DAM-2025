@@ -1,4 +1,4 @@
-Lógica de negocio=
+Lógica de negocio =
 Reglas que gobiernan el comportamiento de ese negocio
 "Cómo funciona esa empresa"
 "Cómo fluye la información"
