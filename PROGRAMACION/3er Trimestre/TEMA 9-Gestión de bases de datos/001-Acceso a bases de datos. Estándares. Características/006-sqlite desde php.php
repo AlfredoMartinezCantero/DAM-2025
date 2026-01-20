@@ -2,6 +2,8 @@
 // sudo apt install php php-mysql
 // sudo systemctl restart apache2
 // sudo apt install php-sqlite3
+// En windows, XAMPP lleva preinstalado, pero desactivado SQLite
+// LA solución es activarlo descomentando la linea en php.ini
 
 
 // Conexión a la base de datos SQLite
@@ -19,3 +21,4 @@ foreach ($stmt as $row) {
 
 // Cerrar conexión
 $db = null;
+
