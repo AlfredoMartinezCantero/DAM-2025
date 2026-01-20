@@ -2,9 +2,10 @@
 import pymysql
 
 conn = pymysql.connect(
-    host="localhost",
+    host="127.0.0.1",        # Ahora funcionará tanto si pones esto...
+    # host="localhost",      # ...como si pones esto.
     user="empresa2026",
-    password="Empresa2026$",
+    password="Empresa2026$", # ¡Ojo a la mayúscula y el $!
     database="empresa2026",
     charset="utf8mb4"
 )
