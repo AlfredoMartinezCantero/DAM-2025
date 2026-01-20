@@ -1,4 +1,9 @@
 <?php
+// sudo apt install php php-mysql
+// sudo systemctl restart apache2
+// sudo apt install php-sqlite3
+
+
 // Conexión a la base de datos SQLite
 $db = new PDO("sqlite:empresa2026.db");
 
