@@ -1,0 +1,1 @@
+sudo mysqldump -u root -p blog2526 > /home/Alfredo/Escritorio/backupblog2526.sql
