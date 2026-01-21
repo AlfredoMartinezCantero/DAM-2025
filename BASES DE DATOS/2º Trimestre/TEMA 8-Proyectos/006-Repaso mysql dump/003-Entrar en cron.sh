@@ -1,1 +1,1 @@
-crontab e
+crontab -e
