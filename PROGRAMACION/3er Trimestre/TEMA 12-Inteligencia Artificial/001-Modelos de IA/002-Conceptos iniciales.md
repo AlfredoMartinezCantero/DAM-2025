@@ -15,3 +15,5 @@ Siempre se quedan para ellos los más potentes.
 
 Trabajo para estos días (no en clase, sino en casa):
 Descargar y probar y comparar diferentes modelos de IA.
+
+**descargar si o si** nomic-embed-text:latest
