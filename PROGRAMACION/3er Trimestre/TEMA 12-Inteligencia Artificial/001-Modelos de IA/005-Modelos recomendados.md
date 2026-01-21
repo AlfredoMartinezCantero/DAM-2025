@@ -27,5 +27,3 @@ qwen2.5-coder:7b             dae161e27b0e    4.7 GB    4 months ago
 
 
 ollama pull qwen2.5-coder:7b
-
-
