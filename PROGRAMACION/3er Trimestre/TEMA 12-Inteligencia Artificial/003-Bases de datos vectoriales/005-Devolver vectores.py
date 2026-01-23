@@ -36,7 +36,7 @@ def main():
         print("Palabra:", doc)
         print("Metadatos:", meta)
         print("Longitud del vector:", len(emb))
-        print("Vector (primeros 10 valores):", emb[:10])
+        print("Vector (primeros 10 valores):", emb)
         print("-" * 60)
 
 if __name__ == "__main__":
