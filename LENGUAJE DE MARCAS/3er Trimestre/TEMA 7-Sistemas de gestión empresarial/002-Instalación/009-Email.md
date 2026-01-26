@@ -32,4 +32,3 @@ A continuación deberéis:
 "quiero enviar correo SMTP con Gmail, dime como crear una clave de aplicación" (Prompt)
 
 2.- O bien crear una cuenta en un servicio gratuito de correo electrónico en la red (por ejemplo resend)
- 
