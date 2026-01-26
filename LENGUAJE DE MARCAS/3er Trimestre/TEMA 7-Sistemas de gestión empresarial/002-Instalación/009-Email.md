@@ -18,3 +18,11 @@ Protocolo de envío de correo electrónico
 
 Niños usad esto que os voy a enseñar para hacer el bien
 Y no para hacer el mal (porque se puede)
+
+Para el siguiente ejercicio necesitáis sacaros una cuenta de correo electrónico que tenga SMTP
+
+No suelen servir ni las de gmail ni las de Outlook
+SE PUEDE pero la configuración es ardua
+Por que la gente las utilizaba para hacer SPAM
+
+SPAM = Envío masivo e indiscriminado de correo electrónico no solicitado
