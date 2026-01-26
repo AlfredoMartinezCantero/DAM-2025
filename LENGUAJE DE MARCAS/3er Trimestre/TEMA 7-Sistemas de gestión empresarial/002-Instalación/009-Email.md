@@ -15,3 +15,6 @@ IMAP = Descarga correo a tu ordenador pero se queda una copia en el servidor
 
 SMTP = Send Mail Transport Protocol
 Protocolo de envío de correo electrónico
+
+Niños usad esto que os voy a enseñar para hacer el bien
+Y no para hacer el mal (porque se puede)
