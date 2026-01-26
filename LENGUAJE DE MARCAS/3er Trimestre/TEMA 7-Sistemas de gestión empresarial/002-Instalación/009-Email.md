@@ -26,3 +26,10 @@ SE PUEDE pero la configuración es ardua
 Por que la gente las utilizaba para hacer SPAM
 
 SPAM = Envío masivo e indiscriminado de correo electrónico no solicitado
+A continuación deberéis:
+
+1.- -O bien configurar una clave de aplicación en Gmail para que Gmail os deje enviar correo SMTP
+"quiero enviar correo SMTP con Gmail, dime como crear una clave de aplicación" (Prompt)
+
+2.- O bien crear una cuenta en un servicio gratuito de correo electrónico en la red (por ejemplo resend)
+ 
