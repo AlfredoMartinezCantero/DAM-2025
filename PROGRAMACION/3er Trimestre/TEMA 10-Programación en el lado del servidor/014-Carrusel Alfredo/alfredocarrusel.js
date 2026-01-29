@@ -30,6 +30,7 @@ let contenedor = document.querySelector(".alfredocarrusel");
         }
       
         botonatras.onclick = function(){
+            if(contador < -7){contador = 0;}
             contador++;
             nuevo_contenedor.style.left = contador * anchura + "px"
         }
