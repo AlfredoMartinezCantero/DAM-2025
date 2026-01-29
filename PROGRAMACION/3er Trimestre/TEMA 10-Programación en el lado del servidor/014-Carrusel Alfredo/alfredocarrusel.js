@@ -25,6 +25,7 @@ let contenedor = document.querySelector(".alfredocarrusel");
 
         botondelante.onclick = function(){
             contador--;
+            if(contador < -7){contador = 0;}
             nuevo_contenedor.style.left = contador * anchura + "px"
         }
       
