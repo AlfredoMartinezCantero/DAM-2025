@@ -41,12 +41,19 @@
             /* FIX: Estilos necesarios para que los botones se vean encima de la imagen */
             button {
                 border: none;
-                background: white;
-                width: 30px;
-                height: 30px;
+                background: rgba(255,255,255,0.5);
+                width: 50px;
+                height: 50px;
                 position: absolute;
+                border-radius: 60px;
+                font-size: 30px;
+                text-align: center;
                 top: 50%;
                 z-index: 10;
+            }
+            button:hover{
+                background:rgba(255,255,255,1);
+                transition: all 1s;
             }
             /* Separar el botón derecho para que no se solape con el izquierdo */
             button:last-child {
