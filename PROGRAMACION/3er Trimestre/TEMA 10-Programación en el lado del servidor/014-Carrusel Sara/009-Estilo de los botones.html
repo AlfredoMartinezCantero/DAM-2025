@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <div class="alfredocarrusel">
+            <img src="cabeza flores.jpg" alt="Texto alternativo">
+            <img src="gato payaso.jpg" alt="Texto alternativo">
+            <img src="gatoo boom.jpg" alt="Texto alternativo">
+            <img src="girasoles.jpg" alt="Texto alternativo">
+            <img src="hell.jpg" alt="Texto alternativo">
+            <img src="la noche estrellada mariposa.jpg" alt="Texto alternativo">
+            <img src="ojo estrellado.jpg" alt="Texto alternativo">
+            <img src="yoshii.jpg" alt="Texto alternativo">
+        </div>
+        <style>
+            .alfredocarrusel{
+                width: 1280px;
+                height: 720px;
+                overflow: hidden;
+                /* Necesario para que los botones absolutos se posicionen respecto a esto */
+                position: relative; 
+            }
+
+            .alfredocarrusel section{
+                display: flex;
+                width: fit-content;
+                /* FIX: Necesario para que 'left' funcione en la animación */
+                position: relative; 
+                left: 0px;
+                transition: all 1s;
+            }
+
+            .alfredocarrusel section img{
+                width: 1280px;
+                height: 720px;
+                object-fit: cover; 
+            }
+
+            /* FIX: Estilos necesarios para que los botones se vean encima de la imagen */
+            button {
+                border: none;
+                background: white;
+                width: 30px;
+                height: 30px;
+                position: absolute;
+                top: 50%;
+                z-index: 10;
+            }
+            /* Separar el botón derecho para que no se solape con el izquierdo */
+            button:last-child {
+                right: 0;
+            }
+
+        </style>
+        <script>
+        
+        let contenedor = document.querySelector(".alfredocarrusel");
+        let contenido = document.querySelectorAll(".alfredocarrusel img")
+
+        contenido.forEach(function(elemento){
+            elemento.remove()
+        })
+
+        let nuevo_contenedor = document.createElement("section")
+        contenedor.appendChild(nuevo_contenedor)
+
+        contenido.forEach(function(elemento){
+            nuevo_contenedor.appendChild(elemento)
+        })
+
+        let botonatras = document.createElement("button")
+        botonatras.textContent = "◀"
+        contenedor.appendChild(botonatras)
+        
+        let botondelante = document.createElement("button")
+        botondelante.textContent = "▶"
+        contenedor.appendChild(botondelante)
+
+        var anchura = 1280;
+        var contador = 0;
+
+        botondelante.onclick = function(){
+            contador--;
+            nuevo_contenedor.style.left = contador * anchura + "px"
+        }
+      
+        botonatras.onclick = function(){
+            contador++;
+            nuevo_contenedor.style.left = contador * anchura + "px"
+        }
+
+        </script>
+    </body>
+</html>
