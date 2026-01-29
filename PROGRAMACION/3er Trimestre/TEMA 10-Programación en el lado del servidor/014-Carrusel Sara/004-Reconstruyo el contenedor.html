@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+        <div class="alfredocarrusel">
+            <img src="cabeza flores.jpg" alt="Texto alternativo">
+            <img src="gato payaso.jpg" alt="Texto alternativo">
+            <img src="gatoo boom.jpg" alt="Texto alternativo">
+            <img src="girasoles.jpg" alt="Texto alternativo">
+            <img src="hell.jpg" alt="Texto alternativo">
+            <img src="la noche estrellada mariposa.jpg" alt="Texto alternativo">
+            <img src="ojo estrellado.jpg" alt="Texto alternativo">
+            <img src="yoshii.jpg" alt="Texto alternativo">
+        </div>
+        <script>
+
+        // Cojo el contenedor externo (es un solo elemento)
+        let contenedor = document.querySelector(".jocarsacarrusel");
+
+        // Cojo las imagenes de dentro (es un array de elementos)
+        let contenido = document.querySelectorAll(".jocarsacarrusel img")
+
+        // Para cada una de las imagenes
+        contenido.forEach(function(elemento){
+
+        // Quito la imagen del html
+      	elemento.remove()
+      })
+
+        // Creo un nuevo contenedor que es una sección
+        let nuevo_contenedor = document.createElement("section")
+
+        // Al contenedor antiguo le añado el nuevo contenedor
+        contenedor.appendChild(nuevo_contenedor)
+
+        // Dentro del nuevo contenedor meto las imagenes una a una
+        contenido.forEach(function(elemento){
+      	nuevo_contenedor.appendChild(elemento)
+      })
+      
+        </script>
+    </body>
+</html>
