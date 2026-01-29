@@ -23,14 +23,20 @@ let contenedor = document.querySelector(".alfredocarrusel");
         var anchura = 1280;
         var contador = 0;
 
-        botondelante.onclick = function(){
-            contador--;
-            if(contador < -7){contador = 0;}
-            nuevo_contenedor.style.left = contador * anchura + "px"
+        // Botón Derecha (Avanzar)
+        botondelante.onclick = function() {
+            contador--; 
+            if (contador < -7) { 
+                contador = 0; // Vuelve al inicio si se pasa del final
+            }
+            nuevo_contenedor.style.left = (contador * anchura) + "px";
         }
-      
-        botonatras.onclick = function(){
-            if(contador < -7){contador = 0;}
-            contador++;
-            nuevo_contenedor.style.left = contador * anchura + "px"
+
+        // Botón Izquierda (Retroceder)
+        botonatras.onclick = function() {
+            contador++; 
+            if (contador > 0) { 
+                contador = -7; // Va al final si intenta retroceder desde el inicio
+            }
+            nuevo_contenedor.style.left = (contador * anchura) + "px";
         }
