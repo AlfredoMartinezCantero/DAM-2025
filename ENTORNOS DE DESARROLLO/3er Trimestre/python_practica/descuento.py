@@ -25,3 +25,4 @@ def calcular_descuento(precio, cliente_vip):
         descuento = precio * 0.20
     else:
         descuento = precio * 0.10
+        
