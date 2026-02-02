@@ -83,14 +83,15 @@
         ////// Atrapa los datos del cliente
         let boton_enviar = document.querySelector("#enviar");
         boton_enviar.onclick = function(){
-            let nombre_cliente = document.querySelector("#nombre");
-            let apellidos_cliente = document.querySelector("#apellidos");
-            let email_cliente = document.querySelector("#email");
+            let nombre_cliente = document.querySelector("#nombre").value;
+            let apellidos_cliente = document.querySelector("#apellidos").value;
+            let email_cliente = document.querySelector("#email").value;
             pedido.cliente = {
-                "nombre":nombre_cliente.value,
-                "apellidos":apellidos_cliente.value,
-                "email":email_cliente.value
+                "nombre":nombre_cliente,
+                "apellidos":apellidos_cliente,
+                "email":email_cliente
             }
+            console.log(pedido)
         }
     </script>
 </html>
