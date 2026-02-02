@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="410.71665954589844" height="331" viewBox="0 0 410.71665954589844 331">
+
+  <defs>
+    <style>
+      text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 12px; fill: #111827; }
+      .shape-rect { fill: #ffffff; stroke: #9ca3af; stroke-width: 1; }
+      .shape-entity { fill: #ffffff; stroke: #111827; stroke-width: 2; }
+      .shape-circle { fill: #ffffff; stroke: #9ca3af; stroke-width: 1; }
+      .shape-pill { fill: #ffffff; stroke: #9ca3af; stroke-width: 1; }
+      .shape-db { fill: #ffffff; stroke: #9ca3af; stroke-width: 1; }
+      .conn { stroke: #111827; stroke-width: 2; fill: none; }
+    </style>
+    <marker id="arrow-end" markerWidth="10" markerHeight="7" refX="10" refY="3.5"
+            orient="auto" markerUnits="strokeWidth">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#111827"/>
+    </marker>
+    <marker id="arrow-start" markerWidth="10" markerHeight="7" refX="0" refY="3.5"
+            orient="auto" markerUnits="strokeWidth">
+      <polygon points="10 0, 0 3.5, 10 7" fill="#111827"/>
+    </marker>
+  </defs>
+        
+<rect class="shape-rect" x="127" y="63" width="144.63333129882812" height="40" rx="4" ry="4" />
+<text x="199.31666564941406" y="87" text-anchor="middle">Lenguaje de marcas</text>
+<rect class="shape-rect" x="240" y="251" width="120" height="40" rx="4" ry="4" />
+<text x="300" y="275" text-anchor="middle">MongoDB</text>
+<rect class="shape-rect" x="140" y="146" width="120" height="40" rx="4" ry="4" />
+<text x="200" y="170" text-anchor="middle">Programación</text>
+<text x="250" y="54">JSON</text>
+<text x="241" y="136">JSON</text>
+<text x="340" y="240">JSON</text>
+<rect class="shape-rect" x="40" y="248" width="120" height="40" rx="4" ry="4" />
+<text x="100" y="272" text-anchor="middle">MySQL</text>
+<path class="conn" d="M 119.60784313725492 248 L 180.39215686274508 186" marker-end="url(#arrow-end)" />
+<path class="conn" d="M 219.04761904761904 186 L 280.95238095238096 251" marker-end="url(#arrow-end)" />
+<path class="conn" d="M 199.48132452907333 103 L 199.83534112034073 146" marker-start="url(#arrow-start)" marker-end="url(#arrow-end)" />
+</svg>
