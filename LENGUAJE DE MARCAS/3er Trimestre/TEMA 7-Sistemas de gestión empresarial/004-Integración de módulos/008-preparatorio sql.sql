@@ -27,3 +27,5 @@ INSERT INTO productos (nombre, descripcion, precio) VALUES
 ('Ratón Gaming', 'Ratón ergonómico con luces RGB y 3200 DPI', 25),
 ('Teclado Mecánico', 'Teclado retroiluminado con switches rojos', 70),
 ('Gafas de Sol', 'Gafas con protección UV400 y montura de pasta', 20);
+
+SELECT * FROM productos;
