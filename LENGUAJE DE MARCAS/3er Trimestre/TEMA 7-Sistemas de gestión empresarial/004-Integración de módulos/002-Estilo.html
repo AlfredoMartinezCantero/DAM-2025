@@ -11,7 +11,7 @@
                 height: 100%;
             }
 
-            html{
+            body{
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
@@ -20,8 +20,11 @@
             header,footer{
                 background: black;
                 color: white;
+                padding: 10px;
+                text-align: center;
             }
         </style>
+        <meta charset="utf-8">
     </head>
     <body>
         <header>
@@ -48,9 +51,9 @@
         <section>
             <h3>Datos de cliente</h3>
             <div>
-                <input type="text" id="nombre">
-                <input type="text" id="apellidos">
-                <input type="text" id="email">
+                <input type="text" id="nombre" placeholder="nombre">
+                <input type="text" id="apellidos" placeholder="apellidos">
+                <input type="text" id="email" placeholder="email">
                 <div id="enviar">Enviar pedido</div>
             </div>
         </section>
