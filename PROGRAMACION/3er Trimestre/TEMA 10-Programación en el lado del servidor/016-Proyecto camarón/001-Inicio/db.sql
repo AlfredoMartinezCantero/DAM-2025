@@ -29,3 +29,22 @@ CREATE TABLE imagenes (
         ON DELETE CASCADE
         ON UPDATE CASCADE
 );
+
+
+CREATE USER 
+'camaron'@'localhost' 
+IDENTIFIED  BY 'Camaron123$';
+
+GRANT USAGE ON *.* TO 'camaron'@'localhost';
+
+ALTER USER 'camaron'@'localhost' 
+REQUIRE NONE 
+WITH MAX_QUERIES_PER_HOUR 0 
+MAX_CONNECTIONS_PER_HOUR 0 
+MAX_UPDATES_PER_HOUR 0 
+MAX_USER_CONNECTIONS 0;
+
+GRANT ALL PRIVILEGES ON camaron.* 
+TO 'camaron'@'localhost';
+
+FLUSH PRIVILEGES;
