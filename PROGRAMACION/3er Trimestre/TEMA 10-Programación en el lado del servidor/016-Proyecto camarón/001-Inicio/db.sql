@@ -1,25 +1,31 @@
 CREATE DATABASE camaron;
-
 USE camaron;
 
-CREATE TABLE viviendas(
-	id INT(255),
-	localidad VARCHAR(255),
-    precio INT(255),
-    metroscuadrados DECIMAL(4,2),
-    aniodeconstruccion YEAR(4),
+CREATE TABLE viviendas (
+    id INT UNSIGNED AUTO_INCREMENT,
+    localidad VARCHAR(255),
+    precio INT UNSIGNED,
+    metroscuadrados DECIMAL(6,2),
+    aniodeconstruccion YEAR,
     direccion VARCHAR(255),
-    altura INT(4),
+    altura INT,
     tipodevivienda VARCHAR(255),
     descripcion TEXT,
     estado VARCHAR(255),
-    banios INT(4),
-    habitaciones INT(4),
-    teniente VARCHAR()
+    banios INT,
+    habitaciones INT,
+    teniente VARCHAR(255),
+    PRIMARY KEY (id)
 );
 
-CREATE TABLE imagenes(
-	id INT(255),
-    id_vivienda INT(255),
+CREATE TABLE imagenes (
+    id INT UNSIGNED AUTO_INCREMENT,
+    id_vivienda INT UNSIGNED,
     imagen VARCHAR(255),
-)
+    PRIMARY KEY (id),
+    CONSTRAINT fk_imagenes_viviendas
+        FOREIGN KEY (id_vivienda)
+        REFERENCES viviendas(id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
