@@ -67,7 +67,7 @@
           $resultado = $conexion->query("
             SELECT * FROM viviendas 
             WHERE 
-            localidad = '".$_POST['localidad']."'
+            localidad LIKE '%".$_POST['localidad']."%'
             AND precio > ".$_POST['precio_minimo']."
             AND precio < ".$_POST['precio_maximo']."
             ;
