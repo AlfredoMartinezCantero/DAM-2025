@@ -51,7 +51,8 @@
           <option value="Cullera">Cullera</option>
         </select>
         <input type="number" name="precio_minimo" value="0">
-        <input type="submit" name="precio_maximo" value="1000000000" min=0> 
+        <input type="number" name="precio_maximo" value="1000000000" min=0>
+        <input type="submit"> 
       </form>
     </nav>
     <main>
@@ -64,7 +65,12 @@
 
           $conexion = new mysqli($host, $user, $pass, $db);
           $resultado = $conexion->query("
-            SELECT * FROM viviendas WHERE localidad = '".$_POST['localidad']."';
+            SELECT * FROM viviendas 
+            WHERE 
+            localidad = '".$_POST['localidad']."'
+            AND precio > ".$_POST['precio_minimo']."
+            AND precio < ".$_POST['precio_maximo']."
+            ;
           ");
           while ($fila = $resultado->fetch_assoc()) {
             echo '
