@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f8fafc;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    canvas {
+      filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
+      border-radius: 8px;
+    }
+    h2 { color: #1e293b; margin-bottom: 20px; }
+  </style>
+</head>
+<body>
+  <h2>Estadísticas de Distribución</h2>
+  <canvas id="chart"></canvas>
+
+  <script>
+    const canvas = document.getElementById("chart");
+    const ctx = canvas.getContext("2d");
+    
+    // Settings
+    const size = 400;
+    canvas.width = size;
+    canvas.height = size;
+    const centerX = size / 2;
+    const centerY = size / 2;
+    const radius = 150;
+    const innerRadius = 80; // Makes it a donut chart
+
+    const datos = [25, 25, 25, 45, 67];
+    const colores = ["#3a86ff", "#8338ec", "#ff006e", "#fb5607", "#ffbe0b"];
+    const suma = datos.reduce((a, b) => a + b, 0);
+
+    let currentAngle = -0.5 * Math.PI; // Start at the top (12 o'clock)
+
+    datos.forEach((dato, i) => {
+      const sliceAngle = (dato / suma) * 2 * Math.PI;
+
+      // Draw Slice
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, radius, currentAngle, currentAngle + sliceAngle);
+      ctx.arc(centerX, centerY, innerRadius, currentAngle + sliceAngle, currentAngle, true);
+      ctx.closePath();
+
+      ctx.fillStyle = colores[i];
+      ctx.fill();
+
+      // Add White Border between slices for "Airy" look
+      ctx.strokeStyle = "white";
+      ctx.lineWidth = 3;
+      ctx.stroke();
+
+      // Add Labels
+      const labelAngle = currentAngle + sliceAngle / 2;
+      const labelRadius = innerRadius + (radius - innerRadius) / 2;
+      const lx = centerX + Math.cos(labelAngle) * labelRadius;
+      const ly = centerY + Math.sin(labelAngle) * labelRadius;
+
+      ctx.fillStyle = "white";
+      ctx.font = "bold 14px sans-serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText(dato, lx, ly);
+
+      currentAngle += sliceAngle;
+    });
+
+    // Central text
+    ctx.fillStyle = "#64748b";
+    ctx.font = "12px sans-serif";
+    ctx.fillText("TOTAL", centerX, centerY - 10);
+    ctx.fillStyle = "#1e293b";
+    ctx.font = "bold 24px sans-serif";
+    ctx.fillText(suma, centerX, centerY + 15);
+  </script>
+</body>
+</html>
