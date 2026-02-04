@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Deep Orbit: Drift — Enhanced</title>
+
+<style>
+body{
+    margin:0;
+    overflow:hidden;
+    background:radial-gradient(circle at center,#050914,#000);
+    font-family:system-ui,Segoe UI;
+    color:#e6f1ff;
+}
+
+canvas{ display:block; }
+
+#hud{
+    position:absolute;
+    top:20px; left:20px;
+    padding:16px 20px;
+    background:rgba(10,15,30,.55);
+    backdrop-filter:blur(8px);
+    border-radius:16px;
+    box-shadow:0 0 30px rgba(0,0,0,.8);
+    min-width:200px;
+}
+
+.stat{
+    font-size:.95rem;
+    margin-bottom:6px;
+}
+
+#center{
+    position:absolute;
+    inset:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    pointer-events:none;
+    font-size:2.6rem;
+    font-weight:900;
+    opacity:0;
+    transition:.35s;
+    text-shadow:0 0 25px #000;
+}
+#center.show{ opacity:1; }
+
+.hint{
+    position:absolute;
+    bottom:14px;
+    width:100%;
+    text-align:center;
+    font-size:.85rem;
+    opacity:.45;
+}
+</style>
+</head>
+<body>
+
+<div id="hud">
+    <div class="stat">🔋 Energía: <span id="energy">100</span>%</div>
+    <div class="stat">🌀 Velocidad: <span id="speed">0</span></div>
+    <div class="stat">📡 Distancia: <span id="score">0</span></div>
+</div>
+
+<div id="center"></div>
+<div class="hint">W acelerar · A/D rotar · S freno · R estabilizar</div>
+
+<canvas id="game"></canvas>
+
+<script>
+const canvas=document.getElementById("game");
+const ctx=canvas.getContext("2d");
+
+function resize(){
+    canvas.width=innerWidth;
+    canvas.height=innerHeight;
+}
+addEventListener("resize",resize);
+resize();
+
+const keys={};
+addEventListener("keydown",e=>keys[e.key.toLowerCase()]=true);
+addEventListener("keyup",e=>keys[e.key.toLowerCase()]=false);
+
+const state={
+    energy:100,
+    score:0,
+    shake:0
+};
+
+/* ===== STARFIELD ===== */
+const stars=Array.from({length:200},()=>({
+    x:Math.random()*4000-2000,
+    y:Math.random()*4000-2000,
+    z:Math.random()*1+0.3
+}));
+
+/* ===== PLAYER ===== */
+const ship={
+    x:0,y:0,
+    vx:0,vy:0,
+    angle:0,
+    update(){
+        if(keys.a) this.angle-=0.045;
+        if(keys.d) this.angle+=0.045;
+
+        if(keys.w && state.energy>0){
+            this.vx+=Math.cos(this.angle)*0.11;
+            this.vy+=Math.sin(this.angle)*0.11;
+            state.energy-=0.07;
+        }
+
+        if(keys.s){
+            this.vx*=0.985;
+            this.vy*=0.985;
+            state.energy-=0.04;
+        }
+
+        if(keys.r && state.energy>0){
+            this.vx*=0.92;
+            this.vy*=0.92;
+            state.energy-=0.12;
+        }
+
+        this.x+=this.vx;
+        this.y+=this.vy;
+    },
+    draw(){
+        ctx.save();
+        ctx.translate(this.x,this.y);
+        ctx.rotate(this.angle);
+
+        // thruster
+        const speed=Math.hypot(this.vx,this.vy);
+        if(speed>0.3){
+            ctx.strokeStyle="rgba(125,249,255,.7)";
+            ctx.beginPath();
+            ctx.moveTo(-8,0);
+            ctx.lineTo(-14-Math.random()*6,0);
+            ctx.stroke();
+        }
+
+        ctx.strokeStyle="#7df9ff";
+        ctx.lineWidth=2;
+        ctx.beginPath();
+        ctx.moveTo(14,0);
+        ctx.lineTo(-10,8);
+        ctx.lineTo(-6,0);
+        ctx.lineTo(-10,-8);
+        ctx.closePath();
+        ctx.stroke();
+
+        ctx.restore();
+    }
+};
+
+/* ===== OBJECTS ===== */
+class Planet{
+    constructor(){
+        this.x=Math.random()*3000-1500;
+        this.y=Math.random()*3000-1500;
+        this.r=50+Math.random()*70;
+        this.mass=this.r*0.05;
+    }
+    update(){
+        const dx=this.x-ship.x;
+        const dy=this.y-ship.y;
+        const d=Math.hypot(dx,dy);
+
+        if(d<this.r){
+            end("COLAPSO GRAVITACIONAL");
+        }
+        if(d<600){
+            const f=this.mass/(d*d);
+            ship.vx+=dx*f;
+            ship.vy+=dy*f;
+        }
+    }
+    draw(){
+        ctx.fillStyle="#223";
+        ctx.beginPath();
+        ctx.arc(this.x,this.y,this.r,0,Math.PI*2);
+        ctx.fill();
+    }
+}
+
+class Station{
+    constructor(){
+        this.x=Math.random()*3000-1500;
+        this.y=Math.random()*3000-1500;
+        this.r=35;
+    }
+    draw(){
+        ctx.strokeStyle="#ffd966";
+        ctx.lineWidth=2;
+        ctx.beginPath();
+        ctx.rect(this.x-20,this.y-20,40,40);
+        ctx.stroke();
+    }
+}
+
+class Field{
+    constructor(){
+        this.x=Math.random()*3000-1500;
+        this.y=Math.random()*3000-1500;
+        this.r=120;
+    }
+    draw(){
+        ctx.strokeStyle="rgba(100,255,180,.4)";
+        ctx.beginPath();
+        ctx.arc(this.x,this.y,this.r,0,Math.PI*2);
+        ctx.stroke();
+    }
+}
+
+const planets=Array.from({length:5},()=>new Planet());
+const stations=Array.from({length:3},()=>new Station());
+const fields=Array.from({length:4},()=>new Field());
+
+/* ===== GAME FLOW ===== */
+function end(msg){
+    center.textContent=msg;
+    center.classList.add("show");
+    setTimeout(()=>location.reload(),2200);
+}
+
+/* ===== LOOP ===== */
+function loop(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+
+    const shakeX=(Math.random()-0.5)*state.shake;
+    const shakeY=(Math.random()-0.5)*state.shake;
+    state.shake*=0.9;
+
+    ctx.save();
+    ctx.translate(canvas.width/2+shakeX,canvas.height/2+shakeY);
+    ctx.translate(-ship.x,-ship.y);
+
+    // stars
+    stars.forEach(s=>{
+        ctx.fillStyle=`rgba(255,255,255,${s.z})`;
+        ctx.fillRect(
+            s.x-ship.x*s.z,
+            s.y-ship.y*s.z,
+            2,2
+        );
+    });
+
+    ship.update();
+    ship.draw();
+
+    planets.forEach(p=>{ p.update(); p.draw(); });
+
+    stations.forEach(s=>{
+        s.draw();
+        if(Math.hypot(ship.x-s.x,ship.y-s.y)<40){
+            state.energy=100;
+            state.shake=6;
+        }
+    });
+
+    fields.forEach(f=>{
+        f.draw();
+        if(Math.hypot(ship.x-f.x,ship.y-f.y)<f.r){
+            ship.vx*=0.995;
+            ship.vy*=0.995;
+            state.energy=Math.min(100,state.energy+0.03);
+        }
+    });
+
+    ctx.restore();
+
+    state.energy-=0.01;
+    if(state.energy<=0) end("ENERGÍA AGOTADA");
+
+    state.score+=Math.hypot(ship.vx,ship.vy)*0.05;
+
+    energy.textContent=Math.floor(state.energy);
+    speed.textContent=Math.hypot(ship.vx,ship.vy).toFixed(1);
+    score.textContent=Math.floor(state.score);
+
+    requestAnimationFrame(loop);
+}
+
+loop();
+</script>
+</body>
+</html>
+

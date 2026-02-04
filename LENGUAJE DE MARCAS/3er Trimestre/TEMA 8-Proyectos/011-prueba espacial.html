@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Orbital Last Signal</title>
+
+<style>
+body{
+    margin:0;
+    overflow:hidden;
+    background:radial-gradient(circle at center,#0b0f1a,#000);
+    font-family:system-ui,Segoe UI;
+    color:#fff;
+}
+
+canvas{ display:block; }
+
+#hud{
+    position:absolute;
+    top:20px; left:20px;
+    background:rgba(10,15,30,.6);
+    backdrop-filter: blur(8px);
+    border-radius:14px;
+    padding:16px 20px;
+    box-shadow:0 0 25px rgba(0,0,0,.8);
+}
+
+.stat{
+    font-size:1rem;
+    margin-bottom:6px;
+}
+
+#center{
+    position:absolute;
+    inset:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    pointer-events:none;
+    font-size:3rem;
+    font-weight:900;
+    text-shadow:0 0 25px #000;
+    opacity:0;
+    transition:.3s;
+}
+
+#center.show{ opacity:1; }
+
+.hint{
+    position:absolute;
+    bottom:20px;
+    width:100%;
+    text-align:center;
+    opacity:.6;
+    font-size:.9rem;
+}
+</style>
+</head>
+<body>
+
+<div id="hud">
+    <div class="stat">🛰 Estabilidad: <span id="stability">100</span>%</div>
+    <div class="stat">⚡ Energía: <span id="energy">0</span></div>
+    <div class="stat">⏳ Anclar: <span id="cooldown">LISTO</span></div>
+</div>
+
+<div id="center"></div>
+<div class="hint">WASD mover · ESPACIO anclar · Sobrevive</div>
+
+<canvas id="game"></canvas>
+
+<script>
+const canvas=document.getElementById("game");
+const ctx=canvas.getContext("2d");
+
+function resize(){
+    canvas.width=innerWidth;
+    canvas.height=innerHeight;
+}
+addEventListener("resize",resize);
+resize();
+
+const state={
+    keys:{},
+    angle:0,
+    stability:100,
+    energy:0,
+    anchor:false,
+    anchorCD:0
+};
+
+addEventListener("keydown",e=>{
+    state.keys[e.key.toLowerCase()]=true;
+    if(e.key===" ") activateAnchor();
+});
+addEventListener("keyup",e=>state.keys[e.key.toLowerCase()]=false);
+
+/* ===== PLAYER ===== */
+const player={
+    x:0,y:0,
+    r:10,
+    speed:4,
+    update(){
+        let dx=0,dy=0;
+        if(state.keys.w) dy--;
+        if(state.keys.s) dy++;
+        if(state.keys.a) dx--;
+        if(state.keys.d) dx++;
+
+        if(dx||dy){
+            const m=Math.hypot(dx,dy);
+            this.x+=(dx/m)*this.speed;
+            this.y+=(dy/m)*this.speed;
+        }
+    },
+    draw(){
+        ctx.fillStyle="#7df9ff";
+        ctx.beginPath();
+        ctx.arc(this.x,this.y,this.r,0,Math.PI*2);
+        ctx.fill();
+    }
+};
+
+/* ===== ENERGY NODES ===== */
+class Node{
+    constructor(){
+        this.a=Math.random()*Math.PI*2;
+        this.d=150+Math.random()*200;
+        this.r=12;
+        this.active=true;
+    }
+    get pos(){
+        return {
+            x:Math.cos(this.a+state.angle)*this.d,
+            y:Math.sin(this.a+state.angle)*this.d
+        };
+    }
+    draw(){
+        if(!this.active) return;
+        const p=this.pos;
+        ctx.fillStyle="#ffd966";
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,this.r,0,Math.PI*2);
+        ctx.fill();
+    }
+}
+
+/* ===== DISTORTIONS ===== */
+class Distortion{
+    constructor(){
+        this.a=Math.random()*Math.PI*2;
+        this.d=100+Math.random()*250;
+        this.r=40;
+    }
+    get pos(){
+        return {
+            x:Math.cos(this.a+state.angle)*this.d,
+            y:Math.sin(this.a+state.angle)*this.d
+        };
+    }
+    draw(){
+        const p=this.pos;
+        ctx.strokeStyle="rgba(255,100,100,.6)";
+        ctx.lineWidth=2;
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,this.r,0,Math.PI*2);
+        ctx.stroke();
+    }
+}
+
+let nodes=Array.from({length:5},()=>new Node());
+let distortions=Array.from({length:3},()=>new Distortion());
+
+/* ===== ANCHOR ===== */
+function activateAnchor(){
+    if(state.anchorCD>0) return;
+    state.anchor=true;
+    showCenter("ANCLADO");
+    state.anchorCD=600;
+    setTimeout(()=>state.anchor=false,2500);
+}
+
+function showCenter(t){
+    center.textContent=t;
+    center.classList.add("show");
+    setTimeout(()=>center.classList.remove("show"),800);
+}
+
+/* ===== LOOP ===== */
+function loop(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+
+    ctx.save();
+    ctx.translate(canvas.width/2,canvas.height/2);
+
+    if(!state.anchor){
+        state.angle+=0.003+(1-state.stability/100)*0.01;
+    }
+
+    // player physics
+    player.update();
+    player.draw();
+
+    // nodes
+    nodes.forEach(n=>{
+        n.draw();
+        if(n.active){
+            const p=n.pos;
+            if(Math.hypot(player.x-p.x,player.y-p.y)<20){
+                n.active=false;
+                state.energy+=10;
+                state.stability=Math.min(100,state.stability+5);
+                showCenter("+ENERGÍA");
+            }
+        }
+    });
+
+    // distortions
+    distortions.forEach(d=>{
+        d.draw();
+        const p=d.pos;
+        if(Math.hypot(player.x-p.x,player.y-p.y)<d.r){
+            state.stability-=0.1;
+            player.x+=Math.random()*6-3;
+            player.y+=Math.random()*6-3;
+        }
+    });
+
+    ctx.restore();
+
+    // decay
+    state.stability-=0.02;
+    if(state.stability<=0){
+        alert("SEÑAL PERDIDA\nEnergía: "+state.energy);
+        location.reload();
+    }
+
+    if(state.anchorCD>0) state.anchorCD--;
+
+    stability.textContent=Math.floor(state.stability);
+    energy.textContent=state.energy;
+    cooldown.textContent=state.anchorCD>0?"RECARGA":"LISTO";
+
+    requestAnimationFrame(loop);
+}
+
+loop();
+</script>
+</body>
+</html>

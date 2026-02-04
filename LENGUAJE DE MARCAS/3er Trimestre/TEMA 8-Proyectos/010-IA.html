@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Juego Refactorizado - Producción</title>
+    <style>
+        body { margin: 0; overflow: hidden; background: #1a1a1a; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        canvas { display: block; }
+        #hud {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: #fff;
+            text-shadow: 2px 2px 4px #000;
+            user-select: none;
+        }
+        .stat { font-size: 1.2rem; margin-bottom: 5px; }
+        #msg { color: #ffcc00; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div id="hud">
+        <div class="stat">Vidas: <span id="lives">3</span></div>
+        <div class="stat">Puntos: <span id="score">0</span></div>
+        <div id="msg"></div>
+    </div>
+    <canvas id="juego"></canvas>
+
+<script>
+/**
+ * Arquitectura de Sistema de Juego
+ * Patrón: Entity-Component Lite
+ */
+
+const canvas = document.querySelector("#juego");
+const ctx = canvas.getContext("2d");
+
+// Recursos
+const assets = {
+    player: new Image(),
+    npc: new Image()
+};
+assets.player.src = "game.png";
+assets.npc.src = "npc.png";
+
+const state = {
+    keys: {},
+    score: 0,
+    lives: 3,
+    running: false,
+    width: 90,  // anchoSprite original
+    height: 100 // altoSprite original
+};
+
+// --- Manejo de Inputs ---
+window.addEventListener("keydown", e => state.keys[e.key.toLowerCase()] = true);
+window.addEventListener("keyup", e => state.keys[e.key.toLowerCase()] = false);
+
+function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+window.onresize = resize;
+resize();
+
+/**
+ * Entidad Base
+ */
+class Entity {
+    constructor(x, y, img) {
+        this.x = x;
+        this.y = y;
+        this.img = img;
+        this.w = state.width;
+        this.h = state.height;
+    }
+
+    draw() {
+        ctx.drawImage(this.img, this.x, this.y, this.w, this.h);
+    }
+
+    // Colisión AABB (Axis-Aligned Bounding Box)
+    collidesWith(other) {
+        const margin = 20; // Hitbox ligeramente más pequeña para mejorar el gameplay
+        return this.x + margin < other.x + other.w - margin &&
+               this.x + this.w - margin > other.x + margin &&
+               this.y + margin < other.y + other.h - margin &&
+               this.y + this.h - margin > other.y + margin;
+    }
+}
+
+class Jugador extends Entity {
+    constructor() {
+        super(100, 100, assets.player);
+        this.baseSpeed = 5;
+        this.boost = 1;
+    }
+
+    update() {
+        let dx = 0;
+        let dy = 0;
+
+        if (state.keys['w'] || state.keys['arrowup']) dy -= 1;
+        if (state.keys['s'] || state.keys['arrowdown']) dy += 1;
+        if (state.keys['a'] || state.keys['arrowleft']) dx -= 1;
+        if (state.keys['d'] || state.keys['arrowright']) dx += 1;
+
+        // Normalización para evitar velocidad diagonal extra (O(1))
+        if (dx !== 0 || dy !== 0) {
+            const mag = Math.sqrt(dx * dx + dy * dy);
+            const finalSpeed = this.baseSpeed * this.boost;
+            this.x += (dx / mag) * finalSpeed;
+            this.y += (dy / mag) * finalSpeed;
+        }
+
+        // Constraints
+        this.x = Math.max(0, Math.min(canvas.width - this.w, this.x));
+        this.y = Math.max(0, Math.min(canvas.height - this.h, this.y));
+    }
+
+    setBoost(multiplier, duration) {
+        this.boost = multiplier;
+        document.getElementById('msg').innerText = "¡AUMENTO DE VELOCIDAD!";
+        setTimeout(() => {
+            this.boost = 1;
+            document.getElementById('msg').innerText = "";
+        }, duration);
+    }
+}
+
+class Npc extends Entity {
+    constructor() {
+        super(Math.random() * (canvas.width - state.width), 
+              Math.random() * (canvas.height - state.height), 
+              assets.npc);
+        this.vx = (Math.random() - 0.5) * 6;
+        this.vy = (Math.random() - 0.5) * 6;
+    }
+
+    update() {
+        this.x += this.vx;
+        this.y += this.vy;
+
+        if (this.x <= 0 || this.x + this.w >= canvas.width) this.vx *= -1;
+        if (this.y <= 0 || this.y + this.h >= canvas.height) this.vy *= -1;
+    }
+}
+
+// --- Instanciación ---
+const jugador = new Jugador();
+const npcs = Array.from({ length: 40 }, () => new Npc());
+
+/**
+ * Lógica de Colisiones y Estado
+ */
+function checkState() {
+    npcs.forEach(npc => {
+        if (jugador.collidesWith(npc)) {
+            state.lives--;
+            document.getElementById('lives').innerText = state.lives;
+            
+            // Reset posición tras muerte
+            jugador.x = 100;
+            jugador.y = 100;
+
+            if (state.lives <= 0) {
+                alert("Game Over. Puntuación: " + Math.floor(state.score));
+                location.reload();
+            }
+        }
+    });
+
+    // Aumentos aleatorios basados en score
+    if (Math.floor(state.score) % 500 === 0 && Math.floor(state.score) > 0) {
+        if (jugador.boost === 1) jugador.setBoost(2, 3000);
+    }
+}
+
+function loop() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    jugador.update();
+    jugador.draw();
+
+    npcs.forEach(npc => {
+        npc.update();
+        npc.draw();
+    });
+
+    checkState();
+
+    state.score += 0.5;
+    document.getElementById('score').innerText = Math.floor(state.score);
+
+    requestAnimationFrame(loop);
+}
+
+// Inicialización segura: Esperar a que las imágenes carguen
+Promise.all([
+    new Promise(res => assets.player.onload = res),
+    new Promise(res => assets.npc.onload = res)
+]).then(() => {
+    requestAnimationFrame(loop);
+});
+
+</script>
+</body>
+</html>
