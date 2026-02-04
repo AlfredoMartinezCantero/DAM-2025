@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            canvas{border:1px solid grey;}
+        </style>
+    </head>
+    <body>
+        <canvas></canvas>
+        <input type="color" id="selectorcolor">
+        <input type="range" id="grosortrazo">
+        <script>
+            let lienzo = document.querySelector("canvas");
+            let contexto = lienzo.getContext("2d");
+            lienzo.width = 512
+            lienzo.height = 512
+            let imagen = new Image()            // Creo una nueva imagen en memoria
+            imagen.src = "gatoo boom.jpg"      // Indico que archivo carga esta imagen
+            imagen.onload = function(){
+                contexto.drawImage(imagen,50,50)    // Pinto la imagen en el canvas
+            }
+        </script>
+    </body>
+</html>
