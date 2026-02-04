@@ -12,6 +12,14 @@
             let contexto = lienzo.getContext("2d");
             lienzo.width = 512;
             lienzo.height = 512;
+            contexto.fillStyle = "red"
+            contexto.fillRect(40,40,60,60); // x,y,w,h (ancho, alto, width, height)
+
+            // Circulo
+            contexto.fillStyle = "green"
+            contexto.beginPath();
+            contexto.arc(150,150,50,0,Math.PI*2) // x,y,r,and_inicio,ang_final
+            contexto.fill();
         </script>
     </body>
 </html>
