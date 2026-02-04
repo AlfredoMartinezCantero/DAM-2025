@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProDraw Enterprise v2.0</title>
+    <style>
+        :root {
+            --bg-dark: #121212;
+            --panel-bg: #1e1e1e;
+            --accent: #00a2ff;
+            --border: #333;
+            --text-main: #e0e0e0;
+            --text-dim: #999;
+        }
+
+        body {
+            margin: 0; padding: 0;
+            background: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            display: grid;
+            grid-template-columns: 280px 1fr 250px;
+            grid-template-rows: 50px 1fr;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Top Header */
+        header {
+            grid-column: 1 / -1;
+            background: var(--panel-bg);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            justify-content: space-between;
+        }
+
+        /* Sidebar & Tools */
+        .sidebar {
+            background: var(--panel-bg);
+            border-right: 1px solid var(--border);
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .tool-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .tool-btn {
+            background: #2a2a2a;
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 12px;
+            transition: all 0.2s;
+        }
+
+        .tool-btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+
+        /* Workspace */
+        .viewport {
+            position: relative;
+            background: #111;
+            overflow: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 50px;
+        }
+
+        .canvas-stack {
+            position: relative;
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
+            background: white;
+        }
+
+        canvas {
+            position: absolute;
+            top: 0; left: 0;
+            image-rendering: auto;
+        }
+
+        #previewCanvas { pointer-events: none; } /* Overlay for ghosts */
+
+        /* Properties Panel */
+        .properties {
+            background: var(--panel-bg);
+            border-left: 1px solid var(--border);
+            padding: 15px;
+        }
+
+        .control-group { margin-bottom: 20px; }
+        label { display: block; font-size: 11px; color: var(--text-dim); margin-bottom: 8px; text-transform: uppercase; }
+
+        input[type="range"] { width: 100%; accent-color: var(--accent); }
+        input[type="color"] { width: 100%; height: 30px; border: none; background: none; }
+
+        .history-list {
+            font-size: 12px;
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid var(--border);
+            background: #151515;
+        }
+
+        .history-item { padding: 5px 10px; border-bottom: 1px solid #222; color: #777; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div style="font-weight: bold; letter-spacing: 1px;">PRO<span style="color:var(--accent)">DRAW</span> OS</div>
+    <div class="header-actions">
+        <button onclick="engine.undo()" class="tool-btn">Undo</button>
+        <button onclick="engine.redo()" class="tool-btn">Redo</button>
+        <button onclick="engine.export()" class="tool-btn" style="background:var(--accent)">Export PNG</button>
+    </div>
+</header>
+
+<aside class="sidebar">
+    <label>Drawing Tools</label>
+    <div class="tool-grid">
+        <button class="tool-btn active" onclick="engine.setTool('brush')">Brush</button>
+        <button class="tool-btn" onclick="engine.setTool('line')">Line</button>
+        <button class="tool-btn" onclick="engine.setTool('rect')">Rectangle</button>
+        <button class="tool-btn" onclick="engine.setTool('circle')">Circle</button>
+        <button class="tool-btn" onclick="engine.setTool('eraser')">Eraser</button>
+    </div>
+</aside>
+
+<main class="viewport">
+    <div class="canvas-stack" id="stack" style="width: 1200px; height: 800px;">
+        <canvas id="mainCanvas"></canvas>
+        <canvas id="previewCanvas"></canvas>
+    </div>
+</main>
+
+<aside class="properties">
+    <div class="control-group">
+        <label>Stroke Color</label>
+        <input type="color" id="colorInput" value="#000000">
+    </div>
+    <div class="control-group">
+        <label>Stroke Width (<span id="widthDisplay">5</span>px)</label>
+        <input type="range" id="widthInput" min="1" max="200" value="5">
+    </div>
+    <div class="control-group">
+        <label>Global Opacity</label>
+        <input type="range" id="opacityInput" min="1" max="100" value="100">
+    </div>
+    <label>Action History</label>
+    <div id="history" class="history-list"></div>
+</aside>
+
+<script>
+/**
+ * PRODRAW ENTERPRISE ARCHITECTURE
+ * Engineering Lead: Gemini Expert
+ */
+
+class DrawingEngine {
+    constructor() {
+        this.mainCanvas = document.getElementById('mainCanvas');
+        this.prevCanvas = document.getElementById('previewCanvas');
+        this.mCtx = this.mainCanvas.getContext('2d', { willReadFrequently: true });
+        this.pCtx = this.prevCanvas.getContext('2d');
+        
+        this.width = 2400; // Resolución 2K interna
+        this.height = 1600;
+        
+        this.isDrawing = false;
+        this.currentTool = 'brush';
+        this.startPos = { x: 0, y: 0 };
+        
+        // Command Pattern History
+        this.history = [];
+        this.redoStack = [];
+        
+        this.init();
+    }
+
+    init() {
+        [this.mainCanvas, this.prevCanvas].forEach(c => {
+            c.width = this.width;
+            c.height = this.height;
+            c.style.width = "1200px"; // CSS Scaling
+            c.style.height = "800px";
+        });
+
+        this.mCtx.fillStyle = '#ffffff';
+        this.mCtx.fillRect(0, 0, this.width, this.height);
+        
+        this.saveState(); // Initial state
+        this.bindEvents();
+    }
+
+    bindEvents() {
+        const getCoord = (e) => {
+            const rect = this.mainCanvas.getBoundingClientRect();
+            return {
+                x: (e.clientX - rect.left) * (this.width / rect.width),
+                y: (e.clientY - rect.top) * (this.height / rect.height)
+            };
+        };
+
+        const handleDown = (e) => {
+            this.isDrawing = true;
+            this.startPos = getCoord(e);
+            this.mCtx.beginPath();
+            
+            // Sync settings
+            const color = document.getElementById('colorInput').value;
+            const size = document.getElementById('widthInput').value;
+            const opacity = document.getElementById('opacityInput').value / 100;
+
+            [this.mCtx, this.pCtx].forEach(ctx => {
+                ctx.strokeStyle = color;
+                ctx.fillStyle = color;
+                ctx.lineWidth = size;
+                ctx.globalAlpha = opacity;
+                ctx.lineCap = 'round';
+                ctx.lineJoin = 'round';
+            });
+
+            if(this.currentTool === 'eraser') this.mCtx.globalCompositeOperation = 'destination-out';
+            else this.mCtx.globalCompositeOperation = 'source-over';
+        };
+
+        const handleMove = (e) => {
+            if (!this.isDrawing) return;
+            const current = getCoord(e);
+            
+            this.pCtx.clearRect(0, 0, this.width, this.height);
+            
+            switch(this.currentTool) {
+                case 'brush':
+                case 'eraser':
+                    this.mCtx.lineTo(current.x, current.y);
+                    this.mCtx.stroke();
+                    break;
+                case 'line':
+                    this.drawLine(this.pCtx, this.startPos, current);
+                    break;
+                case 'rect':
+                    this.drawRect(this.pCtx, this.startPos, current);
+                    break;
+                case 'circle':
+                    this.drawCircle(this.pCtx, this.startPos, current);
+                    break;
+            }
+        };
+
+        const handleUp = (e) => {
+            if (!this.isDrawing) return;
+            const endPos = getCoord(e);
+            
+            // Finalize shape from preview to main
+            if (['line', 'rect', 'circle'].includes(this.currentTool)) {
+                this[`draw${this.currentTool.charAt(0).toUpperCase() + this.currentTool.slice(1)}`](this.mCtx, this.startPos, endPos);
+            }
+
+            this.pCtx.clearRect(0, 0, this.width, this.height);
+            this.isDrawing = false;
+            this.saveState();
+        };
+
+        this.mainCanvas.addEventListener('mousedown', handleDown);
+        window.addEventListener('mousemove', handleMove);
+        window.addEventListener('mouseup', handleUp);
+
+        // UI Updates
+        document.getElementById('widthInput').oninput = (e) => {
+            document.getElementById('widthDisplay').innerText = e.target.value;
+        };
+    }
+
+    // --- Drawing Primitives ---
+    drawLine(ctx, start, end) {
+        ctx.beginPath();
+        ctx.moveTo(start.x, start.y);
+        ctx.lineTo(end.x, end.y);
+        ctx.stroke();
+    }
+
+    drawRect(ctx, start, end) {
+        ctx.strokeRect(start.x, start.y, end.x - start.x, end.y - start.y);
+    }
+
+    drawCircle(ctx, start, end) {
+        const radius = Math.sqrt(Math.pow(end.x - start.x, 2) + Math.pow(end.y - start.y, 2));
+        ctx.beginPath();
+        ctx.arc(start.x, start.y, radius, 0, Math.PI * 2);
+        ctx.stroke();
+    }
+
+    // --- Engine Core Functions ---
+    setTool(tool) {
+        this.currentTool = tool;
+        document.querySelectorAll('.tool-btn').forEach(b => b.classList.remove('active'));
+        event.target.classList.add('active');
+    }
+
+    saveState() {
+        // Guardamos un snapshot del canvas actual
+        if (this.history.length > 20) this.history.shift(); // Límite de memoria
+        this.history.push(this.mainCanvas.toDataURL());
+        this.updateHistoryUI();
+    }
+
+    undo() {
+        if (this.history.length <= 1) return;
+        this.redoStack.push(this.history.pop());
+        this.loadState(this.history[this.history.length - 1]);
+    }
+
+    redo() {
+        if (this.redoStack.length === 0) return;
+        const state = this.redoStack.pop();
+        this.history.push(state);
+        this.loadState(state);
+    }
+
+    loadState(dataUrl) {
+        const img = new Image();
+        img.src = dataUrl;
+        img.onload = () => {
+            this.mCtx.clearRect(0, 0, this.width, this.height);
+            this.mCtx.drawImage(img, 0, 0);
+        };
+    }
+
+    updateHistoryUI() {
+        const h = document.getElementById('history');
+        h.innerHTML = this.history.map((_, i) => `<div class="history-item">Action Step #${i}</div>`).reverse().join('');
+    }
+
+    async export() {
+        const blob = await new Promise(res => this.mainCanvas.toBlob(res, 'image/png', 1.0));
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `ProDraw_Export_${Date.now()}.png`;
+        a.click();
+        URL.revokeObjectURL(url);
+    }
+}
+
+const engine = new DrawingEngine();
+</script>
+</body>
+</html>
