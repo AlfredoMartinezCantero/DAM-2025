@@ -1,0 +1,46 @@
+:root {
+    --mh-dark: #1a1a1a;
+    --mh-gold: #c5a059;
+    --mh-white: #e0e0e0;
+}
+
+body {
+    background-color: var(--mh-dark);
+    color: var(--mh-white);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* El planner ocupa más espacio que las stats */
+    gap: 20px;
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--mh-gold);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.selector-pieza {
+    display: flex;
+    align-items: center;
+    background: #2a2a2a;
+    margin: 10px 0;
+    padding: 10px;
+    border-left: 4px solid var(--mh-gold);
+}
+
+.selector-pieza img { width: 40px; margin-right: 15px; }
+
+select {
+    background: #333;
+    color: white;
+    border: 1px solid #555;
+    padding: 5px;
+    width: 100%;
+}
