@@ -13,3 +13,7 @@ platano - cereza
 
 SQL = fresa LIKE platano
 SQL = fresa LIKE cereza
+
+Para realizar un entrenamiento hacen falta embeddings los embeddings (vectores), los calcula un modelo de IA en modo inferencia, generalmente se usa el modelo nomic.
+
+ollama pull nomic-embed-text:v1.5
