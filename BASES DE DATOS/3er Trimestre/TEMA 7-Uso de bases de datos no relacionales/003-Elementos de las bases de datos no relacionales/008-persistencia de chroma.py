@@ -1,8 +1,16 @@
 #!/usr/bin/env python3
+import os
 import json
 import urllib.request
 import chromadb
-from chromadb.config import Settings
+
+# -------- Where will ChromaDB live (ABSOLUTE PATH) --------
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DB_DIR = os.path.join(BASE_DIR, "chroma_db")
+os.makedirs(DB_DIR, exist_ok=True)
+
+print("Script folder:", BASE_DIR)
+print("ChromaDB folder:", DB_DIR)
 
 # -------- OLLAMA CONFIG --------
 OLLAMA_URL = "http://localhost:11434/api/embeddings"
@@ -24,21 +32,16 @@ with urllib.request.urlopen(req) as resp:
 
 fresa = data["embedding"]
 
-# -------- CHROMADB (PERSISTENT ON DISK) --------
-client = chromadb.Client(
-    Settings(persist_directory="./chroma_db")
-)
+# -------- CHROMADB (PERSISTENT) --------
+client = chromadb.PersistentClient(path=DB_DIR)
 
 collection = client.get_or_create_collection(name="frutas")
 
-# Add embedding
 collection.add(
     ids=["fresa"],
     embeddings=[fresa],
     documents=["fresa"],
 )
 
-# Force write to disk
-client.persist()
-
-print("OK: embedding de 'fresa' guardado en ./chroma_db (chroma.sqlite3)")
+print("OK: stored. Files should be under:", DB_DIR)
+print("Collection count:", collection.count())
