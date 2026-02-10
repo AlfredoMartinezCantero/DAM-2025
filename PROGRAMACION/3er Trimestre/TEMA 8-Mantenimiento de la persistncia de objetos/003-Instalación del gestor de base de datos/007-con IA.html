@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Farm Simulation V6 - Fixed Reproduction & HUD</title>
+    <style>
+        body { margin: 0; background: #1a1a1a; font-family: 'Consolas', monospace; color: #fff; display: flex; flex-direction: column; align-items: center; }
+        canvas { background: #22301d; border: 4px solid #334433; border-radius: 4px; margin-top: 20px; }
+        .stats { padding: 10px; background: #000; width: 600px; display: flex; justify-content: space-around; border: 1px solid #444; }
+    </style>
+</head>
+<body>
+    <div class="stats">
+        <div>POBLACIÓN: <span id="pop">0</span></div>
+        <div>ALIMENTOS: <span id="res">0</span></div>
+    </div>
+    <canvas id="farmCanvas"></canvas>
+
+<script>
+const CONFIG = {
+    W: 600, H: 600,
+    AGE_REPRO: { MIN: 5, MAX: 15 },
+    MAX_AGE: 25,
+    ENERGY_DRAIN: 0.15,
+    HEALTH_DRAIN: 0.2, // Cuanto pierde si no tiene energía
+    FOOD_SPAWN_RATE: 500
+};
+
+class Food {
+    constructor() {
+        this.x = 20 + Math.random() * (CONFIG.W - 40);
+        this.y = 20 + Math.random() * (CONFIG.H - 40);
+        this.consumed = false;
+    }
+    draw(ctx) {
+        ctx.fillStyle = "#aaff00";
+        ctx.fillRect(this.x, this.y, 4, 4);
+    }
+}
+
+class Animal {
+    constructor(x, y, isBaby = false) {
+        this.x = x || Math.random() * CONFIG.W;
+        this.y = y || Math.random() * CONFIG.H;
+        this.sex = Math.random() > 0.5 ? 'M' : 'F';
+        this.age = isBaby ? 0 : Math.random() * 5;
+        this.energy = 100;
+        this.health = 100;
+        this.angle = Math.random() * Math.PI * 2;
+        this.speed = 1.3;
+        this.isDead = false;
+        this.reproCooldown = 0;
+    }
+
+    update(foods, others) {
+        this.age += 0.01;
+        if (this.reproCooldown > 0) this.reproCooldown--;
+
+        // Lógica de supervivencia
+        if (this.energy > 0) {
+            this.energy -= CONFIG.ENERGY_DRAIN;
+        } else {
+            this.health -= CONFIG.HEALTH_DRAIN;
+        }
+
+        if (this.health <= 0 || this.age > CONFIG.MAX_AGE) {
+            this.isDead = true;
+            return;
+        }
+
+        // IA de búsqueda
+        let targetType = "WANDER";
+        if (this.energy < 60) {
+            targetType = "FOOD";
+        } else if (this.age >= CONFIG.AGE_REPRO.MIN && this.age <= CONFIG.AGE_REPRO.MAX && this.reproCooldown <= 0) {
+            targetType = "MATE";
+        }
+
+        this.executeBehavior(targetType, foods, others);
+        this.move();
+    }
+
+    executeBehavior(type, foods, others) {
+        let targets = type === "FOOD" ? foods : (type === "MATE" ? others : []);
+        let closest = null;
+        let minDist = 150;
+
+        for (let t of targets) {
+            if (type === "MATE") {
+                // Validación estricta de pareja
+                if (t === this || t.sex === this.sex || t.age < CONFIG.AGE_REPRO.MIN || t.reproCooldown > 0) continue;
+            }
+            let d = Math.hypot(t.x - this.x, t.y - this.y);
+            if (d < minDist) {
+                minDist = d;
+                closest = t;
+            }
+        }
+
+        if (closest) {
+            let targetAngle = Math.atan2(closest.y - this.y, closest.x - this.x);
+            this.angle += (targetAngle - this.angle) * 0.1;
+
+            if (minDist < 10) {
+                if (type === "FOOD") {
+                    this.energy = Math.min(100, this.energy + 50);
+                    this.health = Math.min(100, this.health + 10);
+                    closest.consumed = true;
+                } else if (type === "MATE") {
+                    this.reproduce(closest);
+                }
+            }
+        } else {
+            this.angle += (Math.random() - 0.5) * 0.1;
+        }
+    }
+
+    reproduce(partner) {
+        this.energy -= 40;
+        this.reproCooldown = 600;
+        partner.reproCooldown = 600;
+        Engine.spawnQueue.push(new Animal(this.x, this.y, true));
+    }
+
+    move() {
+        this.x += Math.cos(this.angle) * this.speed;
+        this.y += Math.sin(this.angle) * this.speed;
+        if (this.x < 0 || this.x > CONFIG.W) this.angle = Math.PI - this.angle;
+        if (this.y < 0 || this.y > CONFIG.H) this.angle = -this.angle;
+    }
+
+    draw(ctx) {
+        const size = this.age < 5 ? 4 : 7;
+        
+        ctx.save();
+        ctx.translate(this.x, this.y);
+
+        // Barras de Estado (Health & Energy)
+        ctx.fillStyle = "#444";
+        ctx.fillRect(-10, -15, 20, 4); // Fondo Salud
+        ctx.fillStyle = "#ff3333";
+        ctx.fillRect(-10, -15, (this.health / 100) * 20, 2); // Barra Salud
+        ctx.fillStyle = "#ffaa00";
+        ctx.fillRect(-10, -13, (this.energy / 100) * 20, 2); // Barra Energía
+
+        // Cuerpo
+        ctx.rotate(this.angle);
+        ctx.fillStyle = this.sex === 'M' ? '#0099ff' : '#ff66cc';
+        ctx.beginPath();
+        ctx.moveTo(size, 0);
+        ctx.lineTo(-size, size/2);
+        ctx.lineTo(-size, -size/2);
+        ctx.fill();
+        ctx.restore();
+    }
+}
+
+const Engine = {
+    canvas: document.getElementById("farmCanvas"),
+    ctx: document.getElementById("farmCanvas").getContext("2d"),
+    animals: [],
+    foods: [],
+    spawnQueue: [],
+
+    init() {
+        this.canvas.width = CONFIG.W;
+        this.canvas.height = CONFIG.H;
+        for(let i=0; i<20; i++) this.animals.push(new Animal());
+        
+        // Spawn de comida cada 3 segundos exactos
+        setInterval(() => {
+            this.foods.push(new Food());
+        }, CONFIG.FOOD_SPAWN_RATE);
+
+        this.loop();
+    },
+
+    update() {
+        for (let i = this.animals.length - 1; i >= 0; i--) {
+            let a = this.animals[i];
+            a.update(this.foods, this.animals);
+            if (a.isDead) this.animals.splice(i, 1);
+        }
+
+        if (this.spawnQueue.length > 0) {
+            this.animals.push(...this.spawnQueue);
+            this.spawnQueue = [];
+        }
+
+        this.foods = this.foods.filter(f => !f.consumed);
+        document.getElementById("pop").innerText = this.animals.length;
+        document.getElementById("res").innerText = this.foods.length;
+    },
+
+    render() {
+        this.ctx.clearRect(0, 0, CONFIG.W, CONFIG.H);
+        this.foods.forEach(f => f.draw(this.ctx));
+        this.animals.forEach(a => a.draw(this.ctx));
+    },
+
+    loop() {
+        this.update();
+        this.render();
+        requestAnimationFrame(() => this.loop());
+    }
+};
+
+Engine.init();
+</script>
+</body>
+</html>

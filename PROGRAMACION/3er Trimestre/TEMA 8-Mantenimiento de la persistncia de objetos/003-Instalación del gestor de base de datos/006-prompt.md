@@ -1,0 +1,1 @@
+turn this into a "farm" videogame, 1.-create initial conditions 2.-create init function 3.-create loop function 4.-give npcs angle and speed 5.-make them move and avoid themselves 6.-make them collide with borders to not escape 7.-apply color
