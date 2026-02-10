@@ -26,17 +26,18 @@
             }
         }
 
-        var npcs = []
-        if(localStorage.getItem(npcs) != undefined){
+            var npcs = []
+        if(localStorage.getItem("npcs") != undefined){
             // Si hay npcs guardados vamos a cargarlos
-            npcs = localStorage.getItem(npcs)
+            npcs = JSON.parse(localStorage.getItem("npcs"))
         }else{
             // Si no hay npcs guardados los creamos
-        var numeronpc = 50;
-        for(let i = 0;i<numeronpc;i++){
+            var numeronpc = 50;
+            for(let i = 0;i<numeronpc;i++){
             npcs.push(new Npc);
+            }
         }
-    }
+
 
         // Los pinto en la pantalla
 
