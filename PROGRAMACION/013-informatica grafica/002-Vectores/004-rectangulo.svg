@@ -8,7 +8,7 @@
    version="1.1"
    id="svg1"
    inkscape:version="1.4.3 (fcd0343856, 2026-01-01)"
-   sodipodi:docname="circulo.svg"
+   sodipodi:docname="rectangulo.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -38,12 +38,12 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1">
-    <ellipse
+    <rect
        style="fill:#000000;stroke-width:0.264583"
-       id="path1"
-       cx="83.598671"
-       cy="80.722153"
-       rx="46.563557"
-       ry="45.125301" />
+       id="rect1"
+       width="145.62349"
+       height="61.48547"
+       x="30.562954"
+       y="38.113804" />
   </g>
 </svg>
