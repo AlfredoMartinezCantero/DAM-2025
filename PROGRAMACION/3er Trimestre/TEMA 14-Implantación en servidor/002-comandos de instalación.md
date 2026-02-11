@@ -21,3 +21,8 @@ cd /var/www/html
 cd = change directory
 
 ls = list
+
+sudo mkdir misuperweb 
+mkdir = make directory
+
+sudo chmod 644 -R misuperweb
