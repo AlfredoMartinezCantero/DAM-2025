@@ -26,3 +26,5 @@ sudo mkdir misuperweb
 mkdir = make directory
 
 sudo chmod 644 -R misuperweb
+
+sudo chmod 755 -R misuperweb
