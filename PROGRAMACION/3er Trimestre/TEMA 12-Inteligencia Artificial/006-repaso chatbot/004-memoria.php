@@ -1,4 +1,5 @@
 <?php
+// Si no existe, creo una memoria de preguntas y respuestas
     session_start();
     if(!isset($_SESSION['preguntas'])){
         $_SESSION['preguntas'] = [];
@@ -37,6 +38,7 @@
         <form action="?" method="post">
             <p>
             <?php
+            // En primer lugar enviamos la pregunta a la IA
                 $OLLAMA_URL = "http://localhost:11434/api/generate";
                 $MODEL = "qwen2.5-coder:7b";
                 $prompt = $_POST['mensaje'].". Resume tu respuesta en una unica frase";
@@ -55,8 +57,12 @@
                 $response = curl_exec($ch);
                 curl_close($ch);
                 $result = json_decode($response, true);
+
+                // Ahora metro la pregunta y respuesta en los arrays
                 $_SESSION['preguntas'][] = $_POST['mensaje'];
                 $_SESSION['respuestas'][] = $result["response"];
+
+                // Y ahora con un bucle for, pintamos la conversación
                 for($i = 0;$i<count($_SESSION['preguntas']);$i++){
                     echo '<p>'.$_SESSION['preguntas'][$i].'</p>';
                     echo '<p>'.$_SESSION['respuestas'][$i].'</p>';
