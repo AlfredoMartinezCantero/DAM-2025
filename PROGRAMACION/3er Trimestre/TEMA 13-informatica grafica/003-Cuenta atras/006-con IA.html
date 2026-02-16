@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      background: #f5f6fa;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      position: relative;
+      width: 220px;
+      height: 220px;
+    }
+
+    #tiempo {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 40px;
+      font-weight: bold;
+      color: #2f3640;
+    }
+
+    svg {
+      transform: rotate(-90deg);
+    }
+
+    .ring-bg {
+      stroke: #dcdde1;
+      stroke-width: 14;
+    }
+
+    .ring {
+      stroke: #00a8ff;
+      stroke-width: 14;
+      stroke-linecap: round;
+      transition: stroke-dashoffset 1s linear;
+    }
+
+    button {
+      margin-top: 25px;
+      padding: 12px 28px;
+      background: #00a8ff;
+      border: none;
+      color: white;
+      font-size: 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #0097e6;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <svg width="220" height="220">
+      <circle cx="110" cy="110" r="90" class="ring-bg"></circle>
+      <circle cx="110" cy="110" r="90" class="ring"></circle>
+    </svg>
+    <div id="tiempo">01:00</div>
+  </div>
+
+  <button id="startBtn">Comenzar</button>
+
+  <script>
+    let tiempo = 60;
+    let temporizador;
+    const startBtn = document.getElementById("startBtn");
+    const ring = document.querySelector(".ring");
+    const tiempoTexto = document.querySelector("#tiempo");
+
+    const radius = 90;
+    const circ = 2 * Math.PI * radius;
+
+    ring.style.strokeDasharray = circ;
+    ring.style.strokeDashoffset = 0;
+
+    startBtn.onclick = () => {
+      clearTimeout(temporizador);
+      tiempo = 60;
+      ring.style.strokeDashoffset = 0;
+      tiempoTexto.textContent = "01:00";
+      temporizador = setTimeout(bucle, 1000);
+    };
+
+    function bucle() {
+      if (tiempo > 0) {
+        tiempo--;
+
+        const min = String(Math.floor(tiempo / 60)).padStart(2, "0");
+        const sec = String(tiempo % 60).padStart(2, "0");
+        tiempoTexto.textContent = `${min}:${sec}`;
+
+        const offset = circ - (tiempo / 60) * circ;
+        ring.style.strokeDashoffset = offset;
+
+        temporizador = setTimeout(bucle, 1000);
+      }
+
+      if (tiempo === 0) {
+        let alarma = new Audio("pitipiti.mp3");
+        alarma.play();
+      }
+    }
+  </script>
+
+</body>
+</html>
