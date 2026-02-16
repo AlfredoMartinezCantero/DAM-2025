@@ -16,3 +16,15 @@ OGG Vorbis
 WebM 
 Actualmente los dos en desuso
 
+OGG Vorbis : Compresión variable, open source, escaso soporte
+
+FLAC + AIFF
+Archivos sin compresión + toda la calidad
+Tipicos del mundo Apple
+Pero también son multiplataforma
+
+Archivo AC3:
+Soporta hasta 7.1 canales
+Mientras que WAV y MP3 soportan maximo 2 canales
+
+WMA = Windows Media Audio
