@@ -3,12 +3,12 @@
   <head>
   </head>
   <body>
-    <div id="tiempo">00:60</div>
+    <div id="tiempo">00:10</div>
     <button>Comenzar</button>
     <script>
       // Primero declaro condiciones iniciales
       let boton = document.querySelector("button")
-      let tiempo = 60;
+      let tiempo = 10;
       let temporizador
       // Escucho cuando se pulsa el boton
       boton.onclick = function(){
@@ -16,10 +16,18 @@
       }
       // Entro en el bucle
       function bucle(){
-        tiempo--														// Quito un segundo
-        document.querySelector("#tiempo").textContent = "00:"+tiempo	// Actualizo marcador
-      	clearTimeout(temporizador)										// Limpio temporizador
-        temporizador = setTimeout(bucle,1000)							// Rearranco temporizador
+        if(tiempo > 0){
+        	tiempo--														// Quito un segundo
+        	document.querySelector("#tiempo").textContent = "00:"+tiempo	// Actualizo marcador
+        	clearTimeout(temporizador)										// Limpio temporizador
+        	temporizador = setTimeout(bucle,1000)							// Rearranco temporizador
+        }
+        if(tiempo == 0){
+        	let alarma = new Audio()
+          alarma.src = "pitipiti.mp3"
+          alarma.play()
+        }
+        
       }
     </script>
   </body>
