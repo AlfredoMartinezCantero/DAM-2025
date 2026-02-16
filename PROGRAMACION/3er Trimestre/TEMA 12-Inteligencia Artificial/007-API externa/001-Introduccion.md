@@ -1,10 +1,11 @@
-Hasta el momento hemos trabajado con modelos locales mediante ollama (forma fácil de instalar modelos)
+ESTE EJERCICIO ES OPCIONAL
+Hasta el momento hemos trabajado con modelos locales
+mediante ollama (forma fácil de instalar modelos)
 
 Ventajas:
 Independencia
-
 Desventajas:
-Límites, en la info del modelo y en el hardware
+Límites, en la info del modelo, y en el hardware
 
 OpenAI - GPT
 Google - Gemini
@@ -16,6 +17,5 @@ Application Programmer Interface
 
 Ventajas:
 Potencia
-
 Desventajas:
 Dependencia, coste
