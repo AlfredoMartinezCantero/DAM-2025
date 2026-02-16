@@ -9,7 +9,7 @@ response = client.chat.completions.create(
     model="gpt-4.1-mini",
     messages=[
         {"role": "system", "content": "You are a helpful assistant."},
-        {"role": "user", "content": ""}
+        {"role": "user", "content": "Haz un resumen de la situación geopolítica mundial."}
     ],
     temperature=0.3
 )
