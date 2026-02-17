@@ -129,23 +129,29 @@ def main():
     # ------------------------------------------------------------
     # TrainingArguments
     # ------------------------------------------------------------
-    training_args = TrainingArguments(
-        output_dir=OUTPUT_DIR,
-        overwrite_output_dir=True,
-        num_train_epochs=NUM_EPOCHS,
-        per_device_train_batch_size=BATCH_SIZE,
-        gradient_accumulation_steps=GRAD_ACCUM,
-        learning_rate=LR,
-        weight_decay=0.01,
-        warmup_ratio=0.03,
-        logging_steps=10,
-        save_steps=200,
-        save_total_limit=1,
-        fp16=(device == "cuda"),
-        bf16=False,
-        dataloader_pin_memory=False,
-        report_to="none",
-    )
+# --- Asegúrate de tener estas variables definidas antes ---
+GRAD_ACCUM = 4  # Aumentamos esto para compensar un Batch Size de 1
+# ---------------------------------------------------------
+
+training_args = TrainingArguments(
+    output_dir=OUTPUT_DIR,
+    overwrite_output_dir=True,
+    num_train_epochs=NUM_EPOCHS,
+    per_device_train_batch_size=BATCH_SIZE,
+    gradient_accumulation_steps=GRAD_ACCUM, # <-- Verifica que esta variable exista
+    learning_rate=LR,
+    weight_decay=0.01,
+    warmup_ratio=0.03,
+    logging_steps=10,
+    save_steps=200,
+    save_total_limit=1,
+    # Cambios críticos para estabilidad en 7B:
+    fp16=True, 
+    bf16=False, # Cambia a True solo si tienes una RTX 3000/4000 o A100/H100
+    optim="paged_adamw_32bit", # Ayuda muchísimo a ahorrar VRAM en modelos 7B
+    dataloader_pin_memory=False,
+    report_to="none",
+)
 
     trainer = Trainer(
         model=model,
