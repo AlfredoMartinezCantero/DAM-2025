@@ -11,15 +11,17 @@ from peft import LoraConfig, get_peft_model
 # ------------------------------------------------------------
 # CONFIG (simplificado)
 # ------------------------------------------------------------
+# 1. Nombre del modelo actualizado a la versión Coder 7B
 DATA_FILE = "004-preentrenamiento relleno.jsonl"
-MODEL_NAME = "Qwen/Qwen2.5-3B-Instruct"
-OUTPUT_DIR = "./qwen25-3b-jvc-lora"
+MODEL_NAME = "Qwen/Qwen2.5-Coder-7B-Instruct" # Nombre oficial en Hugging Face
+OUTPUT_DIR = "./qwen25-7b-coder-lora"
 
-MAX_LENGTH = 512
+# 2. Ajustes de memoria y rendimiento
+MAX_LENGTH = 1024  # El modelo Coder se beneficia de contextos más largos
 NUM_EPOCHS = 3
-LR = 2e-4
-BATCH_SIZE = 1
-GRAD_ACCUM = 4
+LR = 1e-4          # Bajamos un poco el Learning Rate para modelos más grandes (estabilidad)
+BATCH_SIZE = 1     # Mantener en 1 si no tienes mucha VRAM (mínimo 12GB-16GB recomendados)
+GRADIENT_ACCUMULATION_STEPS = 4 # Recomendado para compensar el Batch Size pequeño
 
 
 def main():
