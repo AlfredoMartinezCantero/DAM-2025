@@ -34,8 +34,8 @@ FALLBACK_MODEL = "Qwen/Qwen2.5-0.5B-Instruct"
 
 OUTPUT_DIR = "./lora-cpu-lowram"
 
-MAX_LENGTH = 128
-NUM_EPOCHS = 3
+MAX_LENGTH = 256
+NUM_EPOCHS = 15
 LR = 2e-4
 BATCH_SIZE = 1
 GRAD_ACCUM = 8

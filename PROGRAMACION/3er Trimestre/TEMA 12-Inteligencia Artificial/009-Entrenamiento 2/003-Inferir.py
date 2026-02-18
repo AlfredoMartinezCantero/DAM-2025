@@ -96,7 +96,7 @@ def main():
         output_ids = model.generate(
             **inputs,
             max_new_tokens=256,
-            temperature=0.6,
+            temperature=0.2,
             do_sample=True,
             pad_token_id=tokenizer.eos_token_id,
             eos_token_id=tokenizer.eos_token_id,
