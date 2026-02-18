@@ -1,98 +1,44 @@
-{"question":"¿Qué es la fotosíntesis?","answer":"Es el proceso mediante el cual las plantas convierten luz solar en energía química."}
-{"question":"¿Qué significa VPN?","answer":"Virtual Private Network, una red privada que protege el tráfico en línea."}
-{"question":"¿Qué es un algoritmo?","answer":"Un conjunto de pasos lógicos para resolver un problema específico."}
-{"question":"¿Cuál es la capital de Japón?","answer":"Tokio."}
-{"question":"¿Qué es un volcán?","answer":"Una abertura en la corteza terrestre por donde se expulsa lava y gases."}
-{"question":"¿Para qué sirve la vitamina C?","answer":"Ayuda al sistema inmune y a la producción de colágeno."}
-{"question":"¿Qué es la inteligencia artificial?","answer":"La capacidad de un sistema para realizar tareas que requieren inteligencia humana."}
-{"question":"¿Qué es la gravedad?","answer":"La fuerza que atrae los objetos hacia el centro de la Tierra."}
-{"question":"¿Qué es una contraseña segura?","answer":"Una combinación de letras, números y símbolos difícil de adivinar."}
-{"question":"¿Qué es un ecosistema?","answer":"Una comunidad de organismos y su entorno físico."}
-
-{"question":"¿Qué es un archivo PDF?","answer":"Un formato portátil para documentos que conserva su diseño original."}
-{"question":"¿Qué significa URL?","answer":"Uniform Resource Locator, la dirección de un recurso en internet."}
-{"question":"¿Qué es el reciclaje?","answer":"El proceso de transformar residuos en nuevos productos."}
-{"question":"¿Qué es un átomo?","answer":"La unidad básica de la materia."}
-{"question":"¿Qué es un virus informático?","answer":"Un programa malicioso diseñado para dañar o alterar sistemas."}
-{"question":"¿Qué es la energía solar?","answer":"Energía obtenida del sol mediante paneles fotovoltaicos."}
-{"question":"¿Qué es una base de datos?","answer":"Un sistema organizado para almacenar y gestionar información."}
-{"question":"¿Cuál es el metal más liviano?","answer":"El litio."}
-{"question":"¿Qué es un satélite artificial?","answer":"Un objeto creado por humanos que orbita la Tierra."}
-{"question":"¿Qué es una app?","answer":"Un programa diseñado para dispositivos móviles o computadoras."}
-
-{"question":"¿Qué significa HTTP?","answer":"HyperText Transfer Protocol, usado para transferir datos en la web."}
-{"question":"¿Qué es una neurona?","answer":"La célula principal del sistema nervioso encargada de transmitir señales."}
-{"question":"¿Qué es la biodiversidad?","answer":"La variedad de especies y ecosistemas en un área."}
-{"question":"¿Qué es el ADN?","answer":"La molécula que contiene la información genética de los seres vivos."}
-{"question":"¿Qué es un eclipse solar?","answer":"Cuando la Luna se interpone entre el Sol y la Tierra."}
-{"question":"¿Qué es el WiFi?","answer":"Una tecnología que permite la conexión inalámbrica a internet."}
-{"question":"¿Qué es la programación?","answer":"El proceso de escribir instrucciones para que un computador realice tareas."}
-{"question":"¿Qué es la inflación?","answer":"El aumento generalizado de los precios con el tiempo."}
-{"question":"¿Qué es un router?","answer":"Dispositivo que permite distribuir la conexión a internet."}
-{"question":"¿Qué es el clima?","answer":"Las condiciones atmosféricas de una región durante largos períodos."}
-
-{"question":"¿Qué es el Big Bang?","answer":"La teoría que explica el origen del universo como una gran expansión."}
-{"question":"¿Qué es la fotosíntesis?","answer":"Proceso mediante el cual las plantas transforman luz solar en energía."}
-{"question":"¿Qué es la democracia?","answer":"Un sistema de gobierno donde los ciudadanos participan en las decisiones."}
-{"question":"¿Qué es un navegador web?","answer":"Un software para acceder y ver contenido en internet."}
-{"question":"¿Qué es un anticuerpo?","answer":"Proteína del sistema inmune que reconoce patógenos."}
-{"question":"¿Qué es un procesador?","answer":"El componente que ejecuta instrucciones en un dispositivo."}
-{"question":"¿Qué es el pH?","answer":"Una escala que mide la acidez o alcalinidad de una sustancia."}
-{"question":"¿Qué es la capa de ozono?","answer":"Zona de la atmósfera que protege de la radiación ultravioleta."}
-{"question":"¿Qué significa USB?","answer":"Universal Serial Bus, un estándar de conexión entre dispositivos."}
-{"question":"¿Qué es un backup?","answer":"Una copia de seguridad de datos importantes."}
-
-{"question":"¿Qué es la energía cinética?","answer":"La energía asociada al movimiento de un objeto."}
-{"question":"¿Qué es el colesterol?","answer":"Una sustancia grasa necesaria en el cuerpo, pero peligrosa en exceso."}
-{"question":"¿Qué es un telescopio?","answer":"Instrumento que permite observar objetos lejanos en el espacio."}
-{"question":"¿Qué es un firewall?","answer":"Un sistema que protege redes de accesos no autorizados."}
-{"question":"¿Qué es un terremoto?","answer":"Un movimiento brusco de la corteza terrestre."}
-{"question":"¿Qué es un plugin?","answer":"Una extensión que añade funciones a un software."}
-{"question":"¿Qué es la masa muscular?","answer":"La cantidad de tejido muscular en el cuerpo."}
-{"question":"¿Qué es un átomo?","answer":"La unidad básica e indivisible de la materia."}
-{"question":"¿Qué es la lluvia ácida?","answer":"Precipitación con altos niveles de compuestos contaminantes."}
-{"question":"¿Qué es un diagrama de flujo?","answer":"Representación visual de pasos en un proceso."}
-
-{"question":"¿Qué es un sistema operativo?","answer":"El software que gestiona el hardware y permite ejecutar programas."}
-{"question":"¿Qué es una célula?","answer":"La unidad básica de los seres vivos."}
-{"question":"¿Qué es la obesidad?","answer":"Una condición caracterizada por exceso de grasa corporal."}
-{"question":"¿Qué es un PDF?","answer":"Un formato de documento portátil."}
-{"question":"¿Qué es la evaporación?","answer":"El proceso por el cual un líquido se convierte en vapor."}
-{"question":"¿Qué es un servidor?","answer":"Una computadora que provee servicios a otras en una red."}
-{"question":"¿Qué es un bit?","answer":"La unidad mínima de información digital."}
-{"question":"¿Qué es la energía nuclear?","answer":"Energía obtenida de reacciones en el núcleo de los átomos."}
-{"question":"¿Qué es la tensión arterial?","answer":"La presión que ejerce la sangre sobre las paredes de las arterias."}
-{"question":"¿Qué es un motor eléctrico?","answer":"Un dispositivo que convierte energía eléctrica en movimiento."}
-
-{"question":"¿Qué es una metáfora?","answer":"Una figura literaria que compara sin usar 'como'."}
-{"question":"¿Qué es la célula madre?","answer":"Células capaces de convertirse en diferentes tipos celulares."}
-{"question":"¿Qué es un enlace químico?","answer":"La unión entre átomos para formar moléculas."}
-{"question":"¿Qué es un archivo comprimido?","answer":"Un archivo reducido en tamaño para facilitar su almacenamiento."}
-{"question":"¿Qué es un dron?","answer":"Un vehículo aéreo no tripulado."}
-{"question":"¿Qué es la astronomía?","answer":"La ciencia que estudia los cuerpos celestes."}
-{"question":"¿Qué es una API?","answer":"Un conjunto de reglas que permite que aplicaciones se comuniquen entre sí."}
-{"question":"¿Qué es un disco duro?","answer":"Un dispositivo de almacenamiento de datos."}
-{"question":"¿Qué es una proteína?","answer":"Molécula esencial para funciones vitales del organismo."}
-{"question":"¿Qué es un ecosistema marino?","answer":"Un ambiente compuesto por organismos que viven en el mar."}
-
-{"question":"¿Qué es la capa de la atmósfera llamada estratosfera?","answer":"La segunda capa, donde se encuentra la capa de ozono."}
-{"question":"¿Qué es una ecuación?","answer":"Una igualdad matemática con incógnitas."}
-{"question":"¿Qué es una impresora 3D?","answer":"Una máquina que crea objetos físicos capa por capa."}
-{"question":"¿Qué es una vacuna?","answer":"Una preparación que activa el sistema inmune para prevenir enfermedades."}
-{"question":"¿Qué es un fractal?","answer":"Una figura geométrica que se repite a distintas escalas."}
-{"question":"¿Qué es un superalimento?","answer":"Alimento rico en nutrientes con beneficios para la salud."}
-{"question":"¿Qué es la nanotecnología?","answer":"La manipulación de materia a escala atómica o molecular."}
-{"question":"¿Qué es un meme?","answer":"Contenido humorístico difundido en internet."}
-{"question":"¿Qué es un spoiler?","answer":"Información que revela partes clave de una historia."}
-{"question":"¿Qué es una red social?","answer":"Plataforma digital para interactuar e intercambiar contenido."}
-
-{"question":"¿Qué es el machine learning?","answer":"Técnicas que permiten a sistemas aprender patrones automáticamente."}
-{"question":"¿Qué es un certificado digital?","answer":"Un documento que verifica la identidad de una persona o entidad en internet."}
-{"question":"¿Qué es la energía eólica?","answer":"Energía obtenida del viento mediante turbinas."}
-{"question":"¿Qué es la contaminación lumínica?","answer":"Exceso de luz artificial que afecta ecosistemas y observación astronómica."}
-{"question":"¿Qué es el minimalismo?","answer":"Estilo que busca simplicidad y eliminar lo innecesario."}
-{"question":"¿Qué es un archivo CSV?","answer":"Archivo de datos estructurados separados por comas."}
-{"question":"¿Qué es un ecosistema digital?","answer":"Conjunto de herramientas, plataformas y servicios interconectados."}
-{"question":"¿Qué es una criptomoneda?","answer":"Moneda digital protegida por criptografía."}
-{"question":"¿Qué es blockchain?","answer":"Una cadena de bloques que registra transacciones de forma segura."}
-{"question":"¿Qué es un navegador?","answer":"Aplicación para acceder a páginas web."}
+{"question":"¿Quién es José Vicente Carratalá Sanchis?","answer":"José Vicente Carratalá Sanchis es desarrollador de software, formador técnico y creador de herramientas educativas, con un enfoque práctico orientado a la programación, la automatización y la inteligencia artificial aplicada."}
+{"question":"¿Cuál es el perfil profesional de José Vicente Carratalá Sanchis?","answer":"Tiene un perfil técnico multidisciplinar que combina desarrollo de software, docencia en informática, diseño de sistemas educativos y experimentación con modelos de lenguaje e IA local."}
+{"question":"¿Qué es JOCARSA dentro de su actividad profesional?","answer":"JOCARSA es la marca paraguas bajo la cual agrupa proyectos de software empresarial, educación, inteligencia artificial, juegos, infraestructura tecnológica y productos digitales."}
+{"question":"¿Qué tipo de mentalidad técnica tiene José Vicente Carratalá Sanchis?","answer":"Tiene una mentalidad sistemática, orientada a procesos reproducibles, automatización, claridad estructural y control total del flujo técnico."}
+{"question":"¿Cómo entiende la programación?","answer":"Entiende la programación como una herramienta para resolver problemas reales mediante estructuras claras, código comprensible y soluciones mantenibles."}
+{"question":"¿Qué lenguajes de programación domina principalmente?","answer":"Domina Python, Java, PHP, JavaScript, C, C++ y SQL, aplicándolos según el contexto y los requisitos del proyecto."}
+{"question":"¿Qué papel tiene Python en su trabajo?","answer":"Python es una herramienta central para scripting, automatización, inteligencia artificial, procesamiento de datos y desarrollo de aplicaciones educativas."}
+{"question":"¿Qué papel tiene Java en sus proyectos?","answer":"Java es utilizado para desarrollo de aplicaciones robustas, servidores, sistemas empresariales y proyectos que requieren estabilidad y estructura orientada a objetos."}
+{"question":"¿Qué papel tiene PHP en su ecosistema técnico?","answer":"PHP se utiliza para aplicaciones web, sistemas de gestión, plataformas educativas y herramientas empresariales basadas en servidor."}
+{"question":"¿Qué importancia tiene JavaScript en su trabajo?","answer":"JavaScript es clave para interfaces web interactivas, aplicaciones frontend, juegos sencillos y herramientas educativas basadas en navegador."}
+{"question":"¿Qué tipo de proyectos empresariales desarrolla?","answer":"Desarrolla CRM, ERP, plataformas SaaS, sistemas de gestión académica, herramientas de recursos humanos y soluciones web personalizadas."}
+{"question":"¿Qué relación tiene con Moodle?","answer":"Trabaja intensamente con Moodle, desarrollando integraciones, automatizaciones, scripts de matriculación, análisis de datos y extensiones personalizadas."}
+{"question":"¿Qué enfoque tiene hacia el software educativo?","answer":"El software educativo debe ser práctico, alineado con el mundo profesional y diseñado para facilitar la comprensión progresiva de los conceptos."}
+{"question":"¿Cómo estructura los contenidos educativos?","answer":"Los estructura de forma incremental, sin adelantar conceptos, usando ejercicios continuos y ejemplos que evolucionan con el temario."}
+{"question":"¿Qué ciclos formativos conoce en profundidad?","answer":"Conoce en profundidad el ciclo de Desarrollo de Aplicaciones Multiplataforma (DAM) y su relación con la Formación Profesional en España."}
+{"question":"¿Qué papel tiene como formador?","answer":"Actúa como tutor, diseñador de contenidos, creador de proyectos técnicos y evaluador con criterios profesionales realistas."}
+{"question":"¿Qué tipo de libros técnicos escribe?","answer":"Escribe libros técnicos de programación enfocados a la comprensión real del lenguaje, con ejemplos extensos y continuidad didáctica."}
+{"question":"¿Qué caracteriza sus libros frente a otros manuales?","answer":"Se caracterizan por el enfoque práctico, la ausencia de relleno teórico innecesario y el uso de ejemplos funcionales completos."}
+{"question":"¿Qué importancia tiene SQL en su trabajo?","answer":"SQL es fundamental para la gestión de datos, diseño de bases de datos, análisis y desarrollo de aplicaciones empresariales."}
+{"question":"¿Cómo aborda el diseño de bases de datos?","answer":"De forma estructurada, priorizando integridad, claridad, normalización y casos de uso reales."}
+{"question":"¿Qué visión tiene sobre la inteligencia artificial?","answer":"La inteligencia artificial es una herramienta que debe entenderse, controlarse y adaptarse a necesidades concretas, especialmente en educación."}
+{"question":"¿Qué tipo de IA desarrolla o utiliza?","answer":"Trabaja con modelos de lenguaje locales, fine-tuning, embeddings, asistentes personalizados y automatización basada en IA."}
+{"question":"¿Por qué prioriza modelos de IA locales?","answer":"Para mantener control total, evitar dependencias externas y garantizar reproducibilidad y privacidad."}
+{"question":"¿Qué formatos de dataset utiliza para IA?","answer":"Utiliza JSONL, ChatML y estructuras personalizadas para entrenamiento y ajuste fino de modelos de lenguaje."}
+{"question":"¿Cómo genera datasets educativos?","answer":"A partir de contenidos reales, documentos oficiales, libros técnicos y ejercicios prácticos, con cobertura exhaustiva."}
+{"question":"¿Qué es QLoRA en su contexto de trabajo?","answer":"QLoRA es una técnica clave para entrenar modelos grandes de forma eficiente en hardware limitado."}
+{"question":"¿Qué importancia tiene la automatización?","answer":"La automatización es esencial para escalar proyectos, reducir errores y optimizar tiempo y recursos."}
+{"question":"¿Qué tipo de scripts desarrolla habitualmente?","answer":"Scripts para procesamiento de datos, generación de contenido, backups, scraping, análisis y flujos de producción completos."}
+{"question":"¿Qué papel tienen los juegos en su trabajo?","answer":"Los juegos son herramientas educativas y creativas, usadas para enseñar programación de forma visual y accesible."}
+{"question":"¿Qué tecnologías usa para juegos sencillos?","answer":"HTML, CSS y JavaScript, priorizando código claro y comprensible."}
+{"question":"¿Qué relación tiene con C y C++?","answer":"Utiliza C y C++ para proyectos de alto rendimiento, simulaciones, gráficos y experimentación técnica avanzada."}
+{"question":"¿Cómo entiende la optimización de rendimiento?","answer":"Como un equilibrio entre claridad del código, eficiencia computacional y objetivos reales del proyecto."}
+{"question":"¿Qué papel tiene OpenCV en sus proyectos?","answer":"OpenCV se utiliza para simulaciones gráficas, procesamiento de imágenes y visualización técnica."}
+{"question":"¿Qué importancia tiene la documentación?","answer":"La documentación es clave para la comprensión, mantenimiento y reutilización del software."}
+{"question":"¿Cómo prefiere estructurar un proyecto de software?","answer":"Con separación clara de responsabilidades, archivos organizados y convenciones coherentes."}
+{"question":"¿Qué tono utiliza al explicar conceptos técnicos?","answer":"Un tono neutro, preciso y directo, evitando lenguaje innecesariamente informal."}
+{"question":"¿Qué objetivo tiene al crear herramientas educativas propias?","answer":"Adaptar la tecnología a las necesidades reales de alumnos y proyectos concretos."}
+{"question":"¿Qué visión tiene sobre el aprendizaje de la programación?","answer":"Debe ser progresivo, práctico y basado en la comprensión real, no en la memorización superficial."}
+{"question":"¿Qué papel tiene el emprendimiento en su trabajo?","answer":"El emprendimiento es una extensión natural de la capacidad técnica aplicada a resolver problemas reales."}
+{"question":"¿Qué tipo de ingresos genera con su trabajo?","answer":"Combina ingresos por desarrollo de software, formación, libros, contenidos digitales y productos automatizados."}
+{"question":"¿Cómo conecta sus proyectos entre sí?","answer":"Mediante una visión de ecosistema donde software, educación e IA se refuerzan mutuamente."}
+{"question":"¿Qué caracteriza su forma de resolver problemas?","answer":"Análisis estructurado, descomposición del problema y construcción incremental de la solución."}
+{"question":"¿Qué importancia tiene el control técnico para él?","answer":"Es fundamental para garantizar calidad, independencia y sostenibilidad a largo plazo."}
+{"question":"¿Cómo concibe el futuro de la educación técnica?","answer":"Como un entorno más personalizado, automatizado y apoyado por herramientas de inteligencia artificial controladas."}

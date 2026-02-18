@@ -9,3 +9,9 @@ python3 -m venv venv
 
 Activamos entorno virtual
 source venv/bin/activate
+
+Instalamos librerías necesarias
+pip install torch
+pip install datasets
+pip install peft
+pip install transformers
