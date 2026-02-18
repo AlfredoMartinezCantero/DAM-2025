@@ -1,52 +1,55 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import subprocess
 import json
-import sys
+import textwrap
 
-INPUT_TXT = "input.txt"
-OUTPUT_JSONL = "output.jsonl"
+MODEL = "qwen2.5:3b-instruct"
+INPUT_TXT = "convertido.txt"
+OUTPUT_JSONL = "entrenamiento.jsonl"
+CHUNK_SIZE = 1200  # characters
+
+
+def call_ollama(prompt):
+    result = subprocess.run(
+        ["ollama", "run", MODEL],
+        input=prompt,
+        text=True,
+        capture_output=True
+    )
+    return result.stdout.strip()
 
 
 def main():
-    question = None
-    answer_lines = []
+    with open(INPUT_TXT, "r", encoding="utf-8") as f:
+        text = f.read()
 
-    with open(INPUT_TXT, "r", encoding="utf-8") as f, \
-         open(OUTPUT_JSONL, "w", encoding="utf-8") as out:
+    chunks = textwrap.wrap(text, CHUNK_SIZE)
 
-        for line in f:
-            line = line.strip()
+    with open(OUTPUT_JSONL, "w", encoding="utf-8") as out:
+        for chunk in chunks:
+            prompt = f"""
+You are an expert teacher.
+Read the following text and generate ONE high-quality question
+and its correct answer.
 
-            if not line:
-                continue
+Return STRICT JSON ONLY in this format:
+{{"question":"...","answer":"..."}}
 
-            if line.startswith("Q:"):
-                # Save previous Q/A if exists
-                if question and answer_lines:
-                    write_pair(out, question, answer_lines)
+Text:
+\"\"\"
+{chunk}
+\"\"\"
+"""
 
-                question = line[2:].strip()
-                answer_lines = []
+            response = call_ollama(prompt)
 
-            elif line.startswith("A:"):
-                answer_lines.append(line[2:].strip())
-
-            else:
-                # Multiline answer support
-                answer_lines.append(line)
-
-        # Final pair
-        if question and answer_lines:
-            write_pair(out, question, answer_lines)
-
-
-def write_pair(out, question, answer_lines):
-    record = {
-        "question": question,
-        "answer": " ".join(answer_lines).strip()
-    }
-    out.write(json.dumps(record, ensure_ascii=False) + "\n")
+            try:
+                data = json.loads(response)
+                out.write(json.dumps(data, ensure_ascii=False) + "\n")
+            except json.JSONDecodeError:
+                print("⚠️ Skipped invalid model output")
 
 
 if __name__ == "__main__":
