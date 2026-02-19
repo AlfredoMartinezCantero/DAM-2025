@@ -9,16 +9,22 @@
     </head>
   <body>
     <div id="arrastra" draggable="true"></div>
-    <div id="suelta" droppable="true"></div>
+    <div id="suelta"></div>
     <script>
-        let arrastra = document.querySelector("#arrastra")
+    	let arrastra = document.querySelector("#arrastra")
+        let suelta = document.querySelector("#suelta")
         arrastra.ondragstart = function(){
-      	console.log("has empezado a arrastrar")
-      }
-
+            console.log("has empezado a arrastrar")
+        }
         arrastra.ondragend = function(){
-      	console.log("has acabado de arrastrar")
-      }
+            console.log("has acabado de arrastrar")
+        }
+        suelta.ondragover = function(e){
+            e.preventDefault()
+        }
+        suelta.ondrop = function(){
+            console.log("Alguien me ha soltado algo")
+        }
   	</script>
   </body>
 </html>
