@@ -1,0 +1,293 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>AMC | kanban</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+
+  body{
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    background: #eef1f5;
+    margin: 0;
+    padding: 20px;
+  }
+
+  header{
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #d9d9d9;
+    color: #333;
+  }
+
+  .kanban{
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .columna{
+    background: #fff;
+    width: 25%;
+    min-width: 220px;
+    border-radius: 8px;
+    padding: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .columna h2{
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e6e6e6;
+  }
+
+  .add{
+    align-self: center;
+    font: inherit;
+    background: #4c8bf5;
+    color: #fff;
+    border: 0;
+    border-radius: 6px;
+    padding: 6px 10px;
+    cursor: pointer;
+  }
+  .add:hover{ filter: brightness(1.05); }
+
+  .destino{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-height: 60px;
+    padding: 4px;
+    border: 2px dashed transparent;
+    border-radius: 6px;
+    transition: background .15s, border-color .15s;
+  }
+  .destino.over{
+    border-color: #4c8bf5;
+    background: #eef4ff;
+  }
+
+  /* --- Tarjetas estilo ventana macOS --- */
+  .tarjeta{
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 6px rgba(0,0,0,.08);
+    border-left: 6px solid #999;
+    display: flex;
+    flex-direction: column;
+    cursor: grab;
+    transition: transform .08s;
+  }
+  .tarjeta:active{ cursor: grabbing; transform: scale(1.01); }
+
+  .barra-mac{
+    height: 22px;
+    background: #f5f5f7;
+    border-bottom: 1px solid #e2e2e4;
+    border-radius: 8px 8px 0 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-left: 8px;
+  }
+
+  .boton-mac{
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 1px solid #d0d0d0;
+  }
+
+  .mac-cerrar{ background: #ff5f57; }
+  .mac-color{ background: #fdbc40; position: relative; }
+
+  .color-picker{
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    width: 1px;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .contenido{
+    padding: 8px;
+    outline: none;
+    min-height: 40px;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .contenido:empty:before{
+    content: "(clic para editar)";
+    color: #999;
+  }
+</style>
+</head>
+
+<body>
+
+<header>AMC | kanban</header>
+
+<div class="kanban" id="board">
+  <div class="columna">
+    <h2>Por hacer</h2>
+    <button class="add" data-col="col1">+ Añadir</button>
+    <div class="destino" id="col1"></div>
+  </div>
+
+  <div class="columna">
+    <h2>En progreso</h2>
+    <button class="add" data-col="col2">+ Añadir</button>
+    <div class="destino" id="col2"></div>
+  </div>
+
+  <div class="columna">
+    <h2>Revisión</h2>
+    <button class="add" data-col="col3">+ Añadir</button>
+    <div class="destino" id="col3"></div>
+  </div>
+
+  <div class="columna">
+    <h2>Hecho</h2>
+    <button class="add" data-col="col4">+ Añadir</button>
+    <div class="destino" id="col4"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const LS_KEY = 'kanbanSimpleAMC';
+  let tarjetaActual = null;
+
+  function crearTarjeta({texto = '', color = '#999'} = {}){
+    const card = document.createElement('div');
+    card.className = 'tarjeta';
+    card.draggable = true;
+    card.style.borderLeftColor = color;
+
+    const barra = document.createElement('div');
+    barra.className = 'barra-mac';
+
+    const btnCerrar = document.createElement('div');
+    btnCerrar.className = 'boton-mac mac-cerrar';
+    btnCerrar.title = 'Cerrar';
+
+    const btnColor = document.createElement('label');
+    btnColor.className = 'boton-mac mac-color';
+    btnColor.title = 'Cambiar color';
+
+    const picker = document.createElement('input');
+    picker.type = 'color';
+    picker.className = 'color-picker';
+    picker.value = color;
+
+    btnColor.appendChild(picker);
+    barra.appendChild(btnCerrar);
+    barra.appendChild(btnColor);
+
+    const content = document.createElement('div');
+    content.className = 'contenido';
+    content.contentEditable = 'true';
+    content.textContent = texto;
+
+    card.appendChild(barra);
+    card.appendChild(content);
+
+    card.ondragstart = function(){
+      tarjetaActual = this;
+      setTimeout(() => this.style.display = 'none', 0);
+    };
+    card.ondragend = function(){
+      this.style.display = 'block';
+      tarjetaActual = null;
+      guardar();
+    };
+
+    btnCerrar.onclick = function(){
+      card.remove();
+      guardar();
+    };
+
+    picker.oninput = function(){
+      card.style.borderLeftColor = this.value;
+      guardar();
+    };
+
+    content.oninput = function(){
+      guardar();
+    };
+
+    return card;
+  }
+
+  function guardar(){
+    const columnas = Array.from(document.querySelectorAll('.destino'));
+    const data = columnas.map(col => {
+      return {
+        id: col.id,
+        tarjetas: Array.from(col.querySelectorAll('.tarjeta')).map(t => ({
+          texto: t.querySelector('.contenido').textContent.trim(),
+          color: t.style.borderLeftColor
+        }))
+      };
+    });
+    localStorage.setItem(LS_KEY, JSON.stringify(data));
+  }
+
+  function cargar(){
+    const raw = localStorage.getItem(LS_KEY);
+    if(raw){
+      try{
+        const data = JSON.parse(raw);
+        data.forEach(col => {
+          const destino = document.getElementById(col.id);
+          destino.innerHTML = '';
+          col.tarjetas.forEach(t => destino.appendChild(crearTarjeta(t)));
+        });
+        return;
+      }catch(e){}
+    }
+
+    document.getElementById('col1').appendChild(
+      crearTarjeta({texto:'Tarea ejemplo', color:'#4c8bf5'})
+    );
+    guardar();
+  }
+
+  document.querySelectorAll('.destino').forEach(d => {
+    d.ondragover = e => { e.preventDefault(); d.classList.add('over'); };
+    d.ondragleave = () => d.classList.remove('over');
+    d.ondrop = () => {
+      if(tarjetaActual) d.appendChild(tarjetaActual);
+      d.classList.remove('over');
+      guardar();
+    };
+  });
+
+  document.querySelectorAll('.add').forEach(btn => {
+    btn.onclick = function(){
+      const destino = document.getElementById(this.dataset.col);
+      const nueva = crearTarjeta({texto:'Nueva tarea'});
+      destino.appendChild(nueva);
+      guardar();
+      const contenido = nueva.querySelector('.contenido');
+      contenido.focus();
+    };
+  });
+
+  cargar();
+})();
+</script>
+
+</body>
+</html>

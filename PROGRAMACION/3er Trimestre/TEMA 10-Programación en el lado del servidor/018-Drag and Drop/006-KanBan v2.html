@@ -1,0 +1,285 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Kanban sencillo</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+
+  body{
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    background: #f5f6f8;
+    margin: 0;
+    padding: 20px;
+  }
+
+  .kanban{
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .columna{
+    background: #fff;
+    width: 25%;
+    min-width: 220px;
+    border-radius: 8px;
+    padding: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .columna h2{
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e6e6e6;
+  }
+
+  .add{
+    align-self: center;
+    font: inherit;
+    background: #4c8bf5;
+    color: #fff;
+    border: 0;
+    border-radius: 6px;
+    padding: 6px 10px;
+    cursor: pointer;
+  }
+  .add:hover{ filter: brightness(1.05); }
+
+  .destino{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-height: 60px;
+    padding: 4px;
+    border: 2px dashed transparent;
+    border-radius: 6px;
+    transition: background .15s, border-color .15s;
+  }
+  .destino.over{
+    border-color: #4c8bf5;
+    background: #eef4ff;
+  }
+
+  .tarjeta{
+    background: #fff;
+    border-radius: 6px;
+    box-shadow: 0 1px 6px rgba(0,0,0,.08);
+    border-left: 6px solid #cfcfcf; /* se actualiza con el selector de color */
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    cursor: grab;
+    transition: transform .08s;
+  }
+  .tarjeta:active{ cursor: grabbing; transform: scale(1.01); }
+
+  .contenido{
+    outline: none;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .contenido:empty:before{
+    content: "(haz clic para editar)";
+    color: #999;
+  }
+
+  .acciones{
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .acciones .color{
+    width: 32px; height: 28px; padding: 0; border: none; background: transparent;
+    cursor: pointer;
+  }
+  .acciones .borrar{
+    margin-left: auto;
+    background: #ff4d4f;
+    color: #fff;
+    border: 0;
+    border-radius: 6px;
+    padding: 4px 8px;
+    cursor: pointer;
+  }
+  .acciones .borrar:hover{ filter: brightness(1.05); }
+</style>
+</head>
+
+<body>
+
+<div class="kanban" id="board">
+  <div class="columna">
+    <h2>Por hacer</h2>
+    <button class="add" data-col="col1">+ Añadir</button>
+    <div class="destino" id="col1"></div>
+  </div>
+
+  <div class="columna">
+    <h2>En progreso</h2>
+    <button class="add" data-col="col2">+ Añadir</button>
+    <div class="destino" id="col2"></div>
+  </div>
+
+  <div class="columna">
+    <h2>Revisión</h2>
+    <button class="add" data-col="col3">+ Añadir</button>
+    <div class="destino" id="col3"></div>
+  </div>
+
+  <div class="columna">
+    <h2>Hecho</h2>
+    <button class="add" data-col="col4">+ Añadir</button>
+    <div class="destino" id="col4"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const LS_KEY = 'kanbanSimple';
+  let tarjetaActual = null;
+
+  // Utilidad: crear tarjeta DOM con eventos
+  function crearTarjeta({texto = '', color = '#cfcfcf'} = {}){
+    const card = document.createElement('div');
+    card.className = 'tarjeta';
+    card.draggable = true;
+    card.style.borderLeftColor = color;
+
+    const content = document.createElement('div');
+    content.className = 'contenido';
+    content.contentEditable = 'true';
+    content.textContent = texto;
+
+    const acciones = document.createElement('div');
+    acciones.className = 'acciones';
+
+    const picker = document.createElement('input');
+    picker.type = 'color';
+    picker.className = 'color';
+    picker.value = color;
+
+    const borrar = document.createElement('button');
+    borrar.className = 'borrar';
+    borrar.textContent = '✕';
+    borrar.title = 'Eliminar';
+
+    acciones.appendChild(picker);
+    acciones.appendChild(borrar);
+
+    card.appendChild(content);
+    card.appendChild(acciones);
+
+    // Eventos tarjeta (drag)
+    card.ondragstart = function(){
+      tarjetaActual = this;
+      setTimeout(() => this.style.display = 'none', 0);
+    };
+    card.ondragend = function(){
+      this.style.display = 'block';
+      tarjetaActual = null;
+      guardar();
+    };
+
+    // Eventos edición
+    picker.oninput = function(){
+      card.style.borderLeftColor = this.value;
+      guardar();
+    };
+    borrar.onclick = function(){
+      card.remove();
+      guardar();
+    };
+    content.oninput = function(){
+      guardar();
+    };
+
+    return card;
+  }
+
+  // Guardar estado del tablero en localStorage
+  function guardar(){
+    const columnas = Array.from(document.querySelectorAll('.destino'));
+    const data = columnas.map(col => {
+      const tarjetas = Array.from(col.querySelectorAll('.tarjeta')).map(t => ({
+        texto: (t.querySelector('.contenido')?.textContent || '').trim(),
+        color: t.style.borderLeftColor || '#cfcfcf'
+      }));
+      return { id: col.id, tarjetas };
+    });
+    localStorage.setItem(LS_KEY, JSON.stringify(data));
+  }
+
+  // Cargar estado del tablero (o demo inicial)
+  function cargar(){
+    const raw = localStorage.getItem(LS_KEY);
+    if(raw){
+      try{
+        const data = JSON.parse(raw);
+        data.forEach(col => {
+          const destino = document.getElementById(col.id);
+          if(!destino) return;
+          destino.innerHTML = '';
+          (col.tarjetas || []).forEach(t => destino.appendChild(crearTarjeta(t)));
+        });
+        return;
+      }catch(e){
+        console.warn('Estado corrupto, iniciando demo.');
+      }
+    }
+    // Demo inicial si no hay datos
+    document.getElementById('col1').appendChild(crearTarjeta({texto:'Tarea 1', color:'#4c8bf5'}));
+    document.getElementById('col1').appendChild(crearTarjeta({texto:'Tarea 2', color:'#00b894'}));
+    guardar();
+  }
+
+  // Drag & Drop sobre columnas
+  const destinos = document.querySelectorAll('.destino');
+  destinos.forEach(d => {
+    d.ondragover = function(e){
+      e.preventDefault();
+      this.classList.add('over');
+    };
+    d.ondragleave = function(){
+      this.classList.remove('over');
+    };
+    d.ondrop = function(){
+      if(tarjetaActual){
+        this.appendChild(tarjetaActual);
+      }
+      this.classList.remove('over');
+      guardar();
+    };
+  });
+
+  // Botones "Añadir"
+  const botones = document.querySelectorAll('.add');
+  botones.forEach(b => {
+    b.onclick = function(){
+      const destino = document.getElementById(this.dataset.col);
+      const nueva = crearTarjeta({texto:'Nueva tarea', color:'#cfcfcf'});
+      destino.appendChild(nueva);
+      guardar();
+      // Foco directo para editar
+      const contenido = nueva.querySelector('.contenido');
+      contenido && contenido.focus();
+      // Colocar el cursor al final
+      document.getSelection()?.collapse(contenido, contenido.childNodes.length);
+    };
+  });
+
+  // Inicializar
+  cargar();
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!doctype html>
+<html>
+<head>
+<style>
+    body{
+        font-family: system-ui, sans-serif;
+        background: #f4f4f4;
+        margin: 0;
+        padding: 20px;
+    }
+
+    .kanban{
+        display: flex;
+        gap: 20px;
+    }
+
+    .columna{
+        background: white;
+        border-radius: 6px;
+        padding: 10px;
+        width: 23%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .columna h2{
+        margin: 0;
+        font-size: 18px;
+        text-align: center;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .tarjeta{
+        background: #fff;
+        padding: 10px;
+        border-radius: 4px;
+        cursor: grab;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+        transition: transform .1s;
+    }
+
+    .tarjeta:active{
+        cursor: grabbing;
+        transform: scale(1.02);
+    }
+
+    .destino{
+        flex: 1;
+        min-height: 60px;
+        border: 2px dashed transparent;
+        border-radius: 4px;
+        padding: 5px;
+    }
+
+    .destino.over{
+        border-color: #4c8bf5;
+        background: #eef4ff;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="kanban">
+    <div class="columna">
+        <h2>Por hacer</h2>
+        <div class="destino" id="col1">
+            <div class="tarjeta" draggable="true">Tarea 1</div>
+            <div class="tarjeta" draggable="true">Tarea 2</div>
+        </div>
+    </div>
+
+    <div class="columna">
+        <h2>En progreso</h2>
+        <div class="destino" id="col2"></div>
+    </div>
+
+    <div class="columna">
+        <h2>Revisión</h2>
+        <div class="destino" id="col3"></div>
+    </div>
+
+    <div class="columna">
+        <h2>Hecho</h2>
+        <div class="destino" id="col4"></div>
+    </div>
+</div>
+
+<script>
+let tarjetas = document.querySelectorAll(".tarjeta");
+let destinos = document.querySelectorAll(".destino");
+let tarjetaActual = null;
+
+/* --- Eventos tarjeta --- */
+tarjetas.forEach(t => {
+    t.ondragstart = function(){
+        tarjetaActual = this;
+        setTimeout(() => this.style.display = "none", 0);
+    };
+
+    t.ondragend = function(){
+        this.style.display = "block";
+        tarjetaActual = null;
+    };
+});
+
+/* --- Eventos columnas --- */
+destinos.forEach(d => {
+    d.ondragover = function(e){
+        e.preventDefault();
+        this.classList.add("over");
+    };
+
+    d.ondragleave = function(){
+        this.classList.remove("over");
+    };
+
+    d.ondrop = function(){
+        this.appendChild(tarjetaActual);
+        this.classList.remove("over");
+    };
+});
+</script>
+</body>
+</html>

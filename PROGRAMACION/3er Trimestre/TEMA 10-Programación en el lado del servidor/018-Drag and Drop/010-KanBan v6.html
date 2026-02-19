@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>AMC | kanban</title>
+<style>
+  :root{
+    --bg: #eef1f5;
+    --panel: #ffffff;
+    --panel-2: #f5f5f7;
+    --text: #222;
+    --muted: #666;
+    --brand: #4c8bf5;
+    --shadow: 0 2px 8px rgba(0,0,0,.08);
+    --dash: #d7def0;
+    --dash-on: #4c8bf5;
+  }
+  [data-theme="dark"]{
+    --bg: #0f1216;
+    --panel: #161a20;
+    --panel-2: #1b2027;
+    --text: #e8eaf0;
+    --muted: #a4a9b3;
+    --brand: #6ca3ff;
+    --shadow: 0 2px 10px rgba(0,0,0,.5);
+    --dash: #2a3140;
+    --dash-on: #6ca3ff;
+  }
+
+  *{ box-sizing: border-box; }
+  body{
+    margin:0; padding: 18px;
+    background: var(--bg);
+    color: var(--text);
+    font: 14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif;
+  }
+
+  header{
+    display:flex; gap:12px; align-items:center; justify-content:space-between;
+    margin-bottom: 16px; padding-bottom: 10px;
+    border-bottom: 2px solid rgba(0,0,0,.08);
+  }
+  header .brand{ font-size: 20px; font-weight: 700; letter-spacing:.2px; }
+
+  .tools{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+  .input{
+    background: var(--panel);
+    color: var(--text);
+    border: 1px solid rgba(0,0,0,.1);
+    border-radius: 8px;
+    padding: 8px 10px;
+    outline: none;
+    box-shadow: var(--shadow);
+  }
+  .btn{
+    background: var(--brand);
+    color: #fff; border:0; border-radius: 8px;
+    padding:8px 10px; cursor:pointer; box-shadow: var(--shadow);
+  }
+  .btn.secondary{
+    background: var(--panel);
+    color: var(--text);
+    border: 1px solid rgba(0,0,0,.1);
+  }
+  .btn:hover{ filter: brightness(1.05); }
+
+  .kanban{ display:flex; gap:16px; align-items:flex-start; flex-wrap:wrap; }
+
+  .columna{
+    background: var(--panel);
+    width: clamp(240px, 24vw, 360px);
+    border-radius: 10px;
+    padding: 12px;
+    box-shadow: var(--shadow);
+    display:flex; flex-direction:column; gap:10px;
+  }
+  .columna h2{
+    margin:0; font-size:15px; font-weight:700;
+    padding-bottom:6px; border-bottom:1px solid rgba(0,0,0,.08);
+    outline: none;
+  }
+  .columna h2:empty:before{ content:"(renombra columna)"; color: var(--muted); }
+
+  .add{
+    align-self:center;
+    font: inherit; background: var(--brand); color:#fff;
+    border:0; border-radius: 6px; padding: 6px 10px; cursor: pointer;
+  }
+
+  .destino{
+    display:flex; flex-direction:column; gap:10px;
+    min-height: 64px; padding: 6px;
+    border: 2px dashed var(--dash); border-radius:10px;
+    transition: background .15s, border-color .15s;
+  }
+  .destino.over{
+    border-color: var(--dash-on);
+    background: color-mix(in srgb, var(--brand) 10%, transparent);
+  }
+
+  /* --- Tarjeta estilo macOS --- */
+  .tarjeta{
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    display:flex; flex-direction:column;
+    cursor: grab;
+    transition: transform .08s, background-color .15s, color .15s, border-color .15s;
+    border: 1px solid rgba(0,0,0,.08);
+  }
+  .tarjeta.dragging{ opacity:.85; transform: scale(1.01); }
+
+  .barra-mac{
+    height: 28px;
+    background: var(--panel-2);
+    border-bottom: 1px solid rgba(0,0,0,.08);
+    display:flex; align-items:center; gap:8px;
+    padding: 0 8px;
+  }
+  .boton-mac{
+    width: 12px; height: 12px; border-radius: 50%;
+    cursor: pointer; border: 1px solid rgba(0,0,0,.15);
+  }
+  .mac-cerrar{ background:#ff5f57; }
+
+  .btn-micro{
+    margin-left: 6px;
+    font-size: 12px; line-height: 18px;
+    padding: 2px 8px;
+    border-radius: 6px;
+    border: 1px solid currentColor;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+  }
+  .btn-micro:hover{ filter: brightness(1.05); }
+  .btn-danger{
+    color: #ffffff;
+    border-color: #ffffff;
+    background: transparent;
+  }
+
+  .spacer{ flex:1; }
+
+  .cuerpo{ position: relative; }
+  .contenido{
+    padding: 10px 12px;
+    min-height: 44px; outline: none;
+    white-space: pre-wrap; word-break: break-word;
+  }
+
+  /* Placeholder clicable (real, no pseudo-elemento) */
+  .placeholder{
+    position: absolute; left: 12px; top: 10px;
+    border: 0; padding: 0; margin: 0;
+    background: transparent; color: rgba(0,0,0,.45);
+    font: inherit; cursor: text;
+  }
+  [data-theme="dark"] .placeholder{ color: rgba(255,255,255,.5); }
+</style>
+</head>
+<body data-theme="light">
+
+<header>
+  <div class="brand">AMC | kanban</div>
+  <div class="tools">
+    <input id="buscar" class="input" type="search" placeholder="Buscar tarjetas…" />
+    <button id="toggleTheme" class="btn secondary" title="Tema claro/oscuro">🌙/☀️</button>
+    <button id="exportar" class="btn secondary">Exportar</button>
+    <label class="btn secondary" style="cursor:pointer;">
+      Importar
+      <input id="importar" type="file" accept="application/json" style="display:none;">
+    </label>
+    <button id="reset" class="btn secondary">Reset</button>
+  </div>
+</header>
+
+<div class="kanban" id="board">
+  <div class="columna">
+    <h2 contenteditable="true" data-col-title="col1">Por hacer</h2>
+    <button class="add" data-col="col1">+ Añadir</button>
+    <div class="destino" id="col1"></div>
+  </div>
+
+  <div class="columna">
+    <h2 contenteditable="true" data-col-title="col2">En progreso</h2>
+    <button class="add" data-col="col2">+ Añadir</button>
+    <div class="destino" id="col2"></div>
+  </div>
+
+  <div class="columna">
+    <h2 contenteditable="true" data-col-title="col3">Revisión</h2>
+    <button class="add" data-col="col3">+ Añadir</button>
+    <div class="destino" id="col3"></div>
+  </div>
+
+  <div class="columna">
+    <h2 contenteditable="true" data-col-title="col4">Hecho</h2>
+    <button class="add" data-col="col4">+ Añadir</button>
+    <div class="destino" id="col4"></div>
+  </div>
+</div>
+
+<script>
+(() => {
+  const LS_KEY = 'kanbanAMC_v3'; // conservamos la clave para no romper tus datos previos
+  const $ = s => document.querySelector(s);
+  const $$ = s => Array.from(document.querySelectorAll(s));
+  let draggingCard = null;
+
+  /* ---------- Utilidades de color ---------- */
+  function hexToRgb(hex){
+    hex = hex.replace('#','');
+    if(hex.length===3) hex = hex.split('').map(c=>c+c).join('');
+    const num = parseInt(hex,16);
+    return { r:(num>>16)&255, g:(num>>8)&255, b:num&255 };
+  }
+  function rgbToHex({r,g,b}){
+    const to = v => v.toString(16).padStart(2,'0');
+    return '#'+to(r)+to(g)+to(b);
+  }
+  function shade(hex, percent){ // -100..100
+    const {r,g,b} = hexToRgb(hex);
+    const t = percent<0 ? 0 : 255;
+    const p = Math.abs(percent)/100;
+    return rgbToHex({
+      r: Math.round((t - r)*p + r),
+      g: Math.round((t - g)*p + g),
+      b: Math.round((t - b)*p + b),
+    });
+  }
+  function luminance({r,g,b}){
+    const srgb = [r,g,b].map(v=>{
+      v/=255;
+      return v<=0.03928 ? v/12.92 : Math.pow((v+0.055)/1.055,2.4);
+    });
+    return 0.2126*srgb[0]+0.7152*srgb[1]+0.0722*srgb[2];
+  }
+  function bestTextColor(bgHex){
+    const rgb = hexToRgb(bgHex);
+    return luminance(rgb) < 0.45 ? '#ffffff' : '#101010';
+  }
+
+  /* ---------- Estado ---------- */
+  function getState(){
+    const raw = localStorage.getItem(LS_KEY);
+    if(!raw) return null;
+    try{ return JSON.parse(raw); } catch{ return null; }
+  }
+  function saveState(state){
+    localStorage.setItem(LS_KEY, JSON.stringify(state));
+  }
+  function snapshot(){
+    const theme = document.body.getAttribute('data-theme') || 'light';
+    const columns = $$('.destino').map(col => ({
+      id: col.id,
+      title: document.querySelector(`[data-col-title="${col.id}"]`)?.textContent.trim() || '',
+      cards: Array.from(col.querySelectorAll('.tarjeta')).map(card => ({
+        id: card.dataset.id,
+        text: card.querySelector('.contenido')?.textContent.trim() || '',
+        color: card.dataset.color || '#cfcfcf'
+      }))
+    }));
+    return { theme, columns };
+  }
+  function guardar(){ saveState(snapshot()); }
+
+  /* ---------- Placeholder ---------- */
+  function togglePlaceholder(card){
+    const content = card.querySelector('.contenido');
+    const ph = card.querySelector('.placeholder');
+    const empty = !content.textContent.trim();
+    ph.style.display = empty ? 'block' : 'none';
+  }
+
+  /* ---------- UI de color ---------- */
+  function applyCardColor(card, hex){
+    const textColor = bestTextColor(hex);
+    const barColor = shade(hex, -10);
+    card.style.backgroundColor = hex;
+    card.style.color = textColor;
+    card.dataset.color = hex;
+
+    const contenido = card.querySelector('.contenido');
+    const barra = card.querySelector('.barra-mac');
+    const btnCambiar = card.querySelector('.btn-cambiar-color');
+
+    contenido.style.color = textColor;
+    barra.style.backgroundColor = barColor;
+    barra.style.borderBottomColor = shade(barColor, -12);
+
+    // El botón "Cambiar color" hereda color contrastado respecto a la barra
+    const btnColorText = bestTextColor(barColor);
+    btnCambiar.style.color = btnColorText;
+    btnCambiar.style.borderColor = btnColorText;
+  }
+
+  /* ---------- Construcción de tarjeta ---------- */
+  function crearTarjeta({id, text = '', color = '#cfcfcf'} = {}){
+    const card = document.createElement('div');
+    card.className = 'tarjeta';
+    card.draggable = true;
+    card.dataset.id = id || String(Date.now()) + '_' + Math.random().toString(36).slice(2,7);
+
+    // Barra superior: • cerrar | [Cambiar color] ............. [Eliminar]
+    const bar = document.createElement('div');
+    bar.className = 'barra-mac';
+
+    const closeBtn = document.createElement('span');
+    closeBtn.className = 'boton-mac mac-cerrar';
+    closeBtn.title = 'Cerrar';
+
+    const btnCambiar = document.createElement('button');
+    btnCambiar.className = 'btn-micro btn-cambiar-color';
+    btnCambiar.type = 'button';
+    btnCambiar.textContent = 'Cambiar color';
+    btnCambiar.title = 'Elegir color';
+
+    const picker = document.createElement('input');
+    picker.type = 'color';
+    picker.value = color;
+    picker.style.display = 'none';
+
+    const spacer = document.createElement('div');
+    spacer.className = 'spacer';
+
+    const btnEliminar = document.createElement('button');
+    btnEliminar.className = 'btn-micro btn-danger';
+    btnEliminar.type = 'button';
+    btnEliminar.textContent = 'Eliminar';
+    btnEliminar.title = 'Eliminar tarjeta';
+
+    bar.append(closeBtn, btnCambiar, picker, spacer, btnEliminar);
+
+    // Cuerpo con contenido editable + placeholder clicable
+    const cuerpo = document.createElement('div');
+    cuerpo.className = 'cuerpo';
+
+    const content = document.createElement('div');
+    content.className = 'contenido';
+    content.contentEditable = 'true';
+    content.textContent = text;
+
+    const placeholder = document.createElement('button');
+    placeholder.className = 'placeholder';
+    placeholder.type = 'button';
+    placeholder.textContent = '(clic para escribir)';
+
+    cuerpo.append(content, placeholder);
+    card.append(bar, cuerpo);
+
+    // Colores iniciales y placeholder
+    applyCardColor(card, color);
+    togglePlaceholder(card);
+
+    // Drag handlers
+    card.addEventListener('dragstart', () => {
+      draggingCard = card;
+      card.classList.add('dragging');
+    });
+    card.addEventListener('dragend', () => {
+      card.classList.remove('dragging');
+      draggingCard = null;
+      guardar();
+    });
+
+    // Acciones
+    closeBtn.addEventListener('click', () => { card.remove(); guardar(); });
+    btnEliminar.addEventListener('click', () => { card.remove(); guardar(); });
+
+    btnCambiar.addEventListener('click', () => picker.click());
+    picker.addEventListener('input', () => { applyCardColor(card, picker.value); guardar(); });
+
+    content.addEventListener('input', () => { togglePlaceholder(card); guardar(); });
+    content.addEventListener('blur', () => { togglePlaceholder(card); });
+
+    placeholder.addEventListener('click', () => {
+      placeholder.style.display = 'none';
+      content.focus();
+    });
+
+    return card;
+  }
+
+  function addCardToColumn(colId, cardData){
+    const destino = document.getElementById(colId);
+    destino.appendChild(crearTarjeta(cardData));
+  }
+
+  /* ---------- Drag & Drop con reordenación ---------- */
+  function getDropPosition(container, y){
+    const cards = [...container.querySelectorAll('.tarjeta:not(.dragging)')];
+    return cards.reduce((closest, child) => {
+      const box = child.getBoundingClientRect();
+      const offset = y - (box.top + box.height/2);
+      if(offset < 0 && offset > closest.offset){ return { offset, element: child }; }
+      else return closest;
+    }, {offset: Number.NEGATIVE_INFINITY, element: null}).element;
+  }
+
+  $$('.destino').forEach(col => {
+    col.addEventListener('dragover', e => {
+      e.preventDefault();
+      col.classList.add('over');
+      const afterEl = getDropPosition(col, e.clientY);
+      if(!draggingCard) return;
+      if(afterEl == null) col.appendChild(draggingCard);
+      else col.insertBefore(draggingCard, afterEl);
+    });
+    col.addEventListener('dragleave', () => col.classList.remove('over'));
+    col.addEventListener('drop', () => {
+      col.classList.remove('over');
+      guardar();
+    });
+  });
+
+  /* ---------- Top bar: búsqueda, tema, export/import, reset ---------- */
+  $('#buscar').addEventListener('input', e => {
+    const q = e.target.value.toLowerCase();
+    $$('.tarjeta').forEach(card => {
+      const t = card.querySelector('.contenido')?.textContent.toLowerCase() || '';
+      card.style.display = t.includes(q) ? '' : 'none';
+    });
+  });
+
+  $('#toggleTheme').addEventListener('click', () => {
+    const now = document.body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    document.body.setAttribute('data-theme', now);
+    guardar();
+  });
+
+  $('#exportar').addEventListener('click', () => {
+    const data = snapshot();
+    const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `amc-kanban-${new Date().toISOString().slice(0,10)}.json`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  });
+
+  $('#importar').addEventListener('change', async e => {
+    const file = e.target.files?.[0];
+    if(!file) return;
+    try{
+      const text = await file.text();
+      const data = JSON.parse(text);
+      renderFromState(data);
+      saveState(data);
+    }catch(err){
+      alert('Archivo no válido.');
+    }finally{
+      e.target.value = '';
+    }
+  });
+
+  $('#reset').addEventListener('click', () => {
+    if(!confirm('¿Seguro que quieres resetear el tablero?')) return;
+    localStorage.removeItem(LS_KEY);
+    location.reload();
+  });
+
+  /* ---------- Añadir y renombrar columnas ---------- */
+  $$('.add').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const destino = document.getElementById(btn.dataset.col);
+      const nueva = crearTarjeta({ text:'', color:'#cfcfcf' });
+      destino.appendChild(nueva);
+      guardar();
+      nueva.querySelector('.contenido').focus();
+    });
+  });
+  $$('h2[data-col-title]').forEach(h => h.addEventListener('input', guardar));
+
+  /* ---------- Inicialización ---------- */
+  function renderFromState(state){
+    document.body.setAttribute('data-theme', state?.theme || 'light');
+    (state?.columns || []).forEach(col => {
+      const cont = document.getElementById(col.id);
+      if(!cont) return;
+      cont.innerHTML = '';
+      const titleEl = document.querySelector(`[data-col-title="${col.id}"]`);
+      if(titleEl && col.title) titleEl.textContent = col.title;
+      (col.cards || []).forEach(c => cont.appendChild(crearTarjeta(c)));
+    });
+  }
+
+  const saved = getState();
+  if(saved){ renderFromState(saved); }
+  else{
+    addCardToColumn('col1', { text: '', color:'#4c8bf5' });
+    addCardToColumn('col1', { text: 'Diseñar UI', color:'#7c4dff' });
+    addCardToColumn('col2', { text: '', color:'#00b894' });
+    addCardToColumn('col3', { text: 'QA smoke test', color:'#ffb142' });
+    addCardToColumn('col4', { text: 'Deploy v1', color:'#ff7675' });
+    guardar();
+  }
+})();
+</script>
+</body>
+</html>
