@@ -8,3 +8,5 @@ BEGIN
 END //
 
 DELIMITER ;
+
+CALL `productos_baratos`(40);
