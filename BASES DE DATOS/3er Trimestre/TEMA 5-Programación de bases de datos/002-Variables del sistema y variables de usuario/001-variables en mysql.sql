@@ -1,7 +1,7 @@
-SET @nombre = 'Jose Vicente';
-SET @apellidos = 'Carratalá Sanchis';
-SET @email = 'info@josevicentecarratala.com';
-SET @direccion = 'La calle de Jose Vicente';
+SET @nombre = 'Alfredo';
+SET @apellidos = 'Martinez Cantero';
+SET @email = 'alfredo@gmail.com';
+SET @direccion = 'La calle de Alfredo';
 
 INSERT INTO clientes(
     nombre,
