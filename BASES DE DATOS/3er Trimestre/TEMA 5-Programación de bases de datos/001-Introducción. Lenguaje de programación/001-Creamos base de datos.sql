@@ -10,11 +10,11 @@ CREATE TABLE clientes(
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO clientes VALUES(
-    NULL,
-    'Alfredo',
-    'Martinez Cantero',
-    'alfredo@gmail.com',
-    'La calle de Alfredo'
+	NULL,
+  'Alfredo',	
+  'Martinez Cantero',
+  'alfredo@gmail.com',
+  'La calle de Alfredo'
 );
 
 SELECT * FROM clientes;
