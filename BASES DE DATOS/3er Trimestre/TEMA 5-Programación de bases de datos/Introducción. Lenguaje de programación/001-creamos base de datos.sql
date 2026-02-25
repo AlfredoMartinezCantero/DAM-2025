@@ -11,9 +11,9 @@ CREATE TABLE clientes(
 
 INSERT INTO clientes VALUES(
     NULL,
-    'Alfredo'
-    'Martinez Cantero'
-    'alfredo@gmail.com'
+    'Alfredo',
+    'Martinez Cantero',
+    'alfredo@gmail.com',
     'La calle de Alfredo'
 );
 
