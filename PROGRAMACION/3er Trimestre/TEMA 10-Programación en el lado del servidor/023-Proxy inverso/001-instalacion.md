@@ -31,3 +31,8 @@ Con lo cual tendréis que apagar cosas
 -120GB de disco
 -Importante: Red en adaptador puente desde el principio
 -Red en adaptador puente
+
+3.-Es recomendable (especialmente en Ubuntu Desktop)
+que instaléis las Virtual Box Tools (nos permiten copiar y pegar,
+reescalar pantalla, etc etc) - es lo mismo que las Guest Additions
+Dispositivos - Insertar el CD con los complementos de invitado
