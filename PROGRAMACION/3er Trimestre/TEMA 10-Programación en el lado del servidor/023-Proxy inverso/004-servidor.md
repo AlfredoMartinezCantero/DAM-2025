@@ -10,6 +10,8 @@ gunicorn -b 127.0.0.1:8000 app:app
 
 Ahora creamos un servicio para que gunicorn funcione solo
 (sin ejecutarlo manualmente):
+
+---
 sudo nano /etc/systemd/system/miweb.service
 
 Colocamos esto:
@@ -25,3 +27,12 @@ Restart=always
 
 [Install]
 WantedBy=multi-user.target
+
+---
+Control + O / Control + X
+
+Ahora convertimos ese archivo de conf en un servicio
+sudo systemctl daemon-reload
+sudo systemctl enable miweb
+sudo systemctl start miweb
+sudo systemctl status miweb
