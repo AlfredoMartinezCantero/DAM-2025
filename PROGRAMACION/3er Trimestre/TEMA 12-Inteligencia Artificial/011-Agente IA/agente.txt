@@ -1,1 +1,123 @@
 Soy un agente, pero un poco tonto
+=====================================
+Archivo: /var/www/html/eval/backup/20260309090001/actividades/programaciondam2526/001-Identificación de los elementos de un programa informático/003-Tipos de datos/017fc66ccda6e0cdec7d061d22ad93bfb4d554f1.json
+Resumen:
+Este JSON describe un archivo que contiene información sobre una actividad educativa en programación para estudiantes de FP (Formación Profesional). Los principales elementos son:
+
+1. **Identificación del estudiante**: Incluye el ID, DNI y repositorio asociado.
+2. **Referencia a la lección**: Se relaciona con una lección específica sobre "Tipos de datos" en programación.
+3. **Reglas de personalización**:
+   - Integra al menos un hobby del estudiante (cine o videojuegos) en diferentes partes del enunciado.
+   - Mantén el alcance dentro de la lección actual.
+4. **Política de evaluación**:
+   - La salida debe ser en formato Markdown con secciones específicas.
+   - No incluir soluciones ni código final.
+5. **Guardaraíl de alcance**: Restringe el uso de librerías externas y estructuras no vistas.
+
+La actividad tiene como objetivo crear un contexto que mencione los hobbies del estudiante, utilizarlos en el enunciado y asegurarse de que todo se mantenga dentro del tema actual de la asignatura.
+=====================================
+
+=====================================
+Archivo: /var/www/html/reactjunio2025/aplicacion11/node_modules/dom-accessibility-api/dist/index.js
+Resumen:
+El archivo proporcionado es un módulo de JavaScript que exporta varias funciones relacionadas con la accesibilidad web. Aquí tienes una versión breve del mismo:
+
+```javascript
+"use strict";
+
+exports.__esModule = true;
+
+// Objetos y variables para el módulo
+var _exportNames = {
+  computeAccessibleDescription: true,
+  computeAccessibleName: true,
+  getRole: true
+};
+
+exports.getRole = exports.computeAccessibleName = exports.computeAccessibleDescription = void 0;
+
+// Requiere e expone las funciones desde otros archivos
+var _accessibleDescription = require("./accessible-description");
+exports.computeAccessibleDescription = _accessibleDescription.computeAccessibleDescription;
+
+var _accessibleName = require("./accessible-name");
+exports.computeAccessibleName = _accessibleName.computeAccessibleName;
+
+var _getRole = _interopRequireDefault(require("./getRole"));
+exports.getRole = _getRole.default;
+
+// Expone funciones adicionales del módulo "is-inaccessible"
+var _isInaccessible = require("./is-inaccessible");
+Object.keys(_isInaccessible).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  if (key in exports && exports[key] === _isInaccessible[key]) return;
+  exports[key] = _isInaccessible[key];
+});
+
+// Función auxiliar para el caso de módulos que usan CommonJS
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : { default: obj };
+}
+```
+
+Este archivo es un módulo de JavaScript en modo estricto, y expone varias funciones relacionadas con la accesibilidad web. Utiliza `require` para importar funciones desde otros archivos y luego las expone a través del objeto `exports`. También incluye una función auxiliar `_interopRequireDefault` que se utiliza para manejar los módulos CommonJS en entornos que no soportan automáticamente esta sintaxis.
+=====================================
+
+=====================================
+Archivo: /var/www/html/eval/backup/20260307140001/actividades/dam2526/Primero/Sistemas informáticos/003-Gestión de la información/002-Estructura de directorios de sistemas operativos libres y propietarios/476bcdd1b684651fc880ddae061f68e4fcd14ab4.json
+Resumen:
+El archivo proporciona un resumen detallado de una tarea educativa para estudiantes de primer año de DAM (Diseño y Mantenimiento de Aplicaciones). La tarea se centra en el tema "Estructura de directorios de sistemas operativos libres y propietarios" y es parte de la unidad "Gestión de la información". 
+
+Los elementos clave del archivo incluyen:
+
+1. **Identificación del archivo**: `dam2526primerosistemasinformaticos`
+2. **Ubicación en el repositorio**: `/var/www/html/dam2526/Primero/Sistemas informáticos/003-Gestión de la información/002-Estructura de directorios de sistemas operativos libres y propietarios`
+3. **Requisitos educativos**:
+   - Idioma: Español
+   - Nivel: Iniciación (FP)
+   - Hobbies a considerar en el enunciado
+
+4. **Reglas de personalización**:
+   - Integrar al menos un hobby mencionado en la narrativa, nombres de variables y datos de ejemplo.
+
+5. **Política de evaluación**:
+   - Formato de salida: Markdown con secciones específicas (Título, Contexto, Enunciado paso a paso, Restricciones, Criterios de evaluación).
+   - Prohibición de incluir soluciones o código final.
+
+6. **Contenido del archivo**:
+   - Se presenta el contexto educativo.
+   - Se describen los pasos para la tarea.
+   - Se establecen las restricciones y criterios de evaluación.
+
+La tarea es diseñada para que los estudiantes apliquen lo aprendido sobre estructuras de directorios en sistemas operativos libres y propietarios, integrando conocimientos previos en su resolución.
+=====================================
+
+=====================================
+Archivo: /var/www/html/reactjunio2025/aplicacion8/node_modules/@testing-library/react/dist/@testing-library/react.umd.min.js
+Resumen:
+Este archivo parece ser un módulo JavaScript para React Testing Library. Aquí hay una descripción breve:
+
+1. Define funciones y constantes relacionadas con el testing de React.
+
+2. Proporciona utilidades para renderizar, montar y desmontar componentes React en entornos de pruebas.
+
+3. Incluye adaptadores para diferentes versiones de React (actuales y antiguas).
+
+4. Implementa funciones personalizadas para simular eventos del DOM como `mouseEnter`, `mouseLeave`, `pointerEnter`, `pointerLeave` y `select`.
+
+5. Configura el ambiente de pruebas, permitiendo el uso de funciones asincrónicas y ajustes de configuración.
+
+6. Ofrece métodos para debuggear componentes renderizados en un contenedor DOM.
+
+7. Permite la creación de "roots" virtuales para montar componentes React sin necesidad de un DOM real.
+
+8. Incluye funciones para recuperar elementos del DOM basándose en consultas específicas (queries).
+
+9. Proporciona una forma de renderizar y desmontar componentes con wrappers personalizados y opciones adicionales como el modo estricto de React.
+
+10. Implementa funcionalidades adicionales como la hidratación de componentes previamente montados en un DOM real.
+
+Este módulo es fundamental para escribir pruebas unitarias y integración efectivas de componentes React, proporcionando herramientas poderosas y fáciles de usar.
+=====================================
+
