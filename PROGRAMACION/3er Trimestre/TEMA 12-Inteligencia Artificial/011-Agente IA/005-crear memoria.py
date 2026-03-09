@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import ast
-import os
 import subprocess
 import sys
 import time
@@ -15,41 +14,77 @@ import requests
 MODELO = "qwen2.5-coder:7b"
 URL = "http://localhost:11434/api/generate"
 
-PROMPT = """
-Genera únicamente código Python válido.
-
-El programa debe:
-- Implementar un CRUD de clientes en Python usando SQLite.
-- Funcionar en consola.
-- Crear una base de datos SQLite local.
-- Incluir las operaciones: crear, listar, actualizar y borrar clientes.
-- Tener una función main().
-- Ser ejecutable directamente.
-- Al arrancar, si no hay interacción del usuario, debe mostrar al menos un menú en consola y terminar correctamente si se elige salir.
-- Usa únicamente librerías estándar de Python.
-- No expliques nada.
-- Solo devuelve código.
-"""
-
 ARCHIVO_SALIDA = "programa_generado.py"
 MAX_INTENTOS = 20
 TIMEOUT_EJECUCION = 5
+MAX_ERRORES_MEMORIA = 8
 
-# imports permitidos
 IMPORTS_PERMITIDOS = {
     "sqlite3",
     "os",
     "sys"
 }
 
+PROMPT_BASE = """
+Genera únicamente código Python válido.
+
+Crea un programa de consola en Python usando SQLite que implemente un CRUD de clientes.
+
+Requisitos:
+- Usa sqlite3
+- Base de datos SQLite local
+- Tabla clientes si no existe
+- Campos: id, nombre, email, telefono
+- Operaciones: crear, listar, actualizar, borrar
+- Debe tener una función main()
+- Debe incluir: if __name__ == "__main__": main()
+- Usa solo librerías estándar
+- No expliques nada
+- Solo devuelve código
+
+MUY IMPORTANTE:
+- El programa será ejecutado automáticamente en un entorno no interactivo
+- No debe fallar si no hay entrada disponible por teclado
+- Si usas input(), debes controlar EOFError
+- Si no hay entrada, el programa debe terminar limpiamente
+- No generes un programa que dependa obligatoriamente de interacción humana real
+"""
+
+# ---------------------------------------------------
+# MEMORIA DE ERRORES
+# ---------------------------------------------------
+
+memoria_errores = []
+
+def construir_prompt():
+    prompt = PROMPT_BASE.strip()
+
+    if memoria_errores:
+        prompt += "\n\nERRORES PREVIOS QUE NO DEBES REPETIR:\n"
+        for i, err in enumerate(memoria_errores[-MAX_ERRORES_MEMORIA:], 1):
+            prompt += f"{i}. {err}\n"
+
+    prompt += """
+DEVUELVE SOLO CÓDIGO PYTHON.
+NO USES BLOQUES MARKDOWN.
+"""
+    return prompt
+
+def registrar_error(mensaje):
+    mensaje = mensaje.strip()
+    if mensaje and mensaje not in memoria_errores:
+        memoria_errores.append(mensaje)
+
 # ---------------------------------------------------
 # GENERAR CÓDIGO CON OLLAMA
 # ---------------------------------------------------
 
 def generar_codigo():
+    prompt = construir_prompt()
+
     payload = {
         "model": MODELO,
-        "prompt": PROMPT,
+        "prompt": prompt,
         "stream": False
     }
 
@@ -58,7 +93,6 @@ def generar_codigo():
 
     texto = respuesta.json()["response"]
 
-    # limpiar posible markdown
     texto = texto.replace("```python", "")
     texto = texto.replace("```", "")
     texto = texto.strip()
@@ -85,15 +119,11 @@ def validar_sintaxis(codigo):
         return False, f"Error de sintaxis: {e}"
 
 def validar_seguridad_basica(codigo):
-    """
-    Validación simple para evitar instrucciones peligrosas.
-    """
     palabras_prohibidas = [
         "eval(",
         "exec(",
         "compile(",
         "__import__",
-        "open(",
         "os.system",
         "subprocess",
         "shutil",
@@ -133,19 +163,38 @@ def validar_seguridad_basica(codigo):
     return True, "Validación de seguridad básica correcta"
 
 # ---------------------------------------------------
+# DETECCIÓN DE ERRORES REPETIDOS
+# ---------------------------------------------------
+
+def analizar_error_para_memoria(mensaje_error):
+    texto = mensaje_error.lower()
+
+    if "eoferror" in texto:
+        return "No uses input() sin controlar EOFError. El programa debe funcionar también sin entrada interactiva."
+
+    if "timeout" in texto or "tiempo de ejecución agotado" in texto:
+        return "No generes un programa que se quede esperando indefinidamente. Debe terminar rápido."
+
+    if "import no permitido" in texto:
+        return "Usa únicamente imports permitidos y librerías estándar autorizadas."
+
+    if "syntaxerror" in texto or "error de sintaxis" in texto:
+        return "El código debe tener sintaxis Python completamente válida."
+
+    if "no produjo salida" in texto:
+        return "El programa debe imprimir algo útil en consola al arrancar."
+
+    if "sqlite" in texto and "error" in texto:
+        return "El acceso a SQLite debe funcionar correctamente y crear la tabla si no existe."
+
+    return f"No repitas este error: {mensaje_error}"
+
+# ---------------------------------------------------
 # VALIDACIÓN FUNCIONAL
 # ---------------------------------------------------
 
 def validar_funcionamiento(ruta):
-    """
-    Validación mínima para un CRUD:
-    - el programa debe arrancar
-    - no debe fallar inmediatamente
-    - debe producir alguna salida
-    """
-
     try:
-        # Simulamos elegir salir inmediatamente con la opción 0
         resultado = subprocess.run(
             [sys.executable, ruta],
             input="0\n",
@@ -157,7 +206,11 @@ def validar_funcionamiento(ruta):
         return False, "Tiempo de ejecución agotado"
 
     if resultado.returncode != 0:
-        return False, f"El programa falló al ejecutarse: {resultado.stderr.strip()}"
+        stderr = resultado.stderr.strip()
+        stdout = resultado.stdout.strip()
+
+        detalle = stderr if stderr else stdout
+        return False, f"El programa falló al ejecutarse: {detalle}"
 
     salida = resultado.stdout.strip().lower()
 
@@ -197,10 +250,16 @@ def validar_codigo(codigo, ruta):
 # ---------------------------------------------------
 
 def main():
-    print("🚀 Iniciando generación automática con validación...\n")
+    print("🚀 Iniciando generación automática con validación y memoria...\n")
 
     for intento in range(1, MAX_INTENTOS + 1):
         print(f"Intento {intento}/{MAX_INTENTOS}")
+
+        if memoria_errores:
+            print("🧠 Memoria de errores acumulada:")
+            for i, err in enumerate(memoria_errores[-MAX_ERRORES_MEMORIA:], 1):
+                print(f"   {i}. {err}")
+            print()
 
         try:
             codigo = generar_codigo()
@@ -214,14 +273,19 @@ def main():
                 return
             else:
                 print(f"❌ Programa no válido: {mensaje}\n")
+                registrar_error(analizar_error_para_memoria(mensaje))
                 time.sleep(1)
 
         except requests.exceptions.RequestException as e:
-            print(f"❌ Error de conexión con Ollama: {e}\n")
+            msg = f"Error de conexión con Ollama: {e}"
+            print(f"❌ {msg}\n")
+            registrar_error("La respuesta del modelo o la conexión falló. Genera código de forma más breve y directa.")
             time.sleep(1)
 
         except Exception as e:
-            print(f"❌ Error inesperado: {e}\n")
+            msg = f"Error inesperado: {e}"
+            print(f"❌ {msg}\n")
+            registrar_error(f"No repitas este error inesperado: {e}")
             time.sleep(1)
 
     print("❌ No se consiguió un programa válido tras varios intentos.")
