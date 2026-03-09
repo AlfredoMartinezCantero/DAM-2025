@@ -2,13 +2,13 @@ from flask import Flask
 
 app = Flask(__name__)
 
-contador = 1
+mensajes = []
 
 @app.route("/")
 def inicio():
-	global contador
-	contador += 1
-	return "El contador es: "+str(contador)
+	global mensajes
+	mensajes.append("hola")
+	return str(mensajes)
 
 if __name__ == "__main__":
 	app.run(debug=True)
