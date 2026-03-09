@@ -88,7 +88,7 @@ def generar_codigo():
         "stream": False
     }
 
-    respuesta = requests.post(URL, json=payload, timeout=60)
+    respuesta = requests.post(URL, json=payload, timeout=999999999)
     respuesta.raise_for_status()
 
     texto = respuesta.json()["response"]
