@@ -7,4 +7,3 @@ sudo apt install pip3
 sudo apt install flask
 
 Tendremos que crear una aplicación mínima flask de tipo hola mundo
-
