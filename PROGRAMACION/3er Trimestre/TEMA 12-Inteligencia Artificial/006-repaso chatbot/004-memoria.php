@@ -8,7 +8,6 @@
         $_SESSION['respuestas'] = [];
     }
 ?>
-
 <!DOCTYPE html>
 <html>
     <head>
