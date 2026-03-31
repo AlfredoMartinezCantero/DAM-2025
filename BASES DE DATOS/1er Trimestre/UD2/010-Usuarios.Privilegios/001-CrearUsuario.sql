@@ -2,7 +2,7 @@
 -- creamos el nombre de usuario que queramos
 CREATE USER
 'alfredo'@'localhost'
-IDENTIFIED  BY 'Alfredo7?';
+IDENTIFIED  BY 'Alfredo1234';
 -- permite acceso a ese usuario
 GRANT USAGE ON *.* TO 'alfredo'@'localhost';
 
