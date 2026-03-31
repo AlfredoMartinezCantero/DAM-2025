@@ -1,2 +1,2 @@
 import math as matematicas
-print(matematicas
+print(matematicas.ceil(7.2))

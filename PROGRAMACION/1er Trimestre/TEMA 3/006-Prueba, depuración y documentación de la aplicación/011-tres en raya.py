@@ -1,78 +1,52 @@
 print("Tres en raya - 2 jugadores humanos")
-print("(c) 2025 Jose Vicente Carratala")
+print("(c) 2025 Alfredo Martínez Cantero")
 
 jugador = 1
-casilla1 = 1
-casilla2 = 2
-casilla3 = 3
-casilla4 = 4
-casilla5 = 5
-casilla6 = 6
-casilla7 = 7
-casilla8 = 8
-casilla9 = 9
+tablero = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+def mostrar_tablero(tablero):
+  print(f'{tablero[0]}|{tablero[1]}|{tablero[2]}')
+  print('------')
+  print(f'{tablero[3]}|{tablero[4]}|{tablero[5]}')
+  print('------')
+  print(f'{tablero[6]}|{tablero[7]}|{tablero[8]}')
+
+def verificar_ganador(tablero):
+  lineas_ganadoras = [
+    [0, 1, 2], [3, 4, 5], [6, 7, 8],  # filas
+    [0, 3, 6], [1, 4, 7], [2, 5, 8],  # columnas
+    [0, 4, 8], [2, 4, 6]              # diagonales
+  ]
+  for linea in lineas_ganadoras:
+    if tablero[linea[0]] == tablero[linea[1]] == tablero[linea[2]]:
+      if tablero[linea[0]] in ['X', 'O']:
+        return tablero[linea[0]]
+  return None
 
 while True:
-  print(f'{casilla1}|{casilla2}|{casilla3}')
-  print(f'------')
-  print(f'{casilla4}|{casilla5}|{casilla6}')
-  print(f'------')
-  print(f'{casilla7}|{casilla8}|{casilla9}')
-  tirada = input("Tirada del jugador "+str(jugador))
-  if int(tirada) == 1:
-    if jugador == 1:
-      casilla1 = "X"
-    else:
-      casilla1 = "O"
-  if int(tirada) == 2:
-    if jugador == 1:
-      casilla2 = "X"
-    else:
-      casilla1 = "O"
-  if int(tirada) == 3:
-    if jugador == 1:
-      casilla3 = "X"
-    else:
-      casilla1 = "O"
-  if int(tirada) == 4:
-    if jugador == 1:
-      casilla4 = "X"
-    else:
-      casilla1 = "O"
-  if int(tirada) == 5:
-    if jugador == 1:
-      casilla5 = "X"
-    else:
-      casilla1 = "O"
-  if int(tirada) == 6:
-    if jugador == 1:
-      casilla6 = "X"
-    else:
-      casilla1 = "O"
-  if int(tirada) == 7:
-    if jugador == 1:
-      casilla1 = "X"
-    else:
-      casilla7 = "O"
-  if int(tirada) == 8:
-    if jugador == 1:
-      casilla8 = "X"
-    else:
-      casilla1 = "O"
-  if int(tirada) == 9:
-    if jugador == 1:
-      casilla9 = "X"
-    else:
-      casilla1 = "O"
-
+  mostrar_tablero(tablero)
   
-
-#Caso correcto con número positivo.
-
-#Caso con cadena convertible.
-
-#Caso con número negativo.
-
-#Caso con cadena no convertible.
-
-#Caso con 0.
+  while True:
+    try:
+      tirada = int(input(f"Tirada del jugador {jugador} (1-9): "))
+      if 1 <= tirada <= 9 and isinstance(tablero[tirada - 1], int):
+        break
+      print("Casilla inválida o ya ocupada.")
+    except ValueError:
+      print("Ingresa un número válido.")
+  
+  simbolo = "X" if jugador == 1 else "O"
+  tablero[tirada - 1] = simbolo
+  
+  ganador = verificar_ganador(tablero)
+  if ganador:
+    mostrar_tablero(tablero)
+    print(f"¡Jugador {jugador} ({ganador}) gana!")
+    break
+  
+  if all(not isinstance(x, int) for x in tablero):
+    mostrar_tablero(tablero)
+    print("¡Empate!")
+    break
+  
+  jugador = 2 if jugador == 1 else 1
