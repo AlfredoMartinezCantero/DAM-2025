@@ -301,6 +301,5 @@ Text:
         print(f"Invalid details:  {BAD_OUTPUTS_FILE}")
     print(line)
 
-
 if __name__ == "__main__":
     main()
