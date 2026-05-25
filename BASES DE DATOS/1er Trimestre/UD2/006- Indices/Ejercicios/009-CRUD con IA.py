@@ -201,4 +201,3 @@ while True:
         print(f"{RED}❌ Opción fuera de rango.{RESET}")
         time.sleep(1.2)
 
-
